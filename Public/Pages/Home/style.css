@@ -127,3 +127,99 @@ body{
     margin-left: 149px;
     margin-bottom: 14px;
 }
+
+.flex-container2{                       /*Segunda seccion*/
+    display: flex;    
+    width: 1240px;
+    height: 650px;
+    margin-left: 35px; 
+    align-items: center;
+}
+
+.flex-container3{                       /*Tercera seccion*/
+    margin: 55px;
+}
+.text3{
+    text-align: center;
+}
+.carrusel ul{                           /*Imagenes-marcas*/
+ list-style: none;
+ margin: 0;
+ padding: o;
+ margin-left: 35px;
+}
+.carrusel-fotos{
+    display: flex;
+    gap: 45px;
+    overflow: auto;
+}
+.carrusel-fotos img{
+    width: 200px;
+    height: 105px;
+}
+
+.pie-pagina{                            /*footer*/
+    width: 100%;
+    background-color: rgb(31, 31, 78);    
+}
+.pie-pagina .grupo-1 {
+    width: 100%;
+    display: flex;
+    padding: 10px 0px;    
+    justify-content: space-between;
+}
+figure {
+    margin: 0;
+}
+.pie-pagina .grupo-1 .box figure img{
+    width: 100px;
+    height: 95px;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+.pie-pagina .grupo-1 .box h2{
+    color: antiquewhite;
+    margin-bottom: 25px;
+    font-size: 20px;
+}
+.pie-pagina .grupo-1 .box p{
+    color: antiquewhite;
+    margin-bottom: 5px;
+}
+.pie-pagina .grupo-1 .box p img{
+    margin-bottom: -5px;
+    height: 25px;
+    width: 25px;
+    margin-right: 3px;
+}
+.pie-pagina .grupo-1 .red-social a{
+    display: inline-block;
+    text-decoration: none;
+    width: 45px;
+    color: #fff;
+    height: 45px;
+    line-height: 45px;
+    margin-right: 10px;
+    text-align: center;
+    background-color: rgb(21, 21, 95);
+    transition: all 300ms ease;
+}
+.pie-pagina .grupo-1 .red-social a:hover{
+    color: rgb(240, 240, 32);
+}
+
+.pie-pagina .grupo-2{
+    padding: 15px 10px;
+    background-color: rgb(21, 21, 95);
+    text-align: center;
+    color: antiquewhite;
+}
+.pie-pagina .grupo-2 small{
+    font-size: 15px;
+}
+.pie-pagina .box .ubic{
+    color: antiquewhite;   
+}
+.pie-pagina .box .ubic img{
+    margin-bottom: -5px;
+}

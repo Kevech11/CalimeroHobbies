@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenidos | Calimero Hoobies</title>
     <link rel="stylesheet" href="/Pages/Home/style.css">
+    <link  href="/Pages/Home/fontawesome-free-6.6.0-web/css/all.css" rel="stylesheet"> 
 </head>
 <body class="bg-gray-200 ">
     <header class="header">
@@ -14,7 +15,7 @@
         <nav>
             <ul class="nav-links">
                 <li><a href="/Public/Pages/QuienesSomos/index.html">Quienes somos</a></li>
-                <li class="productos"><a href="/public/pages/navbar/productos.html">Productos</a></li>
+                <li class="productos"><a href="/Public/Pages/Productos/index.html">Productos</a></li>
                 <li><a href="/public/pages/navbar/contacto.html">Contacto</a></li>
             </ul>
         </nav>
@@ -22,9 +23,9 @@
         <a id="button-iniciar-sesion" href="/public/pages/login/login.html" class="btn">
             <button>Iniciar Sesión</button>
         </a>
-        <a id="button-cerrar-sesion" href="/index.html" class="btn">
+        <!-- <a id="button-cerrar-sesion" href="/index.html" class="btn">
             <button>Cerrar Sesión</button>
-        </a>
+        </a> -->
         <div class="carrito">
            <a href="/public/pages/navbar/carrocompras.html"><img src="/Public/img/navbar/caarrito.png" alt=""></a> 
         </div>
@@ -64,6 +65,76 @@
             </p>
         </div>
     </section>
-    <script type="module" src="./Pages/Home/home.controller.js"></script>
+
+    <section class="flex-container2">
+        <img src="./img/header.jpg " alt="">
+        <div class="informacion">
+            <h1 id="title">Haven Hobby</h1>
+            <p class="text2">
+                Somos el proveedor histórico de maquetas plásticas de Córdoba, y el más grande del país. Contamos con
+                más de cinco años en el mercado, ofreciendo directamente al público el mas rápido servicio, los mas
+                variados productos y los mejores precios de este rubro para todo nuestro país.
+            </p>
+        </div>
+    </section>
+
+    <section class="flex-container3">
+        <div class="informacion2">
+            <h1 id="title">Airfix, Trumpeter, Italeri y todas las mejores marcas</h1>
+            <p class="text3">
+                En Haven Hobbies trabajamos todas las marcas de maquetas plásticas del mundo para vos. Importamos desde
+                Italia, Alemania, Polonia, China, Inglaterra y muchos países más. Todas las mejores marcas confían en
+                Haven Hobbies como su representante directo en Argentina: Italeri, Trumpeter, Hobby Boss, Kinetic,
+                Panda, Meng, y muchas más. Siempre estamos trabajando para incorporar las últimas marcas y novedades del
+                plastimodelismo a nuestro catalogo. 
+
+            </p>
+        </div>
+        <br>
+        <div class="carrusel">
+            <ul class="carrusel-fotos">
+                <li id="foto1"><img src="./img/marcas/hobbyboss.png" alt=""></li>
+                <li id="foto2"><img src="./img/marcas/revell.png" alt=""></li>
+                <li id="foto3"><img src="./img/marcas/italeri.png" alt=""></li>
+                <li id="foto4"><img src="./img/marcas/trumpetterjpg.jpg" alt=""></li>
+                <li id="foto5"><img src="./img/marcas/airfix.png" alt=""></li>
+            </ul>
+        </div>
+    </section>
+   
+    <footer class="pie-pagina">
+        <div class="grupo-1">
+            <div class="box">
+                <figure>
+                    <a href=""><img src="./img/footer1.png" alt=""></a>
+                </figure>
+            </div>
+            <div class="box">
+                <h2>SOBRE NOSOTROS</h2>
+                <p>Somos el proveedor histórico de maquetas plásticas de Córdoba - Contactanos por WhatsApp al
+                    351-3775973.
+                    <br>
+                    <br>
+                </p>
+                <div class="ubic">
+                    <img src="./img/ubicacion2.png" alt=""><small>Dean Funes 250 - Local 10 - Galeria Paseo - Córdoba Capital </small>
+                </div>
+                <div>
+                    <small class="ubic">Av.Italia 1400 - Río Cuarto  Córdoba</small>
+                </div>
+            </div>
+            <div class="box">
+                <h2>SIGUENOS</h2>
+                <div class="red-social">                   
+                    <a href="#" class="fa-brands fa-facebook"></a>
+                    <a href="#" class="fa-brands fa-instagram"></a>                    
+                    <a href="#" class="fa-brands fa-whatsapp"></a>
+                </div>
+            </div>
+        </div>
+        <div class="grupo-2">
+            <small>&copy; 2024 <b>Calimero Hobby</b> - Todos los derechos reservados</small>
+        </div>      
+    </footer>    
 </body>
 </html>

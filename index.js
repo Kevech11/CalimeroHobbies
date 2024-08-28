@@ -21,3 +21,7 @@ app.get('/Home', (req, res)=>{
 app.get('/QuienesSomos', (req, res)=>{
     res.sendFile(path.join(__dirname,'Public','Pages','QuienesSomos','index.html'));
 });
+
+app.get('/Productos', (req, res)=>{
+    res.sendFile(path.join(__dirname,'Public','Pages','Productos','index.html'));
+});
