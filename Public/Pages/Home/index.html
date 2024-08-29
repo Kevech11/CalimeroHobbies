@@ -7,30 +7,28 @@
     <link rel="stylesheet" href="/Pages/Home/style.css">
     <link  href="/Pages/Home/fontawesome-free-6.6.0-web/css/all.css" rel="stylesheet"> 
 </head>
-<body class="bg-gray-200 ">
-    <header class="header">
-        <div class="logo">
-            <a href="./index.html"><img src="/img/navbar/LOGO.jpeg" alt="Logo de la marca"></a>
+<body>
+    <input type="checkbox" id="check">
+    <nav>
+        <div class="icon"><b style="color: red;">C</b>alimero <b style="color: red;">H</b>obby</div>
+        <div class="search_box">
+            <input type="search" placeholder="Buscar">
+            <span class="fa fa-search"></span>
         </div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="/Public/Pages/QuienesSomos/index.html">Quienes somos</a></li>
-                <li class="productos"><a href="/Public/Pages/Productos/index.html">Productos</a></li>
-                <li><a href="/public/pages/navbar/contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
-
-        <a id="button-iniciar-sesion" href="/public/pages/login/login.html" class="btn">
-            <button>Iniciar Sesión</button>
-        </a>
-        <!-- <a id="button-cerrar-sesion" href="/index.html" class="btn">
-            <button>Cerrar Sesión</button>
-        </a> -->
-        <div class="carrito">
-           <a href="/public/pages/navbar/carrocompras.html"><img src="/Public/img/navbar/caarrito.png" alt=""></a> 
+        <ol>
+            <li><a href="/Public/Pages/QuienesSomos/index.html">Nosotros</a></li>
+            <li><a href="/Public/Pages/Productos/index.html">Productos</a></li>
+            <li><a href="#">Contacto</a></li>
+            <li><a href="#">Iniciar Sesión</a></li>
+        </ol>
+        <div class="Carrito">
+            <i class="fa-solid fa-cart-shopping"></i>
         </div>
-    </header>
-    <br>
+        <label for="check" class="bar">
+            <span class="fa fa-bars" id="bars"></span>
+            <span class="fa fa-times" id="times"></span>
+        </label>
+    </nav>
     <br>
     <br>
     <br>
@@ -48,7 +46,7 @@
         </div>
         <div>
             <div class="envios">
-                <img src="/img/home/enviar.png" alt="">
+                <img src="" alt="">
             </div>
             <h2 id="title">Envios a todo el país</h2>
             <p class="text">
@@ -69,7 +67,7 @@
     <section class="flex-container2">
         <img src="./img/header.jpg " alt="">
         <div class="informacion">
-            <h1 id="title">Haven Hobby</h1>
+            <h1 id="title">Calimero Hobby</h1>
             <p class="text2">
                 Somos el proveedor histórico de maquetas plásticas de Córdoba, y el más grande del país. Contamos con
                 más de cinco años en el mercado, ofreciendo directamente al público el mas rápido servicio, los mas
@@ -93,11 +91,11 @@
         <br>
         <div class="carrusel">
             <ul class="carrusel-fotos">
-                <li id="foto1"><img src="./img/marcas/hobbyboss.png" alt=""></li>
-                <li id="foto2"><img src="./img/marcas/revell.png" alt=""></li>
-                <li id="foto3"><img src="./img/marcas/italeri.png" alt=""></li>
-                <li id="foto4"><img src="./img/marcas/trumpetterjpg.jpg" alt=""></li>
-                <li id="foto5"><img src="./img/marcas/airfix.png" alt=""></li>
+                <li id="foto1"><img src="/img/home/hobbyboss.png" alt=""></li>
+                <li id="foto2"><img src="/img/home/revell.png" alt=""></li>
+                <li id="foto3"><img src="/img/home/italeri.png" alt=""></li>
+                <li id="foto4"><img src="/img/home/trumpetterjpg.jpg" alt=""></li>
+                <li id="foto5"><img src="/img/home/airfix.png" alt=""></li>
             </ul>
         </div>
     </section>
@@ -117,10 +115,7 @@
                     <br>
                 </p>
                 <div class="ubic">
-                    <img src="./img/ubicacion2.png" alt=""><small>Dean Funes 250 - Local 10 - Galeria Paseo - Córdoba Capital </small>
-                </div>
-                <div>
-                    <small class="ubic">Av.Italia 1400 - Río Cuarto  Córdoba</small>
+                    <i class="fa-solid fa-location-dot"></i>  <small>Dean Funes 250 - Local 10 - Galeria Paseo - Córdoba Capital / Av.Italia 1400 - Río Cuarto  Córdoba</small>
                 </div>
             </div>
             <div class="box">
