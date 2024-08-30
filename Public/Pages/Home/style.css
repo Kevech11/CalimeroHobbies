@@ -13,7 +13,7 @@ nav{
     position: relative;
     justify-content: space-between;
     text-align: center;
-    padding: 15px 30px;
+    padding: 20px 30px;
 }
 nav .icon{
     font-size: 35px;
@@ -176,8 +176,8 @@ input[type="checkbox"]{
 }
 .Carrito{
     color: #fff;
-    width: 100px;
-    margin-left: 10px;
+    cursor: pointer;
+    font-size: 33px;
 }
 /* NAVBAR */
 body{

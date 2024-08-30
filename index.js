@@ -25,4 +25,10 @@ app.get('/Productos', (req, res)=>{
 app.get('/QuienesSomos', (req, res)=>{
     res.sendFile(path.join(__dirname,'Public','Pages','QuienesSomos','index.html'));
 });
+app.get('/Login', (req, res)=>{
+    res.sendFile(path.join(__dirname,'Public','Pages','Login','index.html'));
+});
+app.get('/Contacto', (req, res)=>{
+    res.sendFile(path.join(__dirname,'Public','Pages','Contacto','index.html'));
+});
 
