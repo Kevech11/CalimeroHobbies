@@ -12,7 +12,9 @@ app.listen(port, () =>{
     console.log(`Servidor levantado en el puerto ${port}`)
 });
 
+
 app.use(express.static('./Public')) 
+
 
 app.get('/Home', (req, res)=>{
     res.sendFile(path.join(__dirname,'Public','Pages','Home','index.html'));

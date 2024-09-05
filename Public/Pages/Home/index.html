@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenidos | Calimero Hoobies</title>
+    <title>Bienvenidos | Calimero Hobby</title>
     <link rel="stylesheet" href="/Pages/Home/style.css">
     <link  href="/Pages/Home/fontawesome-free-6.6.0-web/css/all.css" rel="stylesheet"> 
 </head>
@@ -16,23 +16,32 @@
             <span class="fa fa-search"></span>
         </div>
         <ol>
-            <li><a href="/Public/Pages/QuienesSomos/index.html">Nosotros</a></li>
-            <li><a href="/Public/Pages/Productos/index.html">Productos</a></li>
-            <li><a href="#">Contacto</a></li>
-            <li><a href="#">Iniciar Sesión</a></li>
+            <li><a href="/QuienesSomos">Nosotros</a></li>
+            <li><a href="/Productos">Productos</a></li>
+            <li><a href="/Contacto">Contacto</a></li>
+            <li><a href="/Login">Iniciar Sesión</a></li>
         </ol>
         <div class="Carrito">
-            <i class="fa-solid fa-bag-shopping"></i>
+            <i href="/Productos" class="fa-solid fa-bag-shopping"></i>
         </div>
         <label for="check" class="bar">
             <span class="fa fa-bars" id="bars"></span>
             <span class="fa fa-times" id="times"></span>
         </label>
     </nav>
-    <br>
-    <br>
-    <br>
-    <br>
+<br>
+<br>
+<br>
+<br>
+
+    <div class="slider-box">
+        <ul>
+            <li><img src="/img/home/F-14.jpg" alt=""></li>
+            <li><img src="/img/home/tanque.jpg" alt=""></li>
+            <li><img src="/img/home/uss.jpg" alt=""></li>
+        </ul>
+    </div>
+
     <section class="flex-container">
         <div>
             <div class="dinero">
@@ -46,7 +55,7 @@
         </div>
         <div>
             <div class="envios">
-                <img src="/Public/Pages/Home/enviar.png" alt="">
+                <img src="/img/home/enviar.png" alt="">
             </div>
             <h2 id="title">Envios a todo el país</h2>
             <p class="text">
@@ -65,7 +74,7 @@
     </section>
 
     <section class="flex-container2">
-        <img src="./img/header.jpg " alt="">
+        <img src="/img/home/header.jpg " alt="">
         <div class="informacion">
             <h1 id="title">Calimero Hobby</h1>
             <p class="text2">
@@ -96,6 +105,7 @@
                 <li id="foto3"><img src="/img/home/italeri.png" alt=""></li>
                 <li id="foto4"><img src="/img/home/trumpetterjpg.jpg" alt=""></li>
                 <li id="foto5"><img src="/img/home/airfix.png" alt=""></li>
+                <li id="foto6"><img src="/img/home/kitty - copia.jpg" alt=""></li>
             </ul>
         </div>
     </section>
@@ -104,7 +114,7 @@
         <div class="grupo-1">
             <div class="box">
                 <figure>
-                    <a href=""><img src="./img/footer1.png" alt=""></a>
+                    <a href=""><img src="/img/home/footer1.png" alt=""></a>
                 </figure>
             </div>
             <div class="box">
@@ -131,5 +141,6 @@
             <small>&copy; 2024 <b>Calimero Hobby</b> - Todos los derechos reservados</small>
         </div>      
     </footer>    
+    <script type="module" src="./Pages/Home/home.controller.js"></script>
 </body>
 </html>

@@ -14,6 +14,7 @@ nav{
     justify-content: space-between;
     text-align: center;
     padding: 20px 30px;
+    position: fixed;
 }
 nav .icon{
     font-size: 35px;
@@ -183,17 +184,52 @@ input[type="checkbox"]{
 body{
 	background: #E0E4E5;
 }
+
+.slider-box{     
+    display: flex;                    /*imagenes grandes*/
+    width: 1350px;
+    height: 755px;
+    overflow: hidden;
+}    
+.slider-box ul{
+    display: flex;
+    padding: 0;
+    margin: 0px;
+    width: 400%;
+    animation: slide 20s infinite alternate ease-in-out;
+}
+.slider-box li{
+    width: 100%;
+    list-style: none;
+    position: relative;
+}
+
+@keyframes slide{                   /*imagenes grandes*/
+    0% {margin-left: 0;}
+    20%{margin-left: 0;}
+
+    25% {margin-left: -150%;}
+    45% {margin-left: -150%;}  /*revisar*/
+
+    50% {margin-left: -280%;}
+    70% {margin-left: -280%;}
+
+    75% {margin-left: -300%;}
+    100% {margin-left: -300%;}
+
+    /*100% {margin-left: -400%;}
+    140% {margin-left: -400%;}*/
+}
 #title {                                
     color: rgb(31, 31, 78);
     text-align: center;
     margin: 0px;
 }
-
 .flex-container{                                /*primera seccion*/
     display: flex;    
     width: 1240px;
     margin: 65PX;
-    margin-left: 55px;
+    margin-left: 135px;
     justify-content: space-between;  
 }
 .text{
@@ -231,7 +267,10 @@ body{
     margin-left: 35px; 
     align-items: center;
 }
-
+.informacion{      
+    margin-left: 135px;
+    text-align: center;   
+}
 .flex-container3{                       /*Tercera seccion*/
     margin: 55px;
 }

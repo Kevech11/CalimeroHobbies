@@ -13,6 +13,7 @@ nav{
     justify-content: space-between;
     text-align: center;
     padding: 20px 30px;
+    position: fixed;
 }
 nav .icon{
     font-size: 35px;
