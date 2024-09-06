@@ -183,13 +183,14 @@ input[type="checkbox"]{
 /* NAVBAR */
 body{
 	background: #E0E4E5;
+    
 }
-
-.slider-box{     
-    display: flex;                    /*imagenes grandes*/
+.slider-box{                         /*imagenes grandes*/
     width: 1350px;
     height: 755px;
+    margin-left: 75px;
     overflow: hidden;
+    
 }    
 .slider-box ul{
     display: flex;
@@ -214,12 +215,13 @@ body{
     50% {margin-left: -280%;}
     70% {margin-left: -280%;}
 
-    75% {margin-left: -300%;}
-    100% {margin-left: -300%;}
+    /* 75% {margin-left: -300%;}
+    100% {margin-left: -300%;} */
 
     /*100% {margin-left: -400%;}
     140% {margin-left: -400%;}*/
 }
+
 #title {                                
     color: rgb(31, 31, 78);
     text-align: center;
@@ -291,6 +293,29 @@ body{
 .carrusel-fotos img{
     width: 200px;
     height: 105px;
+}
+
+.flex-container4{                         /*cuarta seccion*/
+    display: flex;    
+    width: 1240px;
+    margin: 66PX;
+    margin-left: 100px;
+    justify-content: space-between;
+}
+.text4{
+    margin: 0px;
+    text-align: center;
+}
+
+.boton{
+   display: flex;
+}
+
+.flex-container4 .box-ingresos img{   
+   height: 110px;
+   width: 135px;
+   margin-left: 35px;
+   margin-bottom: 14px;
 }
 
 .pie-pagina{                            /*footer*/

@@ -4,17 +4,19 @@ import { fileURLToPath } from 'url'  // Importa la función 'fileURLToPath' del 
 const __filename = fileURLToPath (import.meta.url)
 const __dirname = path.dirname (__filename)
 
-const app = express()
 
-const port = 5001
+const app = express() //Crear instancia
 
+const port = 5001 //Configurar Puerto
+
+//levanto el servidor
 app.listen(port, () =>{
     console.log(`Servidor levantado en el puerto ${port}`)
 });
 
 
+//levantar nuestro FRON-END
 app.use(express.static('./Public')) 
-
 
 app.get('/Home', (req, res)=>{
     res.sendFile(path.join(__dirname,'Public','Pages','Home','index.html'));
@@ -34,3 +36,5 @@ app.get('/Contacto', (req, res)=>{
     res.sendFile(path.join(__dirname,'Public','Pages','Contacto','index.html'));
 });
 
+
+//Rutas de end-point
