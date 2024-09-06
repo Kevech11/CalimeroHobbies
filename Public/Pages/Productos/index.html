@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -80,5 +80,129 @@
             <small>&copy; 2024 <b>Calimero Hobby</b> - Todos los derechos reservados</small>
         </div>      
     </footer>  
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos | Calimero Hobby</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="/Pages/Productos/style.css">
+    <link  href="/Pages/Home/fontawesome-free-6.6.0-web/css/all.css" rel="stylesheet"> 
+</head>
+<body>
+
+    <input type="checkbox" id="check">
+    <nav>
+        <div class="icon"><b style="color: red;" href="/Pages/Home" >C</b>alimero <b style="color: red;">H</b>obby</div>
+        <div class="search_box">
+            <input type="search" placeholder="Buscar">
+            <span class="fa fa-search"></span>
+        </div>
+        <ol>
+            <li><a href="/QuienesSomos">Nosotros</a></li>
+            <li><a href="/Productos">productos</a></li>
+            <li><a href="/Contacto">contacto</a></li>
+            <li><a href="/Login">Iniciar Sesión</a></li>
+        </ol>
+        <div class="Carrito">
+            <i class="fa-solid fa-bag-shopping"></i>
+        </div>
+        <label for="check" class="bar">
+            <span class="fa fa-bars" id="bars"></span>
+            <span class="fa fa-times" id="times"></span>
+        </label>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="wrapper">
+        <header class="header-mobile">
+            <h1 class="logo">CarpiShop</h1>
+            <button class="open-menu" id="open-menu">
+                <i class="bi bi-list"></i>
+            </button>
+        </header>
+        <aside>
+            <button class="close-menu" id="close-menu">
+                <i class="bi bi-x"></i>
+            </button>
+            <header>
+                
+            </header>
+            <nav>
+                <ul class="menu">
+                    <li>
+                        <button id="todos" class="boton-menu boton-categoria active"><i class="bi bi-hand-index-thumb-fill"></i><h2> Todos los productos</h2></button>
+                    </li>
+                    <li>
+                        <button id="aviones" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i><h2>Aviones/Helicopteros</h2></button>
+                    </li>
+                    <li>
+                        <button id="insumos" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i><h2>Pinturas/Insumos</h2></button>
+                    </li>
+                    <li>
+                        <button id="militaria" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i><h2>Militaria</h2></button>
+                    </li>
+                    <li>
+                        <a class="boton-menu boton-carrito" href="/Carrito">
+                            <i class="bi bi-cart-fill"></i><h2>Carrito</h2> <span id="numerito" class="numerito">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <footer>
+               
+            </footer>
+        </aside>
+        <main>
+            <h2 class="titulo-principal" id="titulo-principal">Todos los productos</h2>
+            <div id="contenedor-productos" class="contenedor-productos">
+                <!-- Esto se va a rellenar con JS -->
+            </div>
+        </main>
+    </div>
+
+    <footer class="pie-pagina">
+        <div class="grupo-1">
+            <div class="box">
+                <figure>
+                    <a href=""><img src="/img/home/footer1.png" alt=""></a>
+                </figure>
+            </div>
+            <div class="box">
+                <h2>SOBRE NOSOTROS</h2>
+                <p>Somos el proveedor histórico de maquetas plásticas de Córdoba - Contactanos por WhatsApp al
+                    351-3775973.
+                    <br>
+                    <br>
+                </p>
+                <div class="ubic">
+                    <i class="fa-solid fa-location-dot"></i>  <small>Dean Funes 250 - Local 10 - Galeria Paseo - Córdoba Capital / Av.Italia 1400 - Río Cuarto  Córdoba</small>
+                </div>
+            </div>
+            <div class="box">
+                <h2>SIGUENOS</h2>
+                <div class="red-social">                   
+                    <a href="#" class="fa-brands fa-facebook"></a>
+                    <a href="#" class="fa-brands fa-instagram"></a>                    
+                    <a href="#" class="fa-brands fa-whatsapp"></a>
+                </div>
+            </div>
+        </div>
+        <div class="grupo-2">
+            <small>&copy; 2024 <b>Calimero Hobby</b> - Todos los derechos reservados</small>
+        </div>      
+    </footer>  
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="/Pages/Productos/main.js"></script>
+    <script src="/Pages/Productos/menu.js"></script>
 </body>
 </html>

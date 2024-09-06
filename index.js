@@ -25,6 +25,9 @@ app.get('/Home', (req, res)=>{
 app.get('/Productos', (req, res)=>{
     res.sendFile(path.join(__dirname,'Public','Pages','Productos','index.html'));
 });
+app.get('/Carrito', (req, res)=>{
+    res.sendFile(path.join(__dirname,'Public','Pages','Productos','carrito.html'));
+});
 
 app.get('/QuienesSomos', (req, res)=>{
     res.sendFile(path.join(__dirname,'Public','Pages','QuienesSomos','index.html'));
@@ -34,6 +37,9 @@ app.get('/Login', (req, res)=>{
 });
 app.get('/Contacto', (req, res)=>{
     res.sendFile(path.join(__dirname,'Public','Pages','Contacto','index.html'));
+});
+app.get('/Pedidos', (req, res)=>{
+    res.sendFile(path.join(__dirname,'Public','Pages','Pedidos','index.html'));
 });
 
 
