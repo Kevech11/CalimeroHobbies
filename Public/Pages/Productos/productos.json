@@ -24,7 +24,7 @@
     {
         "id": "aviones-03",
         "titulo": "F/A-18F Super Hornet",
-        "imagen": "Pages/Productos/img/aviones/fa-18superhornet132.webp",
+        "imagen": "Pages/Productos/img/aviones/thypoon.webp",
         "marca": "Revell - 1/32",
         "categoria": {
             "nombre": "Aviones",
@@ -38,13 +38,46 @@
         "imagen": "Pages/Productos/img/aviones/AH-64A Apache .jpg",
         "marca": "Academy - 1/48",
         "categoria": {
-            "nombre": "Abrigos",
+            "nombre": "Aviones",
             "id": "aviones"
         },
         "precio": 98700
     },
     {
         "id": "aviones-05",
+        "titulo": "A-10 Wharlog",
+        "imagen": "Pages/Productos/img/aviones/A-10.jpeg",
+        "marca": "Tamiya - 1/72",
+        "categoria": {
+            "nombre": "Aviones",
+            "id": "aviones"
+        },
+        "precio": 76500
+    },
+    {
+        "id": "aviones-06",
+        "titulo": "Sea Viken FAW 2",
+        "imagen": "Pages/Productos/img/aviones/seaviken.webp",
+        "marca": "Revell - 1/72",
+        "categoria": {
+            "nombre": "Aviones",
+            "id": "aviones"
+        },
+        "precio": 76900
+    },
+    {
+        "id": "aviones-07",
+        "titulo": "Mig-17 Fresco",
+        "imagen": "Pages/Productos/img/aviones/mig-17.webp",
+        "marca": "Airfix - 1/72",
+        "categoria": {
+            "nombre": "Aviones",
+            "id": "aviones"
+        },
+        "precio": 67500
+    },
+    {
+        "id": "aviones-08",
         "titulo": "F-35 Lightning II",
         "imagen": "Pages/Productos/img/aviones/f-35.jpeg",
         "marca": "Italeri - 1/72",
@@ -55,92 +88,147 @@
         "precio": 57500
     },
     {
-        "id": "insumos-01",
-        "titulo": "Model Air - 71002",
-        "imagen": "Pages/Productos/img/insumos/71002.jpeg",
+        "id": "pinturas-01",
+        "titulo": "Naranja Intenso - 70851",
+        "imagen": "Pages/Productos/img/insumos/70851.jpg",
         "marca": "Vallejo",
         "categoria": {
-            "nombre": "Insumos",
-            "id": "insumos"
+            "nombre": "Pinturas",
+            "id": "pinturas"
         },
         "precio": 5750
     },
     {
-        "id": "insumos-02",
-        "titulo": "Model Air - 71004",
-        "imagen": "Pages/Productos/img/insumos/vallejoColorAzul.webp",
+        "id": "pinturas-02",
+        "titulo": "Oro - 70966",
+        "imagen": "Pages/Productos/img/insumos/70996.jpg",
         "marca": "Vallejo",
         "categoria": {
-            "nombre": "Insumos",
-            "id": "insumos"
+            "nombre": "Pinturas",
+            "id": "pinturas"
         },
         "precio": 5750
     },
     {
-        "id": "insumos-03",
-        "titulo": "Model Air - 71076",
-        "imagen": "Pages/Productos/img/insumos/vallejoColorPiel.webp",
+        "id": "pinturas-03",
+        "titulo": "Camuflaje Pardo Negro - 70822",
+        "imagen": "Pages/Productos/img/insumos/70822.jpg",
         "marca": "Vallejo",
         "categoria": {
-            "nombre": "Insumos",
-            "id": "insumos"
+            "nombre": "Pinturas",
+            "id": "pinturas"
         },
         "precio": 5750
     },
     {
-        "id": "insumos-04",
-        "titulo": "Stencils Insig. Alemanes",
-        "imagen": "Pages/Productos/img/insumos/stencilaleman.webp",
+        "id": "pinturas-04",
+        "titulo": "Verde Lima - 70827",
+        "imagen": "Pages/Productos/img/insumos/70827.jpg",
         "marca": "Vallejo",
         "categoria": {
-            "nombre": "Insumos",
-            "id": "insumos"
+            "nombre": "Pinturas",
+            "id": "pinturas"
         },
         "precio": 6800
     },
     {
-        "id": "insumos-05",
-        "titulo": "Masilla Plastica",
-        "imagen": "Pages/Productos/img/insumos/masillaplastica.png",
+        "id": "pinturas-05",
+        "titulo": "Unif. Japonés WWII - 70923",
+        "imagen": "Pages/Productos/img/insumos/70923.jpg",
         "marca": "Vallejo",
         "categoria": {
-            "nombre": "Insumos",
-            "id": "insumos"
+            "nombre": "Pinturas",
+            "id": "pinturas"
         },
         "precio": 7550
     },
     {
-        "id": "insumos-06",
-        "titulo": "Pegamento Contact",
-        "imagen": "Pages/Productos/img/insumos/pegamentorevell.webp",
+        "id": "pinturas-06",
+        "titulo": "Rojo Mate - 70957",
+        "imagen": "Pages/Productos/img/insumos/70957.jpg",
         "marca": "Revell",
         "categoria": {
-            "nombre": "Insumos",
-            "id": "insumos"
+            "nombre": "Pinturas",
+            "id": "pinturas"
         },
         "precio": 8700
     },
     {
-        "id": "insumos-07",
-        "titulo": "Premium Violeta",
-        "imagen": "Pages/Productos/img/insumos/premium violeta.webp",
+        "id": "pinturas-07",
+        "titulo": "Violeta Claro - 70750",
+        "imagen": "Pages/Productos/img/insumos/70750.jpg",
         "marca": "Vallejo",
         "categoria": {
-            "nombre": "Insumos",
-            "id": "insumos"
+            "nombre": "Pinturas",
+            "id": "pinturas"
         },
         "precio": 11200
     },
     {
-        "id": "insumos-08",
-        "titulo": "Premium Rojo",
-        "imagen": "Pages/Productos/img/insumos/premium rojoo.webp",
+        "id": "pinturas-08",
+        "titulo": "Purpura Real - 70810",
+        "imagen": "Pages/Productos/img/insumos/70810.jpg",
         "marca": "Vallejo",
+        "categoria": {
+            "nombre": "Pinturas",
+            "id": "pinturas"
+        },
+        "precio": 11200
+    },
+    {
+        "id": "pinturas-09",
+        "titulo": "Carne Oscura - 70927",
+        "imagen": "Pages/Productos/img/insumos/70927.jpg",
+        "marca": "Vallejo",
+        "categoria": {
+            "nombre": "Pinturas",
+            "id": "pinturas"
+        },
+        "precio": 11200
+    },
+    {
+        "id": "insumos-01",
+        "titulo": "MR.CEMENT SP - 40ml",
+        "imagen": "Pages/Productos/img/insumos/mr.cement.jpeg",
+        "marca": "Mr.Hobby",
         "categoria": {
             "nombre": "Insumos",
             "id": "insumos"
         },
-        "precio": 11200
+        "precio": 15529
+    },
+    {
+        "id": "insumos-02",
+        "titulo": "Cinta de Enmascarar",
+        "imagen": "Pages/Productos/img/insumos/cinta15mm.jpg",
+        "marca": "DSPIAE 15mm x 18 mts",
+        "categoria": {
+            "nombre": "Insumos",
+            "id": "insumos"
+        },
+        "precio": 6307
+    },
+    {
+        "id": "insumos-03",
+        "titulo": "MR.METAL PRIMER-R - 40ml",
+        "imagen": "Pages/Productos/img/insumos/mr,metal.jpeg",
+        "marca": "Mr.Hobby",
+        "categoria": {
+            "nombre": "Insumos",
+            "id": "insumos"
+        },
+        "precio": 11759
+    },
+    {
+        "id": "insumos-04",
+        "titulo": "Abridor de Frascos",
+        "imagen": "Pages/Productos/img/insumos/abridor.jpeg",
+        "marca": "Mr.Hobby",
+        "categoria": {
+            "nombre": "Insumos",
+            "id": "insumos"
+        },
+        "precio": 21387
     },
     {
         "id": "militaria-01",
