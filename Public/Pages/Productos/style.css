@@ -9,11 +9,11 @@ nav{
     display: flex;
     width: 100%;
     background: rgb(31, 31, 78);
-    position: relative;
+    position: fixed;
     justify-content: space-between;
     text-align: center;
     padding: 30px 35px;
-    position: fixed;
+    
 }
 nav .icon{
     font-size: 35px;
@@ -220,6 +220,7 @@ a {
     display: grid;
     grid-template-columns: 1fr 4fr;
     background-color: var(--clr-main);
+    position: relative;
 }
 
 aside {
@@ -227,12 +228,12 @@ aside {
     padding: 5rem;
     padding-right: 0;
     color: var(--clr-white);
-    position: sticky;
     top: 0;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
 }
 
 .logo {
@@ -302,6 +303,7 @@ aside {
 
 .boton-carrito {
     margin-top: 2rem;
+    
 }
 
 .numerito {
@@ -337,6 +339,7 @@ main {
     gap: 1rem;
     align-self: flex-start;
     object-fit: contain;
+    
 }
 
 .producto-imagen {
@@ -406,8 +409,10 @@ main {
 
 .carrito-producto {
     display: flex;
-    justify-content: space-between;
+    text-align: center;
+    justify-content:space-between;
     align-items: center;
+    
     background-color: var(--clr-gray);
     color: var(--clr-main);
     padding: .5rem;

@@ -231,6 +231,50 @@
         "precio": 21387
     },
     {
+        "id": "aviones-10",
+        "titulo": "F/A-18F Super Hornet",
+        "imagen": "Pages/Productos/img/aviones/F-18meng.jpeg",
+        "marca": "Meng - 1/48",
+        "categoria": {
+            "nombre": "Aviones",
+            "id": "aviones"
+        },
+        "precio": 167000
+    },
+    {
+        "id": "aviones-12",
+        "titulo": "MI-24V/VP",
+        "imagen": "Pages/Productos/img/aviones/mi24zveda.jpg",
+        "marca": "Zvezda - 1/48",
+        "categoria": {
+            "nombre": "Aviones",
+            "id": "aviones"
+        },
+        "precio": 95500
+    },
+    {
+        "id": "aviones-09",
+        "titulo": "Sukhoi SU-34/SU-32 FN",
+        "imagen": "Pages/Productos/img/aviones/su-34.jpeg",
+        "marca": "Italeri - 1/72",
+        "categoria": {
+            "nombre": "Aviones",
+            "id": "aviones"
+        },
+        "precio": 87700
+    },
+    {
+        "id": "aviones-11",
+        "titulo": "SH-60F Ocean Hawk",
+        "imagen": "Pages/Productos/img/aviones/sh60.jpg",
+        "marca": "Kitty Hawk - 1/35",
+        "categoria": {
+            "nombre": "Aviones",
+            "id": "aviones"
+        },
+        "precio": 197890
+    },
+    {
         "id": "militaria-01",
         "titulo": "M 109 US Army",
         "imagen": "Pages/Productos/img/militaria/M109.jpeg",

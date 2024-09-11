@@ -192,7 +192,7 @@ body{
 .flex-container2-1{                     /*segunda seccion - quienes somos*/
     display: flex;
     margin-right: 35px;
-    padding-top: 130px;
+    padding-top: 60px;
     margin-bottom: 50px;  
 }
 .flex-container2-1 img{

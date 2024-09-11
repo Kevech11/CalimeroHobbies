@@ -4,7 +4,9 @@
     padding: 0;
     box-sizing: border-box;   
     font-family: 'Nunito Sans', sans-serif;
-    
+}
+body{
+	background: #E0E4E5;
 }
 nav{
     display: flex;
@@ -181,23 +183,19 @@ input[type="checkbox"]{
     font-size: 33px;
 }
 /* NAVBAR */
-body{
-	background: #E0E4E5;
-    
-}
+
 .slider-box{                         /*imagenes grandes*/
     width: 1350px;
     height: 755px;
     margin-left: 75px;
     overflow: hidden;
-    
 }    
 .slider-box ul{
     display: flex;
     padding: 0;
     margin: 0px;
     width: 400%;
-    animation: slide 20s infinite alternate ease-in-out;
+    animation: slide 25s infinite alternate ease-in-out;
 }
 .slider-box li{
     width: 100%;

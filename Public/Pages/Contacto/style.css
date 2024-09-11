@@ -1,14 +1,11 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-* {
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,700&display=swap');
+*{
     margin:0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Nunito Sans', sans-serif;
 }
-
 body {
-    display:flex;
     justify-content: center;
     align-items: center;
     background: linear-gradient(rgba(0 0 0 / .8),rgba(0 0 0 / .8)),url(F-14.jpg);
@@ -16,6 +13,183 @@ body {
     background-position: center center;
     background-repeat: no-repeat;
 }
+nav{
+    display: flex;
+    width: 100%;
+    background: rgb(31, 31, 78);
+    position: relative;
+    justify-content: space-between;
+    text-align: center;
+    padding: 20px 30px;
+    position: fixed;
+}
+nav .icon{
+    font-size: 35px;
+    font-weight: 800;
+    color: #fff;
+    cursor: pointer;
+}
+nav ol{
+    display: flex;
+    list-style: none;
+    margin: auto 0;
+}
+nav ol li{
+    margin: 0 2px;
+}
+nav ol li a{
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+}
+nav ol li:hover a{
+    background: #fff;
+    color: rgb(31, 31, 78);
+}
+nav .search_box{
+    display: flex;
+    margin: auto 0;
+    height: 35px;
+    line-height: 35px;
+}
+nav .search_box input{
+    border: none;
+    outline: none;
+    background: #fff;
+    height: 100%;
+    padding: 0 10px;
+    font-size: 20px;
+    width: 350px;
+}
+nav .search_box span{
+    color: rgb(31, 31, 78);
+    font-size: 20px;
+    background: #fff;
+    height: 100%;
+    padding: 8px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+}
+nav .search_box span:hover{
+    color: #fff;
+}
+nav .search_box span::after{
+    height: 100%;
+    width: 0%;
+    content: '';
+    background-color: #ff003c;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    transition: 0.3s;
+}
+nav .search_box span:hover:after{
+    width: 100%;
+}
+nav .bar{
+    position: relative;
+    margin: auto;
+    display: none;
+}
+nav .bar span{
+    position: absolute;
+    color: #fff;
+    font-size: 35px;
+}
+input[type="checkbox"]{
+    /* -webkit-appearance: none; */
+    display: none;
+}
+@media screen and (max-width: 1250px){
+    nav{
+        display: block;
+        padding: 0;
+    }
+    nav .icon{
+        display: inline-block;
+        padding: 15px 30px;
+    }
+    nav .search_box{
+        width: 100%;
+        display: inline-flex;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+    nav .search_box input{
+        width: 90%;
+    }
+    nav ol{
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        height: 0;
+        visibility: hidden;
+        transition: 0.3s;
+    }
+    nav ol li{
+        text-align: center;
+        transition: 0.3s 0.1s all;
+        opacity: 0;
+    }
+    nav ol li a{
+        color: #000;
+        font-size: 28px;
+        padding: 25px;
+        display: block;
+    }
+    nav ol li:nth-child(1){
+        transform: translateX(-150px);
+    }
+    nav ol li:nth-child(2){
+        transform: translateX(-200px);
+    }
+    nav ol li:nth-child(3){
+        transform: translateX(-250px);
+    }
+    nav ol li:nth-child(4){
+        transform: translateX(-300px);
+    }
+    nav .bar{
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 80px;
+        cursor: pointer;
+    }
+    nav .bar #times{
+        display: none;
+    }
+    #check:checked ~ nav .bar #times{
+        display: block;
+    }
+    #check:checked ~ nav .bar #bars{
+        display: block;
+    }
+    #check:checked ~ nav ol{
+        visibility: visible;
+        height: 465px;
+    }
+    #check:checked ~ nav ol li:nth-child(1),
+    #check:checked ~ nav ol li:nth-child(2),
+    #check:checked ~ nav ol li:nth-child(3),
+    #check:checked ~ nav ol li:nth-child(4){
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+.Carrito{
+    color: #fff;
+    cursor: pointer;
+    font-size: 33px;
+}
+/* NAVBAR */
+
+
 .container {
     display:grid;
     grid-template-columns: repeat(2,50%);
@@ -23,43 +197,36 @@ body {
     gap:10px;
     width: 1000px;
 }
-
 .box-info {
     color:#fff;
     display:flex;
     flex-direction: column;
     gap:50px;
+    margin-top: 150px;
+    margin-left: 80px;
 }
-
 .box-info > h1 {
     text-align: left;
     letter-spacing: 5px;
 }
-
 .data {
     display: flex;
     flex-direction: column;
     gap:25px
    
 }
-
 .data > p {
     font-size: 1rem;
 }
-
 .data > p > i {
     color:#E0E4E5;
     margin-right: 10px;
     font-size:25px;
 }
-
-
-
 .links {
     display:flex;
     gap:15px;
 }
-
 .links > a {
     text-decoration: none;
     width: 40px;
@@ -68,24 +235,22 @@ body {
     text-align: center;
     transition: .1s;
 }
-
 .links > a > i {
     color:#fff;
     line-height: 40px;
     font-size: 20px;
 }
-
 form {
     display:flex;
     flex-direction: column;
     text-align: center;
     gap:15px;
+    margin-top: 125px;
+    margin-left: 40px;
 }
-
 .input-box {
     position:relative;
 }
-
 .input-box > input {
     width: 100%;
     height: 40px;
@@ -128,8 +293,6 @@ form {
     color:#fff;
     letter-spacing: 1.5px;
 }
-
-
 .input-box > i {
     position:absolute;
     top:50%;
@@ -182,4 +345,71 @@ form > button:hover,
     .box-info > h1 {
         font-size: 1.5rem;
     }
+}
+
+/*footer*/
+.pie-pagina{                            
+    width: 100%;
+    background-color: rgb(31, 31, 78);    
+}
+.pie-pagina .grupo-1 {
+    width: 100%;
+    display: flex;
+    padding: 10px 0px;    
+    justify-content: space-between;
+}
+figure {
+    margin: 0;
+}
+.pie-pagina .grupo-1 .box figure img{
+    width: 100px;
+    height: 95px;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+.pie-pagina .grupo-1 .box h2{
+    color: antiquewhite;
+    margin-bottom: 25px;
+    font-size: 20px;
+}
+.pie-pagina .grupo-1 .box p{
+    color: antiquewhite;
+    margin-bottom: 5px;
+}
+.pie-pagina .grupo-1 .box p img{
+    margin-bottom: -5px;
+    height: 25px;
+    width: 25px;
+    margin-right: 3px;
+}
+.pie-pagina .grupo-1 .red-social a{
+    display: inline-block;
+    text-decoration: none;
+    width: 45px;
+    color: #fff;
+    height: 45px;
+    line-height: 45px;
+    margin-right: 10px;
+    text-align: center;
+    background-color: rgb(21, 21, 95);
+    transition: all 300ms ease;
+}
+.pie-pagina .grupo-1 .red-social a:hover{
+    color: rgb(240, 240, 32);
+}
+
+.pie-pagina .grupo-2{
+    padding: 15px 10px;
+    background-color: rgb(21, 21, 95);
+    text-align: center;
+    color: antiquewhite;
+}
+.pie-pagina .grupo-2 small{
+    font-size: 15px;
+}
+.pie-pagina .box .ubic{
+    color: antiquewhite;   
+}
+.pie-pagina .box .ubic img{
+    margin-bottom: -5px;
 }
