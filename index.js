@@ -62,9 +62,33 @@ connectDB()
     //levanto el servidors
     app.listen(port, () => {
       console.log(`Servidor levantado en el puerto ${port}`)
+      crearProductos()
     })
   })
   .catch((error) => {
     console.log("Error al conectar a la base de datos", error)
     process.exit(1)
   })
+
+async function crearProductos() {
+  const data = fs.readFileSync(
+    "./Public/Pages/Productos/productos.json",
+    "utf-8"
+  )
+  const productos = JSON.parse(data)
+
+  const productosFormateados = productos.map((producto) => {
+    return {
+      titulo: producto.titulo,
+      imagen: producto.imagen,
+      marca: producto.marca,
+      categoria: producto.categoria.nombre,
+      precio: producto.precio,
+    }
+  })
+
+  for (const producto of productosFormateados) {
+    const nuevoProducto = new ProductModel(producto)
+    await nuevoProducto.save()
+  }
+}
