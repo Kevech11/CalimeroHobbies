@@ -1,6 +1,6 @@
 import express from 'express' 
-import path from 'path'  // Importa el módulo 'path' para manejar y transformar rutas de archivos.
-import { fileURLToPath } from 'url'  // Importa la función 'fileURLToPath' del módulo 'url' para convertir una URL de archivo en una ruta de archivo
+import path from 'path'// Importa el módulo 'path' para manejar y transformar rutas de archivos.
+import { fileURLToPath } from 'url'// Importa la función 'fileURLToPath' del módulo 'url' para convertir una URL de archivo en una ruta de archivo
 const __filename = fileURLToPath (import.meta.url)
 const __dirname = path.dirname (__filename)
 
