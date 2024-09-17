@@ -1,6 +1,6 @@
 import express from "express"
-import path from "path" // Importa el módulo 'path' para manejar y transformar rutas de archivos.
-import { fileURLToPath } from "url" // Importa la función 'fileURLToPath' del módulo 'url' para convertir una URL de archivo en una ruta de archivo
+import path from "path" 
+import { fileURLToPath } from "url" 
 import { connectDB } from "./config/db.js"
 import { productsRouter } from "./routes/products.routes.js"
 import fs from "fs"
@@ -45,8 +45,9 @@ app.get("/Contacto", (req, res) => {
     path.join(__dirname, "Public", "Pages", "Contacto", "index.html")
   )
 })
-app.get("/Pedidos", (req, res) => {
-  res.sendFile(path.join(__dirname, "Public", "Pages", "Pedidos", "index.html"))
+
+app.get("/Ventas", (req, res) => {
+  res.sendFile(path.join(__dirname, "Private","Ventas", "index.html"))
 })
 
 //Rutas de end-point
@@ -62,7 +63,6 @@ connectDB()
     //levanto el servidors
     app.listen(port, () => {
       console.log(`Servidor levantado en el puerto ${port}`)
-      crearProductos()
     })
   })
   .catch((error) => {
@@ -86,7 +86,6 @@ async function crearProductos() {
       precio: producto.precio,
     }
   })
-
   for (const producto of productosFormateados) {
     const nuevoProducto = new ProductModel(producto)
     await nuevoProducto.save()

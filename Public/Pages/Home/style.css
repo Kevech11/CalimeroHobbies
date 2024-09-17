@@ -186,15 +186,16 @@ input[type="checkbox"]{
 
 .slider-box{                         /*imagenes grandes*/
     width: 1350px;
-    height: 755px;
+    height: 640px;
     margin-left: 75px;
     overflow: hidden;
+   
 }    
 .slider-box ul{
     display: flex;
     padding: 0;
     margin: 0px;
-    width: 400%;
+    width: 500%;
     animation: slide 25s infinite alternate ease-in-out;
 }
 .slider-box li{
@@ -202,22 +203,26 @@ input[type="checkbox"]{
     list-style: none;
     position: relative;
 }
+.slider-box img{
+    width: 1800px !important;
+    height: 600px !important;
+}
 
 @keyframes slide{                   /*imagenes grandes*/
-    0% {margin-left: 0;}
-    20%{margin-left: 0;}
+    0% {margin-left: -32%;}
+    20%{margin-left: -32%;}
 
-    25% {margin-left: -150%;}
-    45% {margin-left: -150%;}  /*revisar*/
+    25% {margin-left: -160%;}
+    45% {margin-left: -160%;}  /*revisar*/
 
-    50% {margin-left: -280%;}
-    70% {margin-left: -280%;}
+    50% {margin-left: -290%;}
+    70% {margin-left: -290%;}
 
-    /* 75% {margin-left: -300%;}
-    100% {margin-left: -300%;} */
+    75% {margin-left: -300%;}
+    100% {margin-left: -300%;} 
 
-    /*100% {margin-left: -400%;}
-    140% {margin-left: -400%;}*/
+    100% {margin-left: -420%;}
+    140% {margin-left: -420%;}
 }
 
 #title {                                

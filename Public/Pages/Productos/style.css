@@ -412,7 +412,6 @@ main {
     text-align: center;
     justify-content:space-between;
     align-items: center;
-    
     background-color: var(--clr-gray);
     color: var(--clr-main);
     padding: .5rem;

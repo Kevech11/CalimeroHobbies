@@ -20,7 +20,7 @@ nav{
     position: relative;
     justify-content: space-between;
     text-align: center;
-    padding: 20px 30px;
+    padding: 23px 30px;
     position: fixed;
 }
 nav .icon{
@@ -52,7 +52,7 @@ nav ol li:hover a{
 nav .search_box{
     display: flex;
     margin: auto 0;
-    height: 35px;
+    height: 40px;
     line-height: 35px;
 }
 nav .search_box input{
@@ -102,7 +102,6 @@ nav .bar span{
     font-size: 35px;
 }
 input[type="checkbox"]{
-    /* -webkit-appearance: none; */
     display: none;
 }
 @media screen and (max-width: 1250px){
