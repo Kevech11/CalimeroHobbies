@@ -1,10 +1,9 @@
 import express from "express"
-import path from "path" 
-import { fileURLToPath } from "url" 
+import path from "path"
+import { fileURLToPath } from "url"
 import { connectDB } from "./config/db.js"
 import { productsRouter } from "./routes/products.routes.js"
-import fs from "fs"
-import ProductModel from "./models/products.model.js"
+import { authRouter } from "./routes/auth.router.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -47,10 +46,11 @@ app.get("/Contacto", (req, res) => {
 })
 
 app.get("/Ventas", (req, res) => {
-  res.sendFile(path.join(__dirname, "Private","Ventas", "index.html"))
+  res.sendFile(path.join(__dirname, "Private", "Ventas", "index.html"))
 })
 
 //Rutas de end-point
+app.use("/api/auth", authRouter)
 app.use("/api/productos", productsRouter)
 
 const port = 5001 //Configurar Puerto
@@ -69,25 +69,3 @@ connectDB()
     console.log("Error al conectar a la base de datos", error)
     process.exit(1)
   })
-
-async function crearProductos() {
-  const data = fs.readFileSync(
-    "./Public/Pages/Productos/productos.json",
-    "utf-8"
-  )
-  const productos = JSON.parse(data)
-
-  const productosFormateados = productos.map((producto) => {
-    return {
-      titulo: producto.titulo,
-      imagen: producto.imagen,
-      marca: producto.marca,
-      categoria: producto.categoria.nombre,
-      precio: producto.precio,
-    }
-  })
-  for (const producto of productosFormateados) {
-    const nuevoProducto = new ProductModel(producto)
-    await nuevoProducto.save()
-  }
-}
