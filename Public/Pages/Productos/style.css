@@ -38,7 +38,7 @@ nav ol li a{
     padding: 5px 10px;
 }
 nav ol li:hover a{
-    background: #fff;
+    background: #d1cfcf;
     color: rgb(31, 31, 78);
 }
 nav .search_box{
@@ -224,7 +224,7 @@ a {
 }
 
 aside {
-    margin-left: -45px;
+    margin-left: -38px;
     padding: 5rem;
     padding-right: 0;
     color: var(--clr-white);

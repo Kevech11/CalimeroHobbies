@@ -21,32 +21,27 @@ app.get("/Home", (req, res) => {
 })
 
 app.get("/Productos", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "Public", "Pages", "Productos", "index.html")
-  )
+  res.sendFile(path.join(__dirname, "Public", "Pages", "Productos", "index.html"))
 })
+
 app.get("/Carrito", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "Public", "Pages", "Productos", "carrito.html")
-  )
+  res.sendFile(path.join(__dirname, "Public", "Pages", "Productos", "carrito.html"))
 })
 
 app.get("/QuienesSomos", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "Public", "Pages", "QuienesSomos", "index.html")
-  )
+  res.sendFile(path.join(__dirname, "Public", "Pages", "QuienesSomos", "index.html"))
 })
+
 app.get("/Login", (req, res) => {
   res.sendFile(path.join(__dirname, "Public", "Pages", "Login", "index.html"))
 })
+
 app.get("/Contacto", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "Public", "Pages", "Contacto", "index.html")
-  )
+  res.sendFile(path.join(__dirname, "Public", "Pages", "Contacto", "index.html"))
 })
 
 app.get("/Ventas", (req, res) => {
-  res.sendFile(path.join(__dirname, "Private", "Ventas", "index.html"))
+  res.sendFile(path.join(__dirname, "Public", "Private", "Ventas", "index.html"))
 })
 
 //Rutas de end-point

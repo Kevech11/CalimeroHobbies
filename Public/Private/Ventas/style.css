@@ -32,6 +32,22 @@ nav ol{
 nav ol li{
     margin: 0 2px;
 }
+.bi-person-fill{
+    color: #E0E4E5;
+    font-size: 25px;
+}
+.bi-journal-album{
+    color: #E0E4E5;
+    font-size: 25px;
+}
+.bi-cart{
+    color: #E0E4E5;
+    font-size: 25px;
+}
+.bi-power{
+    color: #E0E4E5;
+    font-size: 25px;
+}
 nav ol li a{
     color: #fff;
     font-size: 20px;
@@ -41,7 +57,7 @@ nav ol li a{
     padding: 5px 10px;
 }
 nav ol li:hover a{
-    background: #fff;
+    background: #d1cfcf;
     color: rgb(31, 31, 78);
 }
 nav .search_box{
