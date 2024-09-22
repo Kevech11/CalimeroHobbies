@@ -183,13 +183,11 @@ input[type="checkbox"]{
     font-size: 33px;
 }
 /* NAVBAR */
-
 .slider-box{                         /*imagenes grandes*/
     width: 1350px;
     height: 640px;
     margin-left: 75px;
     overflow: hidden;
-   
 }    
 .slider-box ul{
     display: flex;

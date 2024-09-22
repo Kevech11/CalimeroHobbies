@@ -46,7 +46,7 @@
           <span>Use su correo electrónico para registrarse</span>
           <div class="container-input">
             <ion-icon name="person-outline"></ion-icon>
-            <input type="text" placeholder="Nombre" name="name" />
+            <input type="text" placeholder="Nombre y apellido" name="name" />
           </div>
           <div class="container-input">
             <ion-icon name="mail-outline"></ion-icon>
@@ -100,8 +100,7 @@
           const data = {
             name: registerForm.querySelector("input[name='name']").value,
             email: registerForm.querySelector("input[name='email']").value,
-            password: registerForm.querySelector("input[name='password']")
-              .value,
+            password: registerForm.querySelector("input[name='password']").value,
           }
 
           const response = await fetch("/api/auth/register", {
@@ -116,8 +115,10 @@
             throw new Error("Error al registrar el usuario")
           }
           const result = await response.json()
-
           alert("Usuario registrado correctamente")
+          registerForm.querySelector("input[name='name']").value = ""
+          registerForm.querySelector("input[name='email']").value = ""
+          registerForm.querySelector("input[name='password']").value = ""
         } catch (error) {
           console.error(error)
           alert("Ocurrió un error al registrar el usuario")

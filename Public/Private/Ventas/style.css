@@ -30,23 +30,23 @@ nav ol{
     margin: auto 0;
 }
 nav ol li{
-    margin: 0 2px;
+    margin: 0 5px;
 }
 .bi-person-fill{
-    color: #E0E4E5;
-    font-size: 25px;
+    color: #909292;
+    font-size: 24px;
 }
 .bi-journal-album{
-    color: #E0E4E5;
-    font-size: 25px;
+    color: #909292;
+    font-size: 24px;
 }
 .bi-cart{
-    color: #E0E4E5;
-    font-size: 25px;
+    color: #909292;
+    font-size: 24px;
 }
 .bi-power{
-    color: #E0E4E5;
-    font-size: 25px;
+    color: #909292;
+    font-size: 24px;
 }
 nav ol li a{
     color: #fff;

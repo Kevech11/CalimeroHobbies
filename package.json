@@ -12,9 +12,10 @@
   "author": "Kevin Penna",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "bcrypt": "^5.1.1",  
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
+    "mercadopago": "^2.0.15",
     "mongoose": "^8.6.2",
     "nodemon": "^3.1.4"
   }
