@@ -1,192 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bienvenidos | Calimero Hobby</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/Pages/Home/style.css">
-    <link  href="/Pages/Home/fontawesome-free-6.6.0-web/css/all.css" rel="stylesheet"> 
-</head>
-<body>
-    <input type="checkbox" id="check">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="/Pages/Home/style.css" />
+    <link
+      href="/Pages/Home/fontawesome-free-6.6.0-web/css/all.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <input type="checkbox" id="check" />
     <nav>
-        <div class="icon" href = "/Home" ><b style="color: red;">C</b>alimero <b style="color: red;">H</b>obby</div>
-        <div class="search_box">
-            <input type="search" placeholder="¿Qué estas buscando?">
-            <span class="fa fa-search"></span>
-        </div>
-        <ol>
-            <li><a href="/QuienesSomos">Nosotros</a></li>
-            <li><a href="/Productos">Productos</a></li>
-            <li><a href="/Contacto">Contacto</a></li>
-            <li><a href="/Login">Iniciar Sesión</a></li>
-        </ol>
-        <div class="Carrito">
-            <i href="/Productos" class="bi bi-cart"></i>
-        </div>
-        <label for="check" class="bar">
-            <span class="fa fa-bars" id="bars"></span>
-            <span class="fa fa-times" id="times"></span>
-        </label>
+      <div class="icon" href="/Home">
+        <b style="color: red">C</b>alimero <b style="color: red">H</b>obby
+      </div>
+      <div class="search_box">
+        <input
+          type="search"
+          placeholder="¿Qué estas buscando?"
+          id="searchInput"
+        />
+        <span class="fa fa-search" id="searchBtn"></span>
+      </div>
+      <ol>
+        <li><a href="/QuienesSomos">Nosotros</a></li>
+        <li><a href="/Productos">Productos</a></li>
+        <li><a href="/Contacto">Contacto</a></li>
+        <li id="loginBtn"></li>
+      </ol>
+      <div class="Carrito">
+        <i href="/Productos" class="bi bi-cart"></i>
+      </div>
+      <label for="check" class="bar">
+        <span class="fa fa-bars" id="bars"></span>
+        <span class="fa fa-times" id="times"></span>
+      </label>
     </nav>
-<br>
-<br>
-<br>
-<br>
-<br>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <section class="section-imagen">
-        <div class="slider-box">
-            <ul>
-                <li><img  src="/img/home/f-35c.jpeg" alt=""></li>
-                <li><img src="/img/home/scania.jpeg" alt=""></li>
-                <li><img src="/img/home/t-34.jpeg" alt=""></li>
-                <li><img src="/img/home/tornado.jpeg" alt=""></li>
-            </ul>
-        </div>
+      <div class="slider-box">
+        <ul>
+          <li><img src="/img/home/f-35c.jpeg" alt="" /></li>
+          <li><img src="/img/home/scania.jpeg" alt="" /></li>
+          <li><img src="/img/home/t-34.jpeg" alt="" /></li>
+          <li><img src="/img/home/tornado.jpeg" alt="" /></li>
+        </ul>
+      </div>
     </section>
 
     <section class="flex-container">
-        <div>
-            <div class="dinero">
-                <img src="/img/home/dinero.png" alt="">
-            </div>
-            <h2 id="title">Métodos de Pago</h2>
-            <p class="text">
-                Podés pagar con transferencia bancaria, o en efectivo al retirar: esta última opción tiene un 20% de
-                descuento.
-            </p>
+      <div>
+        <div class="dinero">
+          <img src="/img/home/dinero.png" alt="" />
         </div>
-        <div>
-            <div class="envios">
-                <img src="/img/home/enviar.png" alt="">
-            </div>
-            <h2 id="title">Envios a todo el país y regíon</h2>
-            <p class="text">
-                Enviamos por Correo Argentino y DHL Certificado a domicilio. También se puede retirar de nuestro depósito.
-            </p>
+        <h2 id="title">Métodos de Pago</h2>
+        <p class="text">
+          Podés pagar con transferencia bancaria, o en efectivo al retirar: esta
+          última opción tiene un 20% de descuento.
+        </p>
+      </div>
+      <div>
+        <div class="envios">
+          <img src="/img/home/enviar.png" alt="" />
         </div>
-        <div>
-            <div class="ubicacion">
-                <img src="/img/home/ubicacion.png" alt="">
-            </div>
-            <h2 id="title">Te estamos esperando</h2>
-            <p class="text">
-                Estamos de lunes a viernes de 10:30 a 18 horas. Podés contactarnos enviando un WhatsApp al 351-3775973.
-            </p>
+        <h2 id="title">Envios a todo el país y regíon</h2>
+        <p class="text">
+          Enviamos por Correo Argentino y DHL Certificado a domicilio. También
+          se puede retirar de nuestro depósito.
+        </p>
+      </div>
+      <div>
+        <div class="ubicacion">
+          <img src="/img/home/ubicacion.png" alt="" />
         </div>
+        <h2 id="title">Te estamos esperando</h2>
+        <p class="text">
+          Estamos de lunes a viernes de 10:30 a 18 horas. Podés contactarnos
+          enviando un WhatsApp al 351-3775973.
+        </p>
+      </div>
     </section>
 
     <section class="flex-container2">
-        <img src="/img/home/header.jpg " alt="">
-        <div class="informacion">
-            <h1 id="title">Calimero Hobby</h1>
-            <p class="text2">
-                Somos el proveedor histórico de maquetas plásticas de Córdoba, y el más grande del país. Contamos con
-                más de cinco años en el mercado, ofreciendo directamente al público el mas rápido servicio, los mas
-                variados productos y los mejores precios de este rubro para todo nuestro país.
-            </p>
-        </div>
+      <img src="/img/home/header.jpg " alt="" />
+      <div class="informacion">
+        <h1 id="title">Calimero Hobby</h1>
+        <p class="text2">
+          Somos el proveedor histórico de maquetas plásticas de Córdoba, y el
+          más grande del país. Contamos con más de cinco años en el mercado,
+          ofreciendo directamente al público el mas rápido servicio, los mas
+          variados productos y los mejores precios de este rubro para todo
+          nuestro país.
+        </p>
+      </div>
     </section>
 
     <section class="flex-container3">
-        <div class="informacion2">
-            <h1 id="title">Vallejo, Tamiya, Trumpeter, Italeri y todas las mejores marcas</h1>
-            <p class="text3">
-                En Calimero Hobby trabajamos todas las marcas de maquetas plásticas del mundo para vos. Importamos desde
-                Italia, Alemania, Polonia, China, Inglaterra y muchos países más. Todas las mejores marcas confían en
-                Haven Hobbies como su representante directo en Argentina: Italeri, Trumpeter, Hobby Boss, Kinetic,
-                Panda, Meng, y muchas más. Siempre estamos trabajando para incorporar las últimas marcas y novedades del
-                plastimodelismo a nuestro catalogo. 
-
-            </p>
-        </div>
-        <br>
-        <div class="carrusel">
-            <ul class="carrusel-fotos">
-                <li id="foto1"><img src="/img/home/vallejo-logo.png" alt=""></li>
-                <li id="foto1"><img src="/img/home/Tamiya.webp"></li>
-                <li id="foto1"><img src="/img/home/hobbyboss.png" alt=""></li>
-                <li id="foto2"><img src="/img/home/revell.png" alt=""></li>
-                <li id="foto3"><img src="/img/home/italeri.png" alt=""></li>
-                <li id="foto4"><img src="/img/home/trumpetterjpg.jpg" alt=""></li>
-                <li id="foto5"><img src="/img/home/airfix.png" alt=""></li>
-                <li id="foto6"><img src="/img/home/kitty - copia.jpg" alt=""></li>
-            </ul>
-        </div>
+      <div class="informacion2">
+        <h1 id="title">
+          Vallejo, Tamiya, Trumpeter, Italeri y todas las mejores marcas
+        </h1>
+        <p class="text3">
+          En Calimero Hobby trabajamos todas las marcas de maquetas plásticas
+          del mundo para vos. Importamos desde Italia, Alemania, Polonia, China,
+          Inglaterra y muchos países más. Todas las mejores marcas confían en
+          Haven Hobbies como su representante directo en Argentina: Italeri,
+          Trumpeter, Hobby Boss, Kinetic, Panda, Meng, y muchas más. Siempre
+          estamos trabajando para incorporar las últimas marcas y novedades del
+          plastimodelismo a nuestro catalogo.
+        </p>
+      </div>
+      <br />
+      <div class="carrusel">
+        <ul class="carrusel-fotos">
+          <li id="foto1"><img src="/img/home/vallejo-logo.png" alt="" /></li>
+          <li id="foto1"><img src="/img/home/Tamiya.webp" /></li>
+          <li id="foto1"><img src="/img/home/hobbyboss.png" alt="" /></li>
+          <li id="foto2"><img src="/img/home/revell.png" alt="" /></li>
+          <li id="foto3"><img src="/img/home/italeri.png" alt="" /></li>
+          <li id="foto4"><img src="/img/home/trumpetterjpg.jpg" alt="" /></li>
+          <li id="foto5"><img src="/img/home/airfix.png" alt="" /></li>
+          <li id="foto6"><img src="/img/home/kitty - copia.jpg" alt="" /></li>
+        </ul>
+      </div>
     </section>
-   
+
     <h1 id="title">Nuevas maquetas en CALIMERO HOBBY</h1>
     <section class="flex-container4">
-        <div>
-            <div class="box-ingresos">
-                <img src="/img/aviones/f-35.jpeg" alt="">
-            </div>
-            <h3 id="title">F-35A Lightning II</h3>
-            <p class="text4">
-                Italeri - 1/72
-            </p>
+      <div>
+        <div class="box-ingresos">
+          <img src="/img/aviones/f-35.jpeg" alt="" />
         </div>
-        <div>
-            <div class="box-ingresos">
-                <img src="/img/aviones/thypoon.png" alt="">
-            </div>
-            <h3 id="title">Eurofighter Thypoon</h3>
-            <p class="text4">
-                Revell - 1/48
-            </p>
+        <h3 id="title">F-35A Lightning II</h3>
+        <p class="text4">Italeri - 1/72</p>
+      </div>
+      <div>
+        <div class="box-ingresos">
+          <img src="/img/aviones/thypoon.png" alt="" />
         </div>
-        <div>
-            <div class="box-ingresos">
-                <img src="/img/aviones/CH-53.jpeg" alt="">
-            </div>
-            <h3 id="title">CH-53 GS/G</h3>
-            <p class="text4">
-                Revell - 1/48
-            </p>
+        <h3 id="title">Eurofighter Thypoon</h3>
+        <p class="text4">Revell - 1/48</p>
+      </div>
+      <div>
+        <div class="box-ingresos">
+          <img src="/img/aviones/CH-53.jpeg" alt="" />
         </div>
-        <div>
-            <div class="box-ingresos">
-                <img src="/img/aviones/flakpanzer.jpeg" alt="">
-            </div>
-            <h3 id="title">Flakpanzer III "Ostwind"</h3>
-            <p class="text4">
-                Revell - 1/72
-            </p>
+        <h3 id="title">CH-53 GS/G</h3>
+        <p class="text4">Revell - 1/48</p>
+      </div>
+      <div>
+        <div class="box-ingresos">
+          <img src="/img/aviones/flakpanzer.jpeg" alt="" />
         </div>
+        <h3 id="title">Flakpanzer III "Ostwind"</h3>
+        <p class="text4">Revell - 1/72</p>
+      </div>
     </section>
 
     <footer class="pie-pagina">
-        <div class="grupo-1">
-            <div class="box">
-                <figure>
-                    <a href=""><img src="/img/home/footer1.png" alt=""></a>
-                </figure>
-            </div>
-            <div class="box">
-                <h2>SOBRE NOSOTROS</h2>
-                <p>Somos el proveedor histórico de maquetas plásticas de Córdoba - Contactanos por WhatsApp al
-                    351-3775973.
-                    <br>
-                    <br>
-                </p>
-                <div class="ubic">
-                    <i class="bi bi-geo-alt-fill"></i>  <small>Dean Funes 250 - Local 10 - Galeria Paseo - Córdoba Capital / Av.Italia 1400 - Río Cuarto  Córdoba</small>
-                </div>
-            </div>
-            <div class="box">
-                <h2>SIGUENOS</h2>
-                <div class="red-social">                   
-                    <a href="#" class="fa-brands fa-facebook"></a>
-                    <a href="#" class="fa-brands fa-instagram"></a>                    
-                    <a href="#" class="fa-brands fa-whatsapp"></a>
-                </div>
-            </div>
+      <div class="grupo-1">
+        <div class="box">
+          <figure>
+            <a href=""><img src="/img/home/footer1.png" alt="" /></a>
+          </figure>
         </div>
-        <div class="grupo-2">
-            <small>&copy; 2024 <b>Calimero Hobby</b> - Todos los derechos reservados</small>
-        </div>      
-    </footer>    
+        <div class="box">
+          <h2>SOBRE NOSOTROS</h2>
+          <p>
+            Somos el proveedor histórico de maquetas plásticas de Córdoba -
+            Contactanos por WhatsApp al 351-3775973.
+            <br />
+            <br />
+          </p>
+          <div class="ubic">
+            <i class="bi bi-geo-alt-fill"></i>
+            <small
+              >Dean Funes 250 - Local 10 - Galeria Paseo - Córdoba Capital /
+              Av.Italia 1400 - Río Cuarto Córdoba</small
+            >
+          </div>
+        </div>
+        <div class="box">
+          <h2>SIGUENOS</h2>
+          <div class="red-social">
+            <a href="#" class="fa-brands fa-facebook"></a>
+            <a href="#" class="fa-brands fa-instagram"></a>
+            <a href="#" class="fa-brands fa-whatsapp"></a>
+          </div>
+        </div>
+      </div>
+      <div class="grupo-2">
+        <small
+          >&copy; 2024 <b>Calimero Hobby</b> - Todos los derechos
+          reservados</small
+        >
+      </div>
+    </footer>
     <script type="module" src="./Pages/Home/home.controller.js"></script>
-</body>
+  </body>
 </html>

@@ -1,3 +1,6 @@
+import fs from "fs"
+import ProductModel from "../models/products.model.js"
+
 async function crearProductos() {
   const data = fs.readFileSync(
     "./Public/Pages/Productos/productos.json",
@@ -19,3 +22,5 @@ async function crearProductos() {
     await nuevoProducto.save()
   }
 }
+
+export { crearProductos }

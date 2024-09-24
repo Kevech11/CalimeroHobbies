@@ -14,16 +14,21 @@
 
     <input type="checkbox" id="check">
     <nav>
-        <div href="/Pages/Home" class="icon"><b style="color: red;"  >C</b>alimero <b style="color: red;">H</b>obby</div>
+        <div class="icon">
+            <a href="/home" style="color: white; text-decoration: none">
+            <span style="color: red">C</span>alimero
+            <span style="color: red">H</span>obby
+            </a>
+        </div>
         <div class="search_box">
-            <input type="search" placeholder="¿Qué estas buscando?">
-            <span class="fa fa-search"></span>
+            <input type="search" placeholder="¿Qué estas buscando?" id="searchInput">
+            <span class="fa fa-search" id="searchBtn"></span>
         </div>
         <ol>
             <li><a href="/QuienesSomos">Nosotros</a></li>
             <li><a href="/Productos">productos</a></li>
             <li><a href="/Contacto">contacto</a></li>
-            <li><a href="/Login">Iniciar Sesión</a></li>
+            <li id="loginBtn"></li>
         </ol>
         <div class="Carrito">
             <i href="/Carrito" class="bi bi-cart"></i>
@@ -66,7 +71,6 @@
                 </ul>      
         </aside>
         <main>
-            <h2 class="titulo-principal" id="titulo-principal">Todos los productos</h2>
             <div id="contenedor-productos" class="contenedor-productos">
                 <!-- Esto se va a rellenar con JS -->
             </div>

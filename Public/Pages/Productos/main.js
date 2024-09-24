@@ -1,24 +1,57 @@
 let productos = []
 
-fetch("/api/productos")
-  .then((response) => response.json())
-  .then((data) => {
-    productos = data.map((producto) => {
-      return {
-        id: producto._id,
-        titulo: producto.titulo,
-        marca: producto.marca,
-        precio: producto.precio,
-        imagen: producto.imagen,
-        categoria: producto.categoria,
-      }
+const searchInput = document.getElementById("searchInput")
+const searchBtn = document.getElementById("searchBtn")
+function redireccionarAlBuscar() {
+  const term = searchInput.value
+  window.location.href = `/Productos?search=${term}`
+}
+
+searchBtn.addEventListener("click", redireccionarAlBuscar)
+searchInput.addEventListener("keypress", (e) => {
+  console.log(e.key)
+  if (e.key === "Enter") {
+    redireccionarAlBuscar()
+  }
+})
+
+if (new URLSearchParams(window.location.search).has("search")) {
+  const term = new URLSearchParams(window.location.search).get("search")
+  fetch("/api/productos/search?term=" + term)
+    .then((response) => response.json())
+    .then((data) => {
+      productos = data.map((producto) => {
+        return {
+          id: producto._id,
+          titulo: producto.titulo,
+          marca: producto.marca,
+          precio: producto.precio,
+          imagen: producto.imagen,
+          categoria: producto.categoria,
+        }
+      })
+      cargarProductos(productos)
     })
-    cargarProductos(productos)
-  })
+} else {
+  fetch("/api/productos")
+    .then((response) => response.json())
+    .then((data) => {
+      productos = data.map((producto) => {
+        return {
+          id: producto._id,
+          titulo: producto.titulo,
+          marca: producto.marca,
+          precio: producto.precio,
+          imagen: producto.imagen,
+          categoria: producto.categoria,
+        }
+      })
+      cargarProductos(productos)
+    })
+}
 
 const contenedorProductos = document.querySelector("#contenedor-productos")
 const botonesCategorias = document.querySelectorAll(".boton-categoria")
-const tituloPrincipal = document.querySelector("#titulo-principal")
 let botonesAgregar = document.querySelectorAll(".producto-agregar")
 const numerito = document.querySelector("#numerito")
 
@@ -59,13 +92,11 @@ botonesCategorias.forEach((boton) => {
       const productoCategoria = productos.find(
         (producto) => producto.categoria.toLowerCase() === e.currentTarget.id
       )
-      tituloPrincipal.innerText = productoCategoria.categoria.nombre
       const productosBoton = productos.filter(
         (producto) => producto.categoria.toLowerCase() === e.currentTarget.id
       )
       cargarProductos(productosBoton)
     } else {
-      tituloPrincipal.innerText = "Todos los productos"
       cargarProductos(productos)
     }
   })
