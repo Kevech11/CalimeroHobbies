@@ -181,6 +181,9 @@ input[type="checkbox"]{
         opacity: 1;
     }
 }
+.bi-cart{
+    color: #fff;
+}
 .Carrito{
     color: #fff;
     cursor: pointer;

@@ -36,10 +36,10 @@
         <li><a href="/QuienesSomos">Nosotros</a></li>
         <li><a href="/Productos">Productos</a></li>
         <li><a href="/Contacto">Contacto</a></li>
-        <li><a href="/Login">Iniciar Sesión</a></li>
+        <li id="loginBtn"></li>
       </ol>
       <div class="Carrito">
-        <i href="/Productos" class="bi bi-cart"></i>
+        <a href="/Carrito"><i class="bi bi-cart"></i></a>
       </div>
       <label for="check" class="bar">
         <span class="fa fa-bars" id="bars"></span>
@@ -119,5 +119,16 @@
         >
       </div>
     </footer>
+    <script>
+        const loginBtn = document.getElementById("loginBtn")
+
+        if (loginBtn) {
+          if (window.localStorage.getItem("user")) {
+            loginBtn.innerHTML = `<a class="btn btn-primary" onclick='window.localStorage.removeItem("user"); window.location.reload();'>Cerrar sesion</a>`
+          } else {
+            loginBtn.innerHTML = `<a href="/login" class="btn btn-primary">Iniciar sesion</a>`
+          }
+        }
+    </script>
   </body>
 </html>

@@ -177,8 +177,11 @@ input[type="checkbox"]{
         opacity: 1;
     }
 }
-.Carrito{
+.bi-cart{
     color: #fff;
+}
+.Carrito{
+    
     cursor: pointer;
     font-size: 33px;
 }
