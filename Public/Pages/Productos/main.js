@@ -130,7 +130,7 @@ function agregarAlCarrito(e) {
     position: "right",
     stopOnFocus: true,
     style: {
-      background: "linear-gradient(to right, #4b33a8, #785ce9)",
+      background: "linear-gradient(to right, rgb(4, 83, 4), rgb(4, 83, 4)",
       borderRadius: "2rem",
       textTransform: "uppercase",
       fontSize: ".75rem",

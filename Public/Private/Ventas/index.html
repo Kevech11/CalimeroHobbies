@@ -11,14 +11,19 @@
 <body>
     <input type="checkbox" id="check">
     <nav>
-        <div class="icon"><b style="color: red;">C</b>alimero <b style="color: red;">H</b>obby</div>
+      <div class="icon">
+        <a href="/Home" style="color: white; text-decoration: none">
+        <span style="color: red">C</span>alimero
+        <span style="color: red">H</span>obby
+        </a>
+      </div>
         <div class="search_box">
             <input type="search" placeholder="¿Qué estas buscando?">
             <span class="fa fa-search"></span>
         </div>
         <ol>
             <li><a href="/QuienesSomos"><i class="bi bi-journal-album"></i> Inventario</a></li>
-            <li><a href="/Productos"><i class="bi bi-person-fill"></i> Clientes</a></li>
+            <li><a href="/Clientes"><i class="bi bi-person-fill"></i> Clientes</a></li>
             <li><a href="/Productos"><i class="bi bi-cart"></i> Productos</a></li>
             <li><a href="/Login"><i class="bi bi-power"></i> Iniciar Sesión</a></li>
         </ol>
@@ -27,45 +32,44 @@
             <span class="fa fa-times" id="times"></span>
         </label>
     </nav>
-<br>
-<br>
-<br>
-<br>
-<br>
-<table class="p-table" aria-label="Example of a table with icons">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Architecture</th>
-      <th>Duration</th>
-      <th class="p-table__cell--icon-placeholder">Result</th>
-      <th>Build finished</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>#1234</th>
-      <td>amd64</td>
-      <td>6 minutes</td>
-      <td class="p-table__cell--icon-placeholder"><i class="p-icon--success"></i>Released</td>
-      <td>2 hours ago</td>
-    </tr>
-    <tr>
-      <th>#1233</th>
-      <td>arm64</td>
-      <td>5 minutes</td>
-      <td class="p-table__cell--icon-placeholder"><i class="p-icon--error"></i>Failed</td>
-      <td>2 hours ago</td>
-    </tr>
-    <tr>
-      <th>#1232</th>
-      <td>i386</td>
-      <td>4 minutes</td>
-      <td class="p-table__cell--icon-placeholder">In progress</td>
-      <td>2 hours ago</td>
-    </tr>
-  </tbody>
-</table>
 
+    <div class="container">
+      <h1>Registro de Ventas</h1>
+      <form id="ventaForm">
+          <label for="producto">Producto Vendido:</label>
+          <input type="text" id="producto" name="producto" required>
+
+          <label for="fecha">Fecha:</label>
+          <input type="text" id="fecha" name="fecha" required>
+
+          <label for="cantidad">Cantidad:</label>
+          <input type="number" id="cantidad" name="cantidad" required>
+
+          <label for="precio">Precio:</label>
+          <input type="number" id="precio" name="precio" required>
+
+          <label for="cliente">Cliente (Dirección):</label>
+          <input type="text" id="cliente" name="cliente" required>
+
+          <button type="submit">Agregar Venta</button>
+      </form>
+
+      <table id="ventasTable">
+          <thead>
+              <tr>
+                  <th>Producto Vendido</th>
+                  <th>Fecha</th>
+                  <th>Cantidad</th>
+                  <th>Precio</th>
+                  <th>Cliente (Dirección)</th>
+                  <th>Acciones</th>
+              </tr>
+          </thead>
+          <tbody>
+              <!-- Aquí se agregan las ventas -->
+          </tbody>
+      </table>
+  </div>
+<script src="/Private/Ventas/ventas.controller.js"></script>
 </body>
 </html>
