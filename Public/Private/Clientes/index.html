@@ -23,7 +23,7 @@
         </div>
         <ol>
             <li><a href="/QuienesSomos"><i class="bi bi-journal-album"></i> Inventario</a></li>
-            <li><a href="/Productos"><i class="bi bi-person-fill"></i> Clientes</a></li>
+            <li><a href="/Clientes"><i class="bi bi-person-fill"></i> Clientes</a></li>
             <li><a href="/Productos"><i class="bi bi-cart"></i> Productos</a></li>
             <li><a href="/Login"><i class="bi bi-power"></i> Iniciar Sesión</a></li>
         </ol>
@@ -32,67 +32,70 @@
             <span class="fa fa-times" id="times"></span>
         </label>
     </nav>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
-<div class="form-container">
-  <h2>Agregar Cliente</h2>
-  <form id="clienteForm">
-      <div class="form-group">
-          <label for="id">ID del Cliente:</label>
-          <input type="text" id="id" name="id" required>
-      </div>
-      <div class="form-group">
-          <label for="nombre">Nombre:</label>
-          <input type="text" id="nombre" name="nombre" required>
-      </div>
-      <div class="form-group">
-          <label for="apellido">Apellido:</label>
-          <input type="text" id="apellido" name="apellido" required>
-      </div>
-      <div class="form-group">
-          <label for="pais">País:</label>
-          <input type="text" id="pais" name="pais" required>
-      </div>
-      <div class="form-group">
-          <label for="provincia">Localidad:</label>
-          <input type="text" id="localidad" name="localidad" required>
-      </div>
-      <div class="form-group">
-          <label for="direccion">Dirección:</label>
-          <input type="text" id="direccion" name="direccion" required>
-      </div>
-      <div class="form-group">
-          <label for="telefono">Teléfono:</label>
-          <input type="text" id="telefono" name="telefono" required>
-      </div>
-      <button type="submit" class="btn-submit">Agregar Cliente</button>
-  </form>
-</div>
-<div class="table-container">
-  <h2>Lista de Clientes</h2>
-  <table id="clientesTable">
-      <thead>
-          <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>País</th>
-              <th>Localidad</th>
-              <th>Dirección</th>
-              <th>Teléfono</th>
-              <th>Acciones</th>
-          </tr>
-      </thead>
-      <tbody>
-          <!-- Los datos de los clientes aparecerán aquí -->
-      </tbody>
-  </table>
-</div>
+
+<section class="section-form">
+    <div class="form-container">
+        <!-- <h2>Agregar Cliente</h2> -->
+        <form id="clienteForm">
+            <div class="form-group">
+                <label for="id">ID del Cliente:</label>
+                <input type="text" id="id" name="id" required>
+            </div>
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required>
+            </div>
+            <div class="form-group">
+                <label for="pais">País:</label>
+                <input type="text" id="pais" name="pais" required>
+            </div>
+            <div class="form-group">
+                <label for="provincia">Provincia:</label>
+                <input type="text" id="provincia" name="provincia" required>
+            </div>
+            <div class="form-group">
+                <label for="localidad">Localidad:</label>
+                <input type="text" id="localidad" name="localidad" required>
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" required>
+            </div>
+            <div class="form-group">
+               <label for="telefono">Teléfono:</label>
+               <input type="text" id="telefono" name="telefono" required>
+            </div>
+            <button type="submit" class="btn-submit">Agregar Cliente</button>
+        </form>
+    </div>
+
+    <div class="table-container">
+        <h2>Lista de Clientes</h2>
+            <table id="clientesTable">
+             <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>País</th>
+                    <th>Provincia</th>
+                    <th>Localidad</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Acciones</th>
+                 </tr>
+            </thead>
+                <tbody>
+                 <!-- Los datos de los clientes aparecerán aquí -->
+                </tbody>
+            </table>
+    </div>
+</section>
 
 <script src="/Private/Clientes/clientes.controller.js"></script>
 </body>
