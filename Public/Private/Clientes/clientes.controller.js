@@ -1,5 +1,3 @@
-
-
 // Obtener el formulario y la tabla
 const clienteForm = document.getElementById('clienteForm');
 const clientesTable = document.getElementById('clientesTable').getElementsByTagName('tbody')[0];
@@ -29,17 +27,47 @@ clienteForm.addEventListener('submit', function(event) {
     newRow.insertCell(6).textContent = direccion;
     newRow.insertCell(7).textContent = telefono;
 
-    // Crear celda de acciones y botón de eliminar
+    // Crear celda de acciones y botones de eliminar y editar
     const actionsCell = newRow.insertCell(8);
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Eliminar';
     deleteButton.className = 'btn-delete';
+    
+    const editButton = document.createElement('button');
+    editButton.textContent = 'Editar';
+    editButton.className = 'btn-edit';
+    
+    actionsCell.appendChild(editButton);
     actionsCell.appendChild(deleteButton);
 
     // Añadir evento de eliminación al botón
     deleteButton.addEventListener('click', function() {
         if (confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
             clientesTable.deleteRow(newRow.rowIndex - 1);
+        }
+    });
+
+    // Añadir evento de edición al botón
+    editButton.addEventListener('click', function() {
+        if (editButton.textContent === 'Editar') {
+            // Habilitar la edición
+            for (let i = 0; i < 8; i++) {
+                const cell = newRow.cells[i];
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = cell.textContent;
+                cell.textContent = '';
+                cell.appendChild(input);
+            }
+            editButton.textContent = 'Guardar';
+        } else {
+            // Guardar los cambios
+            for (let i = 0; i < 8; i++) {
+                const cell = newRow.cells[i];
+                const input = cell.querySelector('input');
+                cell.textContent = input.value;
+            }
+            editButton.textContent = 'Editar';
         }
     });
 

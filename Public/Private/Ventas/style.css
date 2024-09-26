@@ -311,3 +311,15 @@ button {
 .btn-print:hover {
     background-color: #077ddd;
 }
+
+.btn-edit {
+    padding: 5px 10px;
+    background-color: #ffc107;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.btn-edit:hover {
+    background-color: #e0a800;
+}

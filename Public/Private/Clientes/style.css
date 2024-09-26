@@ -216,7 +216,7 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 370px;
+    width: 300px;
     margin-right: 20px;
 }
 .form-container h2 {
@@ -260,7 +260,7 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 950px;
+    width: 1150px;
 }
 .table-container h2 {
     text-align: center;
@@ -290,4 +290,15 @@ th {
 }
 .btn-delete:hover {
     background-color: #c82333;
+}
+.btn-edit {
+    padding: 5px 10px;
+    background-color: #ffc107;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.btn-edit:hover {
+    background-color: #e0a800;
 }

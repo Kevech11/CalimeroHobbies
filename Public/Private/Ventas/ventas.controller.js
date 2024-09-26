@@ -50,11 +50,41 @@ ventaForm.addEventListener('submit', function(event) {
             Total: ${total}
         `;
         const win = window.open('', '', 'height=400,width=600');
-        win.document.write('<html><head><title>Imprimir Venta/title></head><body>');
+        win.document.write('<html><head><title>Imprimir Venta</title></head><body>');
         win.document.write('<pre>' + ventaInfo + '</pre>');
         win.document.write('</body></html>');
         win.document.close();
         win.print();
+    });
+
+    // Botón de editar
+    const editButton = document.createElement('button');
+    editButton.textContent = 'Editar';
+    editButton.className = 'btn-edit';
+    actionsCell.appendChild(editButton);
+
+    // Añadir evento de edición al botón
+    editButton.addEventListener('click', function() {
+        if (editButton.textContent === 'Editar') {
+            // Habilitar la edición
+            for (let i = 0; i < 4; i++) {
+                const cell = newRow.cells[i];
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = cell.textContent;
+                cell.textContent = '';
+                cell.appendChild(input);
+            }
+            editButton.textContent = 'Guardar';
+        } else {
+            // Guardar los cambios
+            for (let i = 0; i < 4; i++) {
+                const cell = newRow.cells[i];
+                const input = cell.querySelector('input');
+                cell.textContent = input.value;
+            }
+            editButton.textContent = 'Editar';
+        }
     });
 
     // Limpiar los campos del formulario
