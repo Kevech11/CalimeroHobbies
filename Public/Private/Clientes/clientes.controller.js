@@ -70,7 +70,5 @@ clienteForm.addEventListener('submit', function(event) {
             editButton.textContent = 'Editar';
         }
     });
-
-    // Limpiar los campos del formulario
     clienteForm.reset();
 });

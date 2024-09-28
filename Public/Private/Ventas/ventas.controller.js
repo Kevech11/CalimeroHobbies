@@ -1,26 +1,24 @@
-// Obtener el formulario y la tabla
-const ventaForm = document.getElementById('ventaForm');
-const ventasTable = document.getElementById('ventasTable').getElementsByTagName('tbody')[0];
-
 // Escuchar el evento de envío del formulario
 ventaForm.addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevenir el envío del formulario                                        
+    event.preventDefault(); // Prevenir el envío del formulario
 
-    // Obtener los valores de los campos
+    // Obtener los valores de los campos, incluyendo el nuevo campo de fecha
+    const fecha = document.getElementById('fecha').value;
     const cliente = document.getElementById('cliente').value;
     const producto = document.getElementById('producto').value;
     const cantidad = document.getElementById('cantidad').value;
     const total = document.getElementById('total').value;
 
-    // Crear una nueva fila y agregar los valores
+    // Crear una nueva fila y agregar los valores, incluyendo la fecha
     const newRow = ventasTable.insertRow();
-    newRow.insertCell(0).textContent = cliente;
-    newRow.insertCell(1).textContent = producto;
-    newRow.insertCell(2).textContent = cantidad;
-    newRow.insertCell(3).textContent = total;
+    newRow.insertCell(0).textContent = fecha;  
+    newRow.insertCell(1).textContent = cliente;
+    newRow.insertCell(2).textContent = producto;
+    newRow.insertCell(3).textContent = cantidad;
+    newRow.insertCell(4).textContent = total;
 
     // Crear celda de acciones
-    const actionsCell = newRow.insertCell(4);
+    const actionsCell = newRow.insertCell(5);
 
     // Botón de eliminar
     const deleteButton = document.createElement('button');
@@ -28,7 +26,6 @@ ventaForm.addEventListener('submit', function(event) {
     deleteButton.className = 'btn-delete';
     actionsCell.appendChild(deleteButton);
 
-    // Añadir evento de eliminación al botón
     deleteButton.addEventListener('click', function() {
         if (confirm('¿Estás seguro de que deseas eliminar esta venta?')) {
             ventasTable.deleteRow(newRow.rowIndex - 1);
@@ -41,11 +38,11 @@ ventaForm.addEventListener('submit', function(event) {
     printButton.className = 'btn-print';
     actionsCell.appendChild(printButton);
 
-    // Añadir evento de impresión al botón
     printButton.addEventListener('click', function() {
         const ventaInfo = `
+            Fecha: ${fecha}
             Cliente: ${cliente}
-            Producto: ${producto} 
+            Producto: ${producto}
             Cantidad: ${cantidad}
             Total: ${total}
         `;
@@ -63,11 +60,9 @@ ventaForm.addEventListener('submit', function(event) {
     editButton.className = 'btn-edit';
     actionsCell.appendChild(editButton);
 
-    // Añadir evento de edición al botón
     editButton.addEventListener('click', function() {
         if (editButton.textContent === 'Editar') {
-            // Habilitar la edición
-            for (let i = 0; i < 4; i++) {
+            for (let i = 0; i < 5; i++) { // Ajuste para incluir la columna de fecha
                 const cell = newRow.cells[i];
                 const input = document.createElement('input');
                 input.type = 'text';
@@ -77,8 +72,7 @@ ventaForm.addEventListener('submit', function(event) {
             }
             editButton.textContent = 'Guardar';
         } else {
-            // Guardar los cambios
-            for (let i = 0; i < 4; i++) {
+            for (let i = 0; i < 5; i++) {
                 const cell = newRow.cells[i];
                 const input = cell.querySelector('input');
                 cell.textContent = input.value;
@@ -86,7 +80,5 @@ ventaForm.addEventListener('submit', function(event) {
             editButton.textContent = 'Editar';
         }
     });
-
-    // Limpiar los campos del formulario
     ventaForm.reset();
 });

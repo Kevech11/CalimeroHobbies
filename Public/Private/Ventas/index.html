@@ -39,6 +39,10 @@
         <!-- <h2>Agregar Cliente</h2> -->
         <form id="ventaForm">
             <div class="form-group">
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" name="fecha" required>
+            </div>
+            <div class="form-group">
                 <label for="id">Cliente:</label>
                 <input type="text" id="cliente" name="cliente" required>
             </div>
@@ -63,6 +67,7 @@
             <table id="ventasTable">
              <thead>
                   <tr>
+                    <th>Fecha</th>
                     <th>Cliente</th>
                     <th>Producto</th>
                     <th>Cantidad</th>
@@ -71,7 +76,7 @@
                  </tr>
             </thead>
                 <tbody>
-                 <!-- Los datos de los clientes aparecerán aquí -->
+                 <!-- Los datos de las ventas aparecerán aquí -->
                 </tbody>
             </table>
     </div>
