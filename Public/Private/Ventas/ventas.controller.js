@@ -11,6 +11,7 @@ ventaForm.addEventListener('submit', function(event) {
 
     // Crear una nueva fila y agregar los valores, incluyendo la fecha
     const newRow = ventasTable.insertRow();
+    //newRow.insertCell(0).textContent = IdPedido;  
     newRow.insertCell(0).textContent = fecha;  
     newRow.insertCell(1).textContent = cliente;
     newRow.insertCell(2).textContent = producto;
@@ -82,3 +83,14 @@ ventaForm.addEventListener('submit', function(event) {
     });
     ventaForm.reset();
 });
+
+
+const loginBtn = document.getElementById("loginBtn")
+
+if (loginBtn) {
+  if (window.localStorage.getItem("user")) {
+    loginBtn.innerHTML = `<a class="btn btn-primary" onclick='window.localStorage.removeItem("user"); window.location.reload();'>Cerrar sesion</a>`
+  } else {
+    loginBtn.innerHTML = `<a href="/login" class="btn btn-primary">Iniciar sesion</a>`
+  }
+}

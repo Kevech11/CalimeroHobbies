@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/Private/Pedidos/style.css">
+    <link  href="/Pages/Home/fontawesome-free-6.6.0-web/css/all.css" rel="stylesheet"> 
+</head>
+<body>
+    <input type="checkbox" id="check">
+    <nav>
+        <div class="icon">
+            <a href="/Ventas" style="color: white; text-decoration: none">
+            <span style="color: red">C</span>alimero
+            <span style="color: red">H</span>obby
+            </a>
+          </div>
+        <div class="search_box">
+            <input type="search" placeholder="¿Qué estas buscando?">
+            <span class="fa fa-search"></span>
+        </div>
+        <ol>
+            <li><a href="/QuienesSomos"><i class="bi bi-journal-album"></i> Pedidos</a></li>
+            <li><a href="/Clientes"><i class="bi bi-person-fill"></i> Clientes</a></li>
+            <li><a href="/Productos"><i class="bi bi-cart"></i> Productos</a></li>
+            <li id="loginBtn"></li>
+        </ol>
+        <label for="check" class="bar">
+            <span class="fa fa-bars" id="bars"></span>
+            <span class="fa fa-times" id="times"></span>
+        </label>
+    </nav>
+    <section class="section-form">
+        <div class="container">
+            <h1>Pedidos Recibidos</h1>
+            <table id="pedidosTable">
+                <thead>
+                    <tr>
+                        <th>ID Pedido</th>
+                        <th>Nombre Cliente</th>
+                        <th>Email</th>
+                        <th>Asunto</th>
+                        <th>Pedido</th>
+                    </tr>
+                </thead>
+                <tbody id="pedidosBody">
+                    <!-- Aquí se añadirán los pedidos en tiempo real -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+<script src="/Private/Pedidos/pedidos.controller.js"></script>
+</body>
+</html>
