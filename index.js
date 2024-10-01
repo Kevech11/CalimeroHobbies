@@ -4,6 +4,8 @@ import { fileURLToPath } from "url"
 import { connectDB } from "./config/db.js"
 import { productsRouter } from "./routes/products.routes.js"
 import { authRouter } from "./routes/auth.router.js"
+import { clientsRouter } from "./routes/clients.router.js"
+import { salesRouter } from "./routes/sales.router.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -69,6 +71,8 @@ app.get("/Pedidos", (req, res) => {
 //Rutas de end-point
 app.use("/api/auth", authRouter)
 app.use("/api/productos", productsRouter)
+app.use("/api/clientes", clientsRouter)
+app.use("/api/ventas", salesRouter)
 
 const port = 5001 //Configurar Puerto
 
