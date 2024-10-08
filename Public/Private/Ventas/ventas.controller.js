@@ -2,15 +2,22 @@ const clientsInput = document.getElementById("cliente")
 const productsInput = document.getElementById("productos")
 const selectedProductsElement = document.getElementById("selected-products")
 const selectedProducts = []
-function sumarUno(id) {
+function sumarUnProducto(id) {
   selectedProducts.find((product) => {
     if (product.id === id) {
-      // Cantidad hay que pasarlo a number
-      product.cantidad++
+      parseInt(product.cantidad++)
       product.total = product.precio * product.cantidad
     }
   })
-  console.log(selectedProducts)
+}
+
+function restarUnProducto(id) {
+  selectedProducts.find((product) => {
+    if (product.id === id) {
+      parseInt(product.cantidad--)
+      product.total = product.precio * product.cantidad
+    }
+  })
 }
 
 productsInput.addEventListener("change", function () {
@@ -18,18 +25,52 @@ productsInput.addEventListener("change", function () {
   const product = {
     id: selectedProduct.value,
     titulo: selectedProduct.text,
-    precio: selectedProduct.dataset.precio,
-    cantidad: selectedProduct.dataset.cantidad,
-    total: selectedProduct.dataset.precio * selectedProduct.dataset.cantidad,
+    precio: parseInt(selectedProduct.dataset.precio),
+    cantidad: parseInt(selectedProduct.dataset.cantidad),
+    total: parseInt(
+      selectedProduct.dataset.precio * selectedProduct.dataset.cantidad
+    ),
   }
   selectedProducts.push(product)
 
   console.log(selectedProducts)
   selectedProductsElement.innerHTML += `
-    <li>${product.titulo} - ${product.precio} <span style="color: red;">${product.cantidad}</span>
-     <button class="sumar" onclick="sumarUno">+</button>  <button class="restar">-</button>
+    <li>
+      <span>${product.titulo} - ${product.precio}</span>
+      <span style="color: red;" id="cantidad-${product.id}">${product.cantidad}</span>
+      <button type="button" class="sumar" data-id="sumar-${product.id}">+</button>
+      <button type="button" class="restar" data-id="restar-${product.id}">-</button>
     </li>
   `
+  actualizarTotal()
+
+  // Capturar todos los botones de sumar y restar nuevamente
+  const sumarButtons = document.querySelectorAll(".sumar")
+  const restarButtons = document.querySelectorAll(".restar")
+
+  sumarButtons.forEach((sumarButton) => {
+    sumarButton.addEventListener("click", function () {
+      const id = sumarButton.dataset.id.split("-")[1]
+      const product = selectedProducts.find((product) => product.id === id)
+      sumarUnProducto(id)
+      actualizarTotal()
+      const cantidad = document.getElementById(`cantidad-${id}`)
+      cantidad.textContent = parseInt(product.cantidad)
+    })
+  })
+
+  restarButtons.forEach((restarButton) => {
+    restarButton.addEventListener("click", function () {
+      const id = restarButton.dataset.id.split("-")[1]
+      const product = selectedProducts.find((product) => product.id === id)
+      if (product.cantidad === 1) return
+      // CUANTO LA CANTIDAD ES 1 DEBE ELMINAR EL PRODUCTO
+      restarUnProducto(id)
+      actualizarTotal()
+      const cantidad = document.getElementById(`cantidad-${id}`)
+      cantidad.textContent = parseInt(product.cantidad)
+    })
+  })
 })
 
 async function getClients() {
@@ -52,6 +93,17 @@ async function getProducts() {
     },
   })
   return await response.json()
+}
+
+function actualizarTotal() {
+  console.log(selectedProducts)
+  const total = selectedProducts.reduce(
+    (acc, product) => acc + product.total,
+    0
+  )
+  console.log(total)
+  const totalElement = document.getElementById("total")
+  totalElement.textContent = total
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
@@ -82,8 +134,7 @@ ventaForm.addEventListener("submit", function (event) {
   // Obtener los valores de los campos, incluyendo el nuevo campo de fecha
   const fecha = document.getElementById("fecha").value
   const cliente = document.getElementById("cliente").value
-  const producto = document.getElementById("producto").value
-  const cantidad = document.getElementById("cantidad").value
+  const producto = document.getElementById("productos").value
   const total = document.getElementById("total").value
 
   // Crear una nueva fila y agregar los valores, incluyendo la fecha
@@ -92,11 +143,10 @@ ventaForm.addEventListener("submit", function (event) {
   newRow.insertCell(0).textContent = fecha
   newRow.insertCell(1).textContent = cliente
   newRow.insertCell(2).textContent = producto
-  newRow.insertCell(3).textContent = cantidad
-  newRow.insertCell(4).textContent = total
+  newRow.insertCell(3).textContent = total
 
   // Crear celda de acciones
-  const actionsCell = newRow.insertCell(5)
+  const actionsCell = newRow.insertCell(4)
 
   // Botón de eliminar
   const deleteButton = document.createElement("button")
@@ -120,8 +170,7 @@ ventaForm.addEventListener("submit", function (event) {
     const ventaInfo = `
             Fecha: ${fecha}
             Cliente: ${cliente}
-            Producto: ${producto}
-            Cantidad: ${cantidad}
+            Productos: ${producto}
             Total: ${total}
         `
     const win = window.open("", "", "height=400,width=600")

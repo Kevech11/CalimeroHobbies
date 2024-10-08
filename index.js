@@ -80,7 +80,6 @@ const port = 5001 //Configurar Puerto
 connectDB()
   .then(() => {
     const port = 5001 //Configurar Puerto
-
     //levanto el servidors
     app.listen(port, () => {
       console.log(`Servidor levantado en el puerto ${port}`)
