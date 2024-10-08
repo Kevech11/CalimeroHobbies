@@ -27,7 +27,7 @@ productsInput.addEventListener("change", function () {
   console.log(selectedProducts)
   selectedProductsElement.innerHTML += `
     <li>${product.titulo} - ${product.precio} <span style="color: red;">${product.cantidad}</span>
-    <button onclick="sumarUno">+</button><button>-</button>
+     <button class="sumar" onclick="sumarUno">+</button>  <button class="restar">-</button>
     </li>
   `
 })
