@@ -228,7 +228,7 @@ width: 30px; /* Define el ancho para el número de cantidad */
 }
 .selec-product  li > *:last-child {
     margin-right: 0; /* Elimina el margen en el último elemento */
-  }
+}
 .section-form{
     padding: 120px;
     display: flex;
@@ -244,7 +244,7 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 480px;
+    width: 560px;
     margin-right: 20px;
 }
 .form-container h2 {
@@ -253,6 +253,7 @@ body {
 }
 .form-group {
     margin-bottom: 15px;
+    
 }
 .form-group label {
     display: block;
@@ -323,7 +324,7 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 800px;
+    width: 900px;
 }
 .table-container h2 {
     text-align: center;

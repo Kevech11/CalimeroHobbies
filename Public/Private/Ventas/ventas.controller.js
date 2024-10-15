@@ -2,6 +2,7 @@ const clientsInput = document.getElementById("cliente")
 const productsInput = document.getElementById("productos")
 const selectedProductsElement = document.getElementById("selected-products")
 const selectedProducts = []
+
 function sumarUnProducto(id) {
   selectedProducts.find((product) => {
     if (product.id === id) {
@@ -96,14 +97,18 @@ async function getProducts() {
 }
 
 function actualizarTotal() {
-  console.log(selectedProducts)
-  const total = selectedProducts.reduce(
-    (acc, product) => acc + product.total,
-    0
-  )
-  console.log(total)
-  const totalElement = document.getElementById("total")
-  totalElement.textContent = total
+  console.log(selectedProducts);
+  
+  const total = selectedProducts.reduce((acc, product) => acc + product.total, 0);
+  
+  const formatter = new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    minimumFractionDigits: 2,
+  });
+  
+  const totalElement = document.getElementById("total");
+  totalElement.textContent = formatter.format(total);  // Mostrar el total en formato de pesos argentinos
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
