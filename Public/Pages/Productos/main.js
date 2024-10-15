@@ -72,14 +72,13 @@ function cargarProductos(productosElegidos) {
             <div class="producto-detalles">
                 <h1 class="producto-titulo">${producto.titulo}</h1>
                 <h4 class="producto-marca">${producto.marca}</h4>
-                <p class="producto-precio">$${producto.precio}</p>
+                <p class="producto-precio">${producto.precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
                 <button class="producto-agregar" id="${producto.id}">Agregar</button>
             </div>
         `
 
     contenedorProductos.append(div)
   })
-
   actualizarBotonesAgregar()
 }
 
@@ -170,3 +169,4 @@ function actualizarNumerito() {
   )
   numerito.innerText = nuevoNumerito
 }
+

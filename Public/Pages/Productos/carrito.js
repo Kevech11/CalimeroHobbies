@@ -146,6 +146,7 @@ function comprarCarrito() {
 
 }
 
+
 const loginBtn = document.getElementById("loginBtn")
 
 if (loginBtn) {
