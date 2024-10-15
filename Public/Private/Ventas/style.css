@@ -218,6 +218,22 @@ input[type="checkbox"]{
     border-radius: 4px;
     min-height: 50px; /* Asegura que todos los items tengan la misma altura */
 }
+
+.selec-product li .titulo{
+    flex: 1;
+}
+
+.selec-product li span{
+    flex: 0;
+}
+
+
+.selec-product li .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
 .selec-product li > * {
     margin-right: 10px; /* Espacio entre los elementos dentro del <li> */
     flex: 1; /* Los elementos ocuparán el mismo espacio disponible */

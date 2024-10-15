@@ -1,7 +1,7 @@
 const clientsInput = document.getElementById("cliente")
 const productsInput = document.getElementById("productos")
 const selectedProductsElement = document.getElementById("selected-products")
-const selectedProducts = []
+let selectedProducts = []
 
 function sumarUnProducto(id) {
   selectedProducts.find((product) => {
@@ -21,6 +21,125 @@ function restarUnProducto(id) {
   })
 }
 
+async function cargarVentas() {
+  try {
+    const ventasTable = document.getElementById("ventasTable")
+    ventasTable.innerHTML = `
+      <tr>
+        <th>Fecha</th>
+        <th>Cliente</th>
+        <th>Producto</th>
+  
+        <th>Total</th>
+        <th>Acciones</th>
+      </tr>
+    `
+    const response = await fetch("/api/ventas", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
+    })
+    const ventas = await response.json()
+    console.log(ventas)
+    ventas.forEach((venta) => {
+      const newRow = ventasTable.insertRow()
+      newRow.insertCell(0).textContent = new Date(
+        venta.fecha
+      ).toLocaleDateString()
+      newRow.insertCell(
+        1
+      ).textContent = `${venta.cliente.nombre} ${venta.cliente.apellido}`
+      newRow.insertCell(
+        2
+      ).innerHTML = `<button type="button" class="btn btn-primary">Ver productos</button>`
+      newRow.insertCell(3).textContent = `$${venta.total}`
+
+      newRow.cells[2]
+        .querySelector("button")
+        .addEventListener("click", function () {
+          const win = window.open("", "", "height=400,width=600")
+          win.document.write(
+            "<html><head><title>Productos</title></head><body>"
+          )
+          win.document.write("<ul>")
+          venta.productos.forEach((producto) => {
+            win.document.write(
+              `<li>${producto.titulo} - $${producto.precio}</li>`
+            )
+          })
+          win.document.write("</ul>")
+          win.document.write("</body></html>")
+          win.document.close()
+        })
+
+      const actionsCell = newRow.insertCell(4)
+
+      const deleteButton = document.createElement("button")
+      deleteButton.textContent = "Eliminar"
+      deleteButton.className = "btn-delete"
+      actionsCell.appendChild(deleteButton)
+
+      deleteButton.addEventListener("click", function () {
+        if (confirm("¿Estás seguro de que deseas eliminar esta venta?")) {
+          ventasTable.deleteRow(newRow.rowIndex - 1)
+        }
+      })
+
+      const printButton = document.createElement("button")
+      printButton.textContent = "Imprimir"
+      printButton.className = "btn-print"
+      actionsCell.appendChild(printButton)
+
+      printButton.addEventListener("click", function () {
+        const ventaInfo = `
+          Fecha: ${venta.fecha}
+          Cliente: ${venta.cliente}
+          Productos: ${venta.producto}
+          Total: ${venta.total}
+        `
+        const win = window.open("", "", "height=400,width=600")
+        win.document.write(
+          "<html><head><title>Imprimir Venta</title></head><body>"
+        )
+        win.document.write("<pre>" + ventaInfo + "</pre>")
+        win.document.write("</body></html>")
+        win.document.close()
+        win.print()
+      })
+
+      const editButton = document.createElement("button")
+      editButton.textContent = "Editar"
+      editButton.className = "btn-edit"
+      actionsCell.appendChild(editButton)
+
+      editButton.addEventListener("click", function () {
+        if (editButton.textContent === "Editar") {
+          for (let i = 0; i < 5; i++) {
+            const cell = newRow.cells[i]
+            const input = document.createElement("input")
+            input.type = "text"
+            input.value = cell.textContent
+            cell.textContent = ""
+            cell.appendChild(input)
+          }
+          editButton.textContent = "Guardar"
+        } else {
+          for (let i = 0; i < 5; i++) {
+            const cell = newRow.cells[i]
+            const input = cell.querySelector("input")
+            cell.textContent = input.value
+          }
+          editButton.textContent = "Editar"
+        }
+      })
+    })
+  } catch (error) {
+    console.error("Error fetching ventas:", error)
+  }
+}
+
 productsInput.addEventListener("change", function () {
   const selectedProduct = productsInput.options[productsInput.selectedIndex]
   const product = {
@@ -37,10 +156,14 @@ productsInput.addEventListener("change", function () {
   console.log(selectedProducts)
   selectedProductsElement.innerHTML += `
     <li>
-      <span>${product.titulo} - ${product.precio}</span>
+      <div class="titulo">
+        <span>${product.titulo} - $${product.precio}</span>
+      </div>
       <span style="color: red;" id="cantidad-${product.id}">${product.cantidad}</span>
+      <div class="buttons">
       <button type="button" class="sumar" data-id="sumar-${product.id}">+</button>
       <button type="button" class="restar" data-id="restar-${product.id}">-</button>
+      </div>
     </li>
   `
   actualizarTotal()
@@ -64,12 +187,21 @@ productsInput.addEventListener("change", function () {
     restarButton.addEventListener("click", function () {
       const id = restarButton.dataset.id.split("-")[1]
       const product = selectedProducts.find((product) => product.id === id)
-      if (product.cantidad === 1) return
-      // CUANTO LA CANTIDAD ES 1 DEBE ELMINAR EL PRODUCTO
+      if (product.cantidad === 1) {
+        const index = selectedProducts.findIndex((product) => product.id === id)
+        selectedProducts.splice(index, 1)
+        document.querySelector("#cantidad-" + id).parentElement.remove()
+        actualizarTotal()
+        return
+      }
+
       restarUnProducto(id)
       actualizarTotal()
       const cantidad = document.getElementById(`cantidad-${id}`)
-      cantidad.textContent = parseInt(product.cantidad)
+      if (product.cantidad) {
+        console.log(product.cantidad)
+        cantidad.textContent = parseInt(product.cantidad)
+      }
     })
   })
 })
@@ -97,22 +229,26 @@ async function getProducts() {
 }
 
 function actualizarTotal() {
-  console.log(selectedProducts);
-  
-  const total = selectedProducts.reduce((acc, product) => acc + product.total, 0);
-  
-  const formatter = new Intl.NumberFormat('es-AR', {
-    style: 'currency',
-    currency: 'ARS',
+  console.log(selectedProducts)
+
+  const total = selectedProducts.reduce(
+    (acc, product) => acc + product.total,
+    0
+  )
+
+  const formatter = new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
     minimumFractionDigits: 2,
-  });
-  
-  const totalElement = document.getElementById("total");
-  totalElement.textContent = formatter.format(total);  // Mostrar el total en formato de pesos argentinos
+  })
+
+  const totalElement = document.getElementById("total")
+  totalElement.textContent = formatter.format(total) // Mostrar el total en formato de pesos argentinos
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
   const clients = await getClients()
+  const sales = await cargarVentas()
 
   clients.forEach((client) => {
     const option = document.createElement("option")
@@ -133,87 +269,116 @@ document.addEventListener("DOMContentLoaded", async function () {
   })
 })
 
-ventaForm.addEventListener("submit", function (event) {
+ventaForm.addEventListener("submit", async function (event) {
   event.preventDefault() // Prevenir el envío del formulario
-
   // Obtener los valores de los campos, incluyendo el nuevo campo de fecha
   const fecha = document.getElementById("fecha").value
   const cliente = document.getElementById("cliente").value
-  const producto = document.getElementById("productos").value
-  const total = document.getElementById("total").value
+  const total = selectedProducts.reduce(
+    (acc, product) => acc + product.total,
+    0
+  )
 
-  // Crear una nueva fila y agregar los valores, incluyendo la fecha
-  const newRow = ventasTable.insertRow()
-  //newRow.insertCell(0).textContent = IdPedido;
-  newRow.insertCell(0).textContent = fecha
-  newRow.insertCell(1).textContent = cliente
-  newRow.insertCell(2).textContent = producto
-  newRow.insertCell(3).textContent = total
+  // HAY QUE FORMATEAR LA DATA PARA QUE COINCIDA CON EL MODELO DE VENTAS
+  // ESTA MAL LA PARTE DE PRODUCTOS, HAY QUE HACER UN MAP PARA QUE COINCIDA CON EL MODELO
 
-  // Crear celda de acciones
-  const actionsCell = newRow.insertCell(4)
+  const dataToSend = {
+    fecha,
+    cliente,
+    productos: selectedProducts,
+    total,
+  }
 
-  // Botón de eliminar
-  const deleteButton = document.createElement("button")
-  deleteButton.textContent = "Eliminar"
-  deleteButton.className = "btn-delete"
-  actionsCell.appendChild(deleteButton)
-
-  deleteButton.addEventListener("click", function () {
-    if (confirm("¿Estás seguro de que deseas eliminar esta venta?")) {
-      ventasTable.deleteRow(newRow.rowIndex - 1)
-    }
+  const response = await fetch("/api/ventas", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(dataToSend),
   })
 
-  // Botón de imprimir
-  const printButton = document.createElement("button")
-  printButton.textContent = "Imprimir"
-  printButton.className = "btn-print"
-  actionsCell.appendChild(printButton)
+  const data = await response.json()
 
-  printButton.addEventListener("click", function () {
-    const ventaInfo = `
-            Fecha: ${fecha}
-            Cliente: ${cliente}
-            Productos: ${producto}
-            Total: ${total}
-        `
-    const win = window.open("", "", "height=400,width=600")
-    win.document.write("<html><head><title>Imprimir Venta</title></head><body>")
-    win.document.write("<pre>" + ventaInfo + "</pre>")
-    win.document.write("</body></html>")
-    win.document.close()
-    win.print()
-  })
+  console.log(data)
+  if (response.status === 201) {
+    ventaForm.reset()
+    selectedProductsElement.innerHTML = ""
+    selectedProducts = []
+    actualizarTotal()
+    cargarVentas()
+  }
+  // // Crear una nueva fila y agregar los valores, incluyendo la fecha
+  // const newRow = ventasTable.insertRow()
+  // //newRow.insertCell(0).textContent = IdPedido;
+  // newRow.insertCell(0).textContent = fecha
+  // newRow.insertCell(1).textContent = cliente
+  // newRow.insertCell(2).textContent = producto
+  // newRow.insertCell(3).textContent = total
 
-  // Botón de editar
-  const editButton = document.createElement("button")
-  editButton.textContent = "Editar"
-  editButton.className = "btn-edit"
-  actionsCell.appendChild(editButton)
+  // // Crear celda de acciones
+  // const actionsCell = newRow.insertCell(4)
 
-  editButton.addEventListener("click", function () {
-    if (editButton.textContent === "Editar") {
-      for (let i = 0; i < 5; i++) {
-        // Ajuste para incluir la columna de fecha
-        const cell = newRow.cells[i]
-        const input = document.createElement("input")
-        input.type = "text"
-        input.value = cell.textContent
-        cell.textContent = ""
-        cell.appendChild(input)
-      }
-      editButton.textContent = "Guardar"
-    } else {
-      for (let i = 0; i < 5; i++) {
-        const cell = newRow.cells[i]
-        const input = cell.querySelector("input")
-        cell.textContent = input.value
-      }
-      editButton.textContent = "Editar"
-    }
-  })
-  ventaForm.reset()
+  // // Botón de eliminar
+  // const deleteButton = document.createElement("button")
+  // deleteButton.textContent = "Eliminar"
+  // deleteButton.className = "btn-delete"
+  // actionsCell.appendChild(deleteButton)
+
+  // deleteButton.addEventListener("click", function () {
+  //   if (confirm("¿Estás seguro de que deseas eliminar esta venta?")) {
+  //     ventasTable.deleteRow(newRow.rowIndex - 1)
+  //   }
+  // })
+
+  // // Botón de imprimir
+  // const printButton = document.createElement("button")
+  // printButton.textContent = "Imprimir"
+  // printButton.className = "btn-print"
+  // actionsCell.appendChild(printButton)
+
+  // printButton.addEventListener("click", function () {
+  //   const ventaInfo = `
+  //           Fecha: ${fecha}
+  //           Cliente: ${cliente}
+  //           Productos: ${producto}
+  //           Total: ${total}
+  //       `
+  //   const win = window.open("", "", "height=400,width=600")
+  //   win.document.write("<html><head><title>Imprimir Venta</title></head><body>")
+  //   win.document.write("<pre>" + ventaInfo + "</pre>")
+  //   win.document.write("</body></html>")
+  //   win.document.close()
+  //   win.print()
+  // })
+
+  // // Botón de editar
+  // const editButton = document.createElement("button")
+  // editButton.textContent = "Editar"
+  // editButton.className = "btn-edit"
+  // actionsCell.appendChild(editButton)
+
+  // editButton.addEventListener("click", function () {
+  //   if (editButton.textContent === "Editar") {
+  //     for (let i = 0; i < 5; i++) {
+  //       // Ajuste para incluir la columna de fecha
+  //       const cell = newRow.cells[i]
+  //       const input = document.createElement("input")
+  //       input.type = "text"
+  //       input.value = cell.textContent
+  //       cell.textContent = ""
+  //       cell.appendChild(input)
+  //     }
+  //     editButton.textContent = "Guardar"
+  //   } else {
+  //     for (let i = 0; i < 5; i++) {
+  //       const cell = newRow.cells[i]
+  //       const input = cell.querySelector("input")
+  //       cell.textContent = input.value
+  //     }
+  //     editButton.textContent = "Editar"
+  //   }
+  // })
 })
 
 const loginBtn = document.getElementById("loginBtn")
