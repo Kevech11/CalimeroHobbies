@@ -29,7 +29,6 @@ async function cargarVentas() {
         <th>Fecha</th>
         <th>Cliente</th>
         <th>Producto</th>
-  
         <th>Total</th>
         <th>Acciones</th>
       </tr>
@@ -243,7 +242,7 @@ function actualizarTotal() {
   })
 
   const totalElement = document.getElementById("total")
-  totalElement.textContent = formatter.format(total) // Mostrar el total en formato de pesos argentinos
+  totalElement.textContent = formatter.format(total) 
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
