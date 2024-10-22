@@ -6,9 +6,9 @@ import { productsRouter } from "./routes/products.routes.js"
 import { authRouter } from "./routes/auth.router.js"
 import { clientsRouter } from "./routes/clients.router.js"
 import { salesRouter } from "./routes/sales.router.js"
+import { mpRouter } from "./routes/mercadopago.router.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-
 
 const app = express() //Crear instancia
 
@@ -74,7 +74,7 @@ app.use("/api/auth", authRouter)
 app.use("/api/productos", productsRouter)
 app.use("/api/clientes", clientsRouter)
 app.use("/api/ventas", salesRouter)
-// app.use("/api/preference", preferenceRouter)
+app.use("/api/mercadopago", mpRouter)
 
 const port = 5001 //Configurar Puerto
 
@@ -91,47 +91,3 @@ connectDB()
     console.log("Error al conectar a la base de datos", error)
     process.exit(1)
   })
-
-
-
-
-
-//MERCADOPAGO
-  import { createRequire } from 'module'; // Importa createRequire para usar CommonJS
-  const require = createRequire(import.meta.url);
-  const mercadopago = require('mercadopago'); // Carga MercadoPago usando require
-
-
-// Ruta para crear una preferencia de pago con Mercado Pago
-app.post("/create_preference", (req, res) => {
-  const preference = {
-    items: [
-      {
-        title: req.body.title, // Título del producto
-        unit_price: parseFloat(req.body.price), // Precio del producto
-        quantity: parseInt(req.body.quantity), // Cantidad de productos
-      }
-    ],
-    back_urls: {
-      success: "https://www.tusitio.com/success", // URL de éxito
-      failure: "https://www.tusitio.com/failure", // URL de fallo
-      pending: "https://www.tusitio.com/pending" // URL de pendiente
-    },
-    auto_return: "approved",
-  };
-
-  // Crea la preferencia enviando el access_token directamente
-  mercadopago.configure({
-    access_token: 'TU_ACCESS_TOKEN' // Reemplazar con mi Access Token de MercadoPago
-  });
-
-  mercadopago.preferences.create(preference)
-    .then(function(response) {
-      res.json({
-        id: response.body.id // Envíar el ID de la preferencia al cliente
-      });
-    }).catch(function(error) {
-      console.log(error);
-      res.status(500).send("Error creando la preferencia de pago");
-    });
-});

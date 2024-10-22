@@ -63,9 +63,13 @@ async function cargarVentas() {
             "<html><head><title>Productos</title></head><body>"
           )
           win.document.write("<ul>")
-          venta.productos.forEach((producto) => {
+          venta.productos.forEach(({ producto, cantidad }) => {
             win.document.write(
-              `<li>${producto.titulo} - $${producto.precio}</li>`
+              `<li>${producto.titulo} - $${
+                producto.precio
+              } - C: ${cantidad} - T: ${producto.precio * cantidad}</li>
+              <hr/>
+              `
             )
           })
           win.document.write("</ul>")
@@ -141,9 +145,11 @@ async function cargarVentas() {
             </tbody>
           </table>
         `
-      
+
         const win = window.open("", "", "height=600,width=800")
-        win.document.write("<html><head><title>Imprimir Venta</title></head><body>")
+        win.document.write(
+          "<html><head><title>Imprimir Venta</title></head><body>"
+        )
         win.document.write(ventaInfo)
         win.document.write("</body></html>")
         win.document.close()
@@ -194,7 +200,6 @@ productsInput.addEventListener("change", function () {
   }
   selectedProducts.push(product)
 
-  console.log(selectedProducts)
   selectedProductsElement.innerHTML += `
     <li>
       <div class="titulo">
@@ -240,7 +245,6 @@ productsInput.addEventListener("change", function () {
       actualizarTotal()
       const cantidad = document.getElementById(`cantidad-${id}`)
       if (product.cantidad) {
-        console.log(product.cantidad)
         cantidad.textContent = parseInt(product.cantidad)
       }
     })
@@ -270,8 +274,6 @@ async function getProducts() {
 }
 
 function actualizarTotal() {
-  console.log(selectedProducts)
-
   const total = selectedProducts.reduce(
     (acc, product) => acc + product.total,
     0
@@ -284,7 +286,7 @@ function actualizarTotal() {
   })
 
   const totalElement = document.getElementById("total")
-  totalElement.textContent = formatter.format(total) 
+  totalElement.textContent = formatter.format(total)
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
@@ -326,7 +328,10 @@ ventaForm.addEventListener("submit", async function (event) {
   const dataToSend = {
     fecha,
     cliente,
-    productos: selectedProducts,
+    productos: selectedProducts.map((product) => ({
+      producto: product.id,
+      cantidad: product.cantidad,
+    })),
     total,
   }
 
@@ -341,7 +346,6 @@ ventaForm.addEventListener("submit", async function (event) {
 
   const data = await response.json()
 
-  console.log(data)
   if (response.status === 201) {
     ventaForm.reset()
     selectedProductsElement.innerHTML = ""
