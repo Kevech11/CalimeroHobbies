@@ -93,16 +93,58 @@ async function cargarVentas() {
 
       printButton.addEventListener("click", function () {
         const ventaInfo = `
-          Fecha: ${venta.fecha}
-          Cliente: ${venta.cliente}
-          Productos: ${venta.producto}
-          Total: ${venta.total}
+          <h2 style="text-align:center;">
+            <span style="color:red;">C</span><span style="color:blue;">ALIMERO </span>
+            <span style="color:red;">H</span><span style="color:blue;">OBBIES</span>
+          </h2>
+          <table style="margin: 0 auto; border-collapse: collapse; text-align: center;">
+            <thead>
+              <tr>
+                <th style="border: 1px solid black; padding: 8px;">Fecha</th>
+                <th style="border: 1px solid black; padding: 8px;">Cliente</th>
+                <th style="border: 1px solid black; padding: 8px;">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="border: 1px solid black; padding: 8px; font-weight:bold;">
+                  ${new Date(venta.fecha).toLocaleDateString()}
+                </td>
+                <td style="border: 1px solid black; padding: 8px; font-weight:bold;">
+                  ${venta.cliente.nombre} ${venta.cliente.apellido}
+                </td>
+                <td style="border: 1px solid black; padding: 8px; font-weight:bold;">
+                  $${venta.total}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <h3 style="text-align:center;">Productos</h3>
+          <table style="margin: 0 auto; border-collapse: collapse; text-align: center;">
+            <thead>
+              <tr>
+                <th style="border: 1px solid black; padding: 8px;">Producto</th>
+                <th style="border: 1px solid black; padding: 8px;">Precio</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${venta.productos
+                .map(
+                  (producto) =>
+                    `<tr>
+                      <td style="border: 1px solid black; padding: 8px; font-weight:bold;">${producto.titulo}</td>
+                      <td style="border: 1px solid black; padding: 8px; font-weight:bold;">$${producto.precio}</td>
+                    </tr>`
+                )
+                .join("")}
+            </tbody>
+          </table>
         `
-        const win = window.open("", "", "height=400,width=600")
-        win.document.write(
-          "<html><head><title>Imprimir Venta</title></head><body>"
-        )
-        win.document.write("<pre>" + ventaInfo + "</pre>")
+      
+        const win = window.open("", "", "height=600,width=800")
+        win.document.write("<html><head><title>Imprimir Venta</title></head><body>")
+        win.document.write(ventaInfo)
         win.document.write("</body></html>")
         win.document.close()
         win.print()

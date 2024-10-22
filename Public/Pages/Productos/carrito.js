@@ -134,16 +134,51 @@ function actualizarTotal() {
 }
 
 botonComprar.addEventListener("click", comprarCarrito);
-function comprarCarrito() {
+async function comprarCarrito() {
+    const productosParaComprar = productosEnCarrito.map(producto => ({
+        title: producto.titulo,
+        price: producto.precio,
+        quantity: producto.cantidad
+    }));
 
-    productosEnCarrito.length = 0;
-    localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
-    
-    contenedorCarritoVacio.classList.add("disabled");
-    contenedorCarritoProductos.classList.add("disabled");
-    contenedorCarritoAcciones.classList.add("disabled");
-    contenedorCarritoComprado.classList.remove("disabled");
+    const producto = productosParaComprar[0];
 
+    try {
+        const response = await fetch("/create_preference", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title: producto.title,
+                price: producto.price,
+                quantity: producto.quantity,
+            }),
+        });
+
+        // Verifica si la respuesta es válida y tiene el formato correcto
+        if (!response.ok) {
+            throw new Error("La respuesta no fue exitosa");
+        }
+
+        const data = await response.json();
+        
+        // Verifica si el id está presente en la respuesta
+        if (data.id) {
+            window.location.href = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${data.id}`;
+        } else {
+            throw new Error("La respuesta no contiene un ID de preferencia");
+        }
+
+    } catch (error) {
+        console.error("Error en la compra:", error);
+        Swal.fire({
+            title: 'Error',
+            text: 'Hubo un problema al procesar tu compra. Intenta de nuevo.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+        });
+    }
 }
 
 
@@ -156,3 +191,18 @@ if (loginBtn) {
     loginBtn.innerHTML = `<a href="/login" class="btn btn-primary">Iniciar sesion</a>`
   }
 }
+
+
+
+// botonComprar.addEventListener("click", comprarCarrito);
+// function comprarCarrito() {
+
+//     productosEnCarrito.length = 0;
+//     localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
+    
+//     contenedorCarritoVacio.classList.add("disabled");
+//     contenedorCarritoProductos.classList.add("disabled");
+//     contenedorCarritoAcciones.classList.add("disabled");
+//     contenedorCarritoComprado.classList.remove("disabled");
+
+// }
