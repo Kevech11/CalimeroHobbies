@@ -84,7 +84,6 @@ clienteForm.addEventListener("submit", async function (event) {
   event.preventDefault() // Prevenir el envío del formulario
 
   // Obtener los valores de los campos
-  const id = document.getElementById("id").value
   const nombre = document.getElementById("nombre").value
   const apellido = document.getElementById("apellido").value
   const pais = document.getElementById("pais").value
@@ -95,7 +94,9 @@ clienteForm.addEventListener("submit", async function (event) {
 
   // Crear una nueva fila y agregar los valores
   const newRow = clientesTable.insertRow()
-  newRow.insertCell(0).textContent = id
+  newRow.insertCell(
+    0
+  ).innerHTML = `<button class="btn btn-primary" onclick="window.location.reload()">Recargar</button>`
   newRow.insertCell(1).textContent = nombre
   newRow.insertCell(2).textContent = apellido
   newRow.insertCell(3).textContent = pais

@@ -49,7 +49,10 @@
 
     <section class="container">
       <div class="box-info">
-        <h1>SI SOS DISTRIBUIDOR EN TU REGIÓN, REALIZA TU PEDIDO AQUI Y NOS CONTÁCTAREMOS</h1>
+        <h1>
+          SI SOS DISTRIBUIDOR EN TU REGIÓN, REALIZA TU PEDIDO AQUI Y NOS
+          CONTÁCTAREMOS
+        </h1>
         <div class="data">
           <p><i class="bi bi-telephone"></i>+54 9 351 371 9898</p>
           <p><i class="bi bi-envelope"></i>calimerohobby@gmail.com</p>
@@ -59,21 +62,34 @@
           </p>
         </div>
       </div>
-      <form>
+      <form id="contact-form">
         <div class="input-box">
-          <input type="text" placeholder="Nombre y apellido" required />
+          <input
+            type="text"
+            placeholder="Nombre y apellido"
+            required
+            name="name"
+          />
           <i class="fa-solid fa-user"></i>
         </div>
         <div class="input-box">
-          <input type="email" required placeholder="Correo electrónico" />
+          <input
+            type="email"
+            required
+            placeholder="Correo electrónico"
+            name="email"
+          />
           <i class="fa-solid fa-envelope"></i>
         </div>
         <div class="input-box">
-          <input type="text" placeholder="Asunto" />
+          <input type="text" placeholder="Asunto" name="subject" />
           <i class="fa-solid fa-pen-to-square"></i>
         </div>
         <div class="input-box">
-          <textarea placeholder="Escribe tu pedido..."></textarea>
+          <textarea
+            placeholder="Escribe tu pedido..."
+            name="message"
+          ></textarea>
         </div>
         <button type="submit">Enviar mensaje</button>
       </form>
@@ -119,16 +135,7 @@
         >
       </div>
     </footer>
-    <script>
-        const loginBtn = document.getElementById("loginBtn")
 
-        if (loginBtn) {
-          if (window.localStorage.getItem("user")) {
-            loginBtn.innerHTML = `<a class="btn btn-primary" onclick='window.localStorage.removeItem("user"); window.location.reload();'>Cerrar sesion</a>`
-          } else {
-            loginBtn.innerHTML = `<a href="/login" class="btn btn-primary">Iniciar sesion</a>`
-          }
-        }
-    </script>
+    <script src="/Pages/Contacto/contacto.js"></script>
   </body>
 </html>

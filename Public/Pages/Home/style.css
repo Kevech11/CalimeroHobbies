@@ -17,6 +17,7 @@ nav{
     text-align: center;
     padding: 20px 30px;
     position: fixed;
+    z-index: 1000;
 }
 nav .icon{
     font-size: 35px;
