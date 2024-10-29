@@ -42,42 +42,79 @@ async function cargarVentas() {
     })
     const ventas = await response.json()
     console.log(ventas)
+    
     ventas.forEach((venta) => {
+      let productosVenta = [] // Para almacenar los productos
+
       const newRow = ventasTable.insertRow()
-      newRow.insertCell(0).textContent = new Date(
-        venta.fecha
-      ).toLocaleDateString()
-      newRow.insertCell(
-        1
-      ).textContent = `${venta.cliente.nombre} ${venta.cliente.apellido}`
-      newRow.insertCell(
-        2
-      ).innerHTML = `<button type="button" class="btn btn-primary">Ver productos</button>`
-      newRow.insertCell(3).textContent = `$${venta.total}`
+      newRow.insertCell(0).textContent = new Date(venta.fecha).toLocaleDateString()
+      newRow.insertCell(1).textContent = `${venta.cliente.nombre} ${venta.cliente.apellido}`
+      newRow.insertCell(2).innerHTML = `<button type="button" class="btn btn-primary">Ver productos</button>`
+      newRow.insertCell(3).textContent = new Intl.NumberFormat("es-AR", {
+        style: "currency",
+        currency: "ARS",
+        minimumFractionDigits: 2,
+      }).format(venta.total)
 
       newRow.cells[2]
         .querySelector("button")
         .addEventListener("click", function () {
-          const win = window.open("", "", "height=400,width=600")
-          win.document.write(
-            "<html><head><title>Productos</title></head><body>"
-          )
-          win.document.write("<ul>")
-          venta.productos.forEach(({ producto, cantidad }) => {
-            win.document.write(
-              `<li>${producto.titulo} - $${
-                producto.precio
-              } - C: ${cantidad} - T: ${producto.precio * cantidad}</li>
-              <hr/>
-              `
-            )
-          })
-          win.document.write("</ul>")
-          win.document.write("</body></html>")
-          win.document.close()
-        })
+          const width = 600;
+          const height = 400;
+          const left = (window.screen.width / 2) - (width / 2);
+          const top = (window.screen.height / 2) - (height / 2);
 
-      const actionsCell = newRow.insertCell(4)
+          // Guardar los productos para utilizarlos luego
+          productosVenta = venta.productos;
+
+          let win = window.open("", "", `height=${height},width=${width},top=${top},left=${left}`);
+
+          // Crear el contenido HTML con una tabla
+          win.document.write(`
+            <html>
+              <head>
+                <title>Productos</title>
+                <style>
+                  table { width: 100%; border-collapse: collapse; }
+                  th, td { border: 1px solid black; padding: 8px; text-align: left; }
+                  th { background-color: #f2f2f2; }
+                  .center { text-align: center; }
+                  .right { text-align: right; }
+                </style>
+              </head>
+              <body>
+                <h2>Lista de Productos</h2>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Producto</th>
+                      <th class="right">Precio</th>
+                      <th class="center">Cantidad</th>
+                      <th class="right">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>`);
+
+          // Añadir los productos a la tabla
+          productosVenta.forEach(({ producto, cantidad }) => {
+            win.document.write(`
+              <tr>
+                <td>${producto.titulo}</td>
+                <td class="right">$ ${producto.precio.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                <td class="center">${cantidad}</td>
+                <td class="right">$ ${(producto.precio * cantidad).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              </tr>`);
+          });
+
+          win.document.write(`</tbody></table></body></html>`);
+          win.document.close();
+
+          win.onunload = function () {
+            win = null;
+          };
+        });
+
+      const actionsCell = newRow.insertCell(4);
 
       const deleteButton = document.createElement("button")
       deleteButton.textContent = "Eliminar"
@@ -133,28 +170,26 @@ async function cargarVentas() {
               </tr>
             </thead>
             <tbody>
-              ${venta.productos
-                .map(
-                  (producto) =>
-                    `<tr>
+              ${productosVenta
+            .map(
+              (producto) =>
+                `<tr>
                       <td style="border: 1px solid black; padding: 8px; font-weight:bold;">${producto.titulo}</td>
                       <td style="border: 1px solid black; padding: 8px; font-weight:bold;">$${producto.precio}</td>
                     </tr>`
-                )
-                .join("")}
+            )
+            .join("")}
             </tbody>
           </table>
         `
 
         const win = window.open("", "", "height=600,width=800")
-        win.document.write(
-          "<html><head><title>Imprimir Venta</title></head><body>"
-        )
+        win.document.write("<html><head><title>Imprimir Venta</title></head><body>")
         win.document.write(ventaInfo)
         win.document.write("</body></html>")
         win.document.close()
         win.print()
-      })
+      });
 
       const editButton = document.createElement("button")
       editButton.textContent = "Editar"
@@ -353,77 +388,6 @@ ventaForm.addEventListener("submit", async function (event) {
     actualizarTotal()
     cargarVentas()
   }
-  // // Crear una nueva fila y agregar los valores, incluyendo la fecha
-  // const newRow = ventasTable.insertRow()
-  // //newRow.insertCell(0).textContent = IdPedido;
-  // newRow.insertCell(0).textContent = fecha
-  // newRow.insertCell(1).textContent = cliente
-  // newRow.insertCell(2).textContent = producto
-  // newRow.insertCell(3).textContent = total
-
-  // // Crear celda de acciones
-  // const actionsCell = newRow.insertCell(4)
-
-  // // Botón de eliminar
-  // const deleteButton = document.createElement("button")
-  // deleteButton.textContent = "Eliminar"
-  // deleteButton.className = "btn-delete"
-  // actionsCell.appendChild(deleteButton)
-
-  // deleteButton.addEventListener("click", function () {
-  //   if (confirm("¿Estás seguro de que deseas eliminar esta venta?")) {
-  //     ventasTable.deleteRow(newRow.rowIndex - 1)
-  //   }
-  // })
-
-  // // Botón de imprimir
-  // const printButton = document.createElement("button")
-  // printButton.textContent = "Imprimir"
-  // printButton.className = "btn-print"
-  // actionsCell.appendChild(printButton)
-
-  // printButton.addEventListener("click", function () {
-  //   const ventaInfo = `
-  //           Fecha: ${fecha}
-  //           Cliente: ${cliente}
-  //           Productos: ${producto}
-  //           Total: ${total}
-  //       `
-  //   const win = window.open("", "", "height=400,width=600")
-  //   win.document.write("<html><head><title>Imprimir Venta</title></head><body>")
-  //   win.document.write("<pre>" + ventaInfo + "</pre>")
-  //   win.document.write("</body></html>")
-  //   win.document.close()
-  //   win.print()
-  // })
-
-  // // Botón de editar
-  // const editButton = document.createElement("button")
-  // editButton.textContent = "Editar"
-  // editButton.className = "btn-edit"
-  // actionsCell.appendChild(editButton)
-
-  // editButton.addEventListener("click", function () {
-  //   if (editButton.textContent === "Editar") {
-  //     for (let i = 0; i < 5; i++) {
-  //       // Ajuste para incluir la columna de fecha
-  //       const cell = newRow.cells[i]
-  //       const input = document.createElement("input")
-  //       input.type = "text"
-  //       input.value = cell.textContent
-  //       cell.textContent = ""
-  //       cell.appendChild(input)
-  //     }
-  //     editButton.textContent = "Guardar"
-  //   } else {
-  //     for (let i = 0; i < 5; i++) {
-  //       const cell = newRow.cells[i]
-  //       const input = cell.querySelector("input")
-  //       cell.textContent = input.value
-  //     }
-  //     editButton.textContent = "Editar"
-  //   }
-  // })
 })
 
 const loginBtn = document.getElementById("loginBtn")
