@@ -23,10 +23,12 @@ contactForm.addEventListener("submit", async (event) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
       },
       body: JSON.stringify({ name, email, subject, message }),
     })
 
+    console.log(response)
     if (!response.ok) {
       throw new Error("La respuesta no fue exitosa")
     }

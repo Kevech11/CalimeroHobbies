@@ -1,7 +1,10 @@
 import { Router } from "express"
 import SalesModel from "../models/sales.model.js"
+import { checkRole, getUserData } from "../middlewares/getUserData.js"
 
 const salesRouter = Router()
+salesRouter.use(getUserData)
+salesRouter.use(checkRole(["gestion_ventas", "admin"]))
 
 salesRouter.get("/", async (req, res) => {
   try {

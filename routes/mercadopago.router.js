@@ -1,10 +1,16 @@
 import { MercadoPagoConfig, Preference } from "mercadopago"
 import { Router } from "express"
+import { checkRole, getUserData } from "../middlewares/getUserData.js"
 const client = new MercadoPagoConfig({
   accessToken: `APP_USR-6508105676111590-102213-8ab833730cadd581130cb361c29e4d4f-2052945142`,
 })
 
 const mpRouter = Router()
+
+mpRouter.use(getUserData)
+mpRouter.use(
+  checkRole(["cliente", "gestion_ventas", "gestion_productos", "admin"])
+)
 
 mpRouter.post("/create_preference", async (req, res) => {
   const body = {

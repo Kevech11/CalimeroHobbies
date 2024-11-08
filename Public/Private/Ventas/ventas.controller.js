@@ -40,16 +40,27 @@ async function cargarVentas() {
         Authorization: `Bearer ${window.localStorage.getItem("token")}`,
       },
     })
+
+    if (response.status === 403) {
+      window.location.href = "/home"
+    }
+
     const ventas = await response.json()
     console.log(ventas)
-    
+
     ventas.forEach((venta) => {
       let productosVenta = [] // Para almacenar los productos
 
       const newRow = ventasTable.insertRow()
-      newRow.insertCell(0).textContent = new Date(venta.fecha).toLocaleDateString()
-      newRow.insertCell(1).textContent = `${venta.cliente.nombre} ${venta.cliente.apellido}`
-      newRow.insertCell(2).innerHTML = `<button type="button" class="btn btn-primary">Ver productos</button>`
+      newRow.insertCell(0).textContent = new Date(
+        venta.fecha
+      ).toLocaleDateString()
+      newRow.insertCell(
+        1
+      ).textContent = `${venta.cliente.nombre} ${venta.cliente.apellido}`
+      newRow.insertCell(
+        2
+      ).innerHTML = `<button type="button" class="btn btn-primary">Ver productos</button>`
       newRow.insertCell(3).textContent = new Intl.NumberFormat("es-AR", {
         style: "currency",
         currency: "ARS",
@@ -59,15 +70,19 @@ async function cargarVentas() {
       newRow.cells[2]
         .querySelector("button")
         .addEventListener("click", function () {
-          const width = 600;
-          const height = 400;
-          const left = (window.screen.width / 2) - (width / 2);
-          const top = (window.screen.height / 2) - (height / 2);
+          const width = 600
+          const height = 400
+          const left = window.screen.width / 2 - width / 2
+          const top = window.screen.height / 2 - height / 2
 
           // Guardar los productos para utilizarlos luego
-          productosVenta = venta.productos;
+          productosVenta = venta.productos
 
-          let win = window.open("", "", `height=${height},width=${width},top=${top},left=${left}`);
+          let win = window.open(
+            "",
+            "",
+            `height=${height},width=${width},top=${top},left=${left}`
+          )
 
           // Crear el contenido HTML con una tabla
           win.document.write(`
@@ -93,28 +108,36 @@ async function cargarVentas() {
                       <th class="right">Total</th>
                     </tr>
                   </thead>
-                  <tbody>`);
+                  <tbody>`)
 
           // Añadir los productos a la tabla
           productosVenta.forEach(({ producto, cantidad }) => {
             win.document.write(`
               <tr>
                 <td>${producto.titulo}</td>
-                <td class="right">$ ${producto.precio.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                <td class="right">$ ${producto.precio.toLocaleString("es-AR", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}</td>
                 <td class="center">${cantidad}</td>
-                <td class="right">$ ${(producto.precio * cantidad).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-              </tr>`);
-          });
+                <td class="right">$ ${(
+                  producto.precio * cantidad
+                ).toLocaleString("es-AR", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}</td>
+              </tr>`)
+          })
 
-          win.document.write(`</tbody></table></body></html>`);
-          win.document.close();
+          win.document.write(`</tbody></table></body></html>`)
+          win.document.close()
 
           win.onunload = function () {
-            win = null;
-          };
-        });
+            win = null
+          }
+        })
 
-      const actionsCell = newRow.insertCell(4);
+      const actionsCell = newRow.insertCell(4)
 
       const deleteButton = document.createElement("button")
       deleteButton.textContent = "Eliminar"
@@ -171,25 +194,27 @@ async function cargarVentas() {
             </thead>
             <tbody>
               ${productosVenta
-            .map(
-              (producto) =>
-                `<tr>
+                .map(
+                  (producto) =>
+                    `<tr>
                       <td style="border: 1px solid black; padding: 8px; font-weight:bold;">${producto.titulo}</td>
                       <td style="border: 1px solid black; padding: 8px; font-weight:bold;">$${producto.precio}</td>
                     </tr>`
-            )
-            .join("")}
+                )
+                .join("")}
             </tbody>
           </table>
         `
 
         const win = window.open("", "", "height=600,width=800")
-        win.document.write("<html><head><title>Imprimir Venta</title></head><body>")
+        win.document.write(
+          "<html><head><title>Imprimir Venta</title></head><body>"
+        )
         win.document.write(ventaInfo)
         win.document.write("</body></html>")
         win.document.close()
         win.print()
-      });
+      })
 
       const editButton = document.createElement("button")
       editButton.textContent = "Editar"
@@ -294,6 +319,10 @@ async function getClients() {
       Authorization: `Bearer ${window.localStorage.getItem("token")}`,
     },
   })
+
+  if (response.status === 403) {
+    window.location.href = "/home"
+  }
   return await response.json()
 }
 

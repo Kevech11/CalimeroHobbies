@@ -1,6 +1,15 @@
 const obtenerPedidos = async () => {
   try {
-    const response = await fetch("/api/contact")
+    const response = await fetch("/api/contact", {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
+    })
+
+    if (response.status === 403) {
+      window.location.href = "/home"
+    }
+
     if (!response.ok) {
       throw new Error("No se pudieron obtener los pedidos")
     }
@@ -26,12 +35,14 @@ function openModal(pedido) {
   const emailPedido = document.getElementById("pedidoEmail")
   const asuntoPedido = document.getElementById("pedidoAsunto")
   const mensajePedido = document.getElementById("pedidoMensaje")
+  const fechaMensaje = document.getElementById("fechaMensaje")
 
   idPedido.innerHTML = pedido._id.slice(-5)
   nombrePedido.innerHTML = pedido.name
   emailPedido.innerHTML = pedido.email
   asuntoPedido.innerHTML = pedido.subject
   mensajePedido.innerHTML = pedido.message
+  fechaMensaje.innerHTML = new Date(pedido.createdAt).toLocaleDateString()
 }
 
 async function agregarPedidoATabla() {
@@ -41,23 +52,29 @@ async function agregarPedidoATabla() {
 
   pedidos.forEach((pedido) => {
     const fecha = new Date(pedido.createdAt)
+    const fila = document.createElement("tr")
     fila.innerHTML = `
-        <td>${pedido._id.slice(-5)}</td>
-        <td>${pedido.name}</td>
-        <td>${pedido.email}</td>
-        <td>${pedido.subject}</td>
-        <td><button class="btn btn-primary" id="open-modal">Ver pedido</button></td>
+      <td>${pedido._id.slice(-5)}</td>
+      <td>${pedido.name}</td>
+      <td>${pedido.email}</td>
+      <td>${pedido.subject}</td>
+      <td>${fecha.toLocaleDateString()}</td>
+      <td>
+        <button class="btn btn-primary" id="open-modal-${
+          pedido._id
+        }">Ver</button>
+      </td>
     `
-
     tabla.appendChild(fila)
-    document.getElementById("open-modal").addEventListener("click", () => {
+
+    const boton = document.getElementById(`open-modal-${pedido._id}`)
+    boton.addEventListener("click", () => {
       openModal(pedido)
     })
   })
 }
 
 agregarPedidoATabla()
-
 
 const loginBtn = document.getElementById("loginBtn")
 

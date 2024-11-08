@@ -13,6 +13,7 @@ async function createClient(client) {
     },
     body: JSON.stringify(client),
   })
+
   return await response.json()
 }
 
@@ -22,6 +23,9 @@ async function getClients() {
       Authorization: `Bearer ${window.localStorage.getItem("token")}`,
     },
   })
+  if (response.status === 403) {
+    window.location.href = "/home"
+  }
   return await response.json()
 }
 
