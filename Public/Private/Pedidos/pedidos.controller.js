@@ -57,16 +57,7 @@ async function agregarPedidoATabla() {
 }
 
 agregarPedidoATabla()
-// Simulando la llegada de pedidos uno por uno cada 2 segundos
-// let contador = 0;
-// const intervalo = setInterval(() => {
-//     if (contador < pedidos.length) {
-//         agregarPedidoATabla(pedidos[contador]);
-//         contador++;
-//     } else {
-//         clearInterval(intervalo); // Detiene el intervalo cuando ya no hay más pedidos
-//     }
-// }, 2000);
+
 
 const loginBtn = document.getElementById("loginBtn")
 

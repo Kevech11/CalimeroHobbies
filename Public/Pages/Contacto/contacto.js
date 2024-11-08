@@ -33,21 +33,21 @@ contactForm.addEventListener("submit", async (event) => {
 
     const data = await response.json()
 
-    // Swal.fire({
-    //   title: "Mensaje enviado",
-    //   text: data.message,
-    //   icon: "success",
-    //   confirmButtonText: "Aceptar",
-    // })
+    Swal.fire({
+      title: "Mensaje enviado",
+      text: data.message,
+      icon: "success",
+      confirmButtonText: "Aceptar",
+    })
 
     contactForm.reset()
   } catch (error) {
     console.error("Error al enviar mensaje:", error)
-    // Swal.fire({
-    //   title: "Error",
-    //   text: "Hubo un problema al enviar tu mensaje. Intenta de nuevo.",
-    //   icon: "error",
-    //   confirmButtonText: "Aceptar",
-    // })
+    Swal.fire({
+      title: "Error",
+      text: "Hubo un problema al enviar tu mensaje. Intenta de nuevo.",
+      icon: "error",
+      confirmButtonText: "Aceptar",
+    })
   }
 })
