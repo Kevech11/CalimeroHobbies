@@ -51,8 +51,8 @@ async function agregarPedidoATabla() {
   const fila = document.createElement("tr")
 
   pedidos.forEach((pedido) => {
-    const fecha = new Date(pedido.createdAt)
-    const fila = document.createElement("tr")
+    const fecha = new Date(pedido.createdAt);
+    const fila = document.createElement("tr");
     fila.innerHTML = `
       <td>${pedido._id.slice(-5)}</td>
       <td>${pedido.name}</td>
@@ -60,18 +60,34 @@ async function agregarPedidoATabla() {
       <td>${pedido.subject}</td>
       <td>${fecha.toLocaleDateString()}</td>
       <td>
-        <button class="btn btn-primary" id="open-modal-${
-          pedido._id
-        }">Ver</button>
+        <button class="btn btn-primary" id="open-modal-${pedido._id}">Ver</button>
       </td>
-    `
-    tabla.appendChild(fila)
-
-    const boton = document.getElementById(`open-modal-${pedido._id}`)
+    `;
+    tabla.appendChild(fila);
+  
+    const boton = document.getElementById(`open-modal-${pedido._id}`);
+  
+    
+    boton.style.padding = "8px 16px";
+    boton.style.fontSize = "14px";
+    boton.style.border = "none";
+    boton.style.borderRadius = "4px";
+    boton.style.cursor = "pointer";
+    boton.style.backgroundColor = "#007bff";
+    boton.style.color = "white";
+    
+    
+    boton.addEventListener("mouseover", () => {
+      boton.style.backgroundColor = "#0056b3";
+    });
+    boton.addEventListener("mouseout", () => {
+      boton.style.backgroundColor = "#007bff";
+    });
+  
     boton.addEventListener("click", () => {
-      openModal(pedido)
-    })
-  })
+      openModal(pedido);
+    });
+  });
 }
 
 agregarPedidoATabla()

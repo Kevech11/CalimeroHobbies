@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administracíon</title>
+    <link rel="stylesheet" href="/Private/Administracion/style.css" />
+    <link href="/Pages/Home/fontawesome-free-6.6.0-web/css/all.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"/>
+</head>
+<body>
+    <input type="checkbox" id="check" />
+    <nav>
+      <div class="icon">
+        <a href="/Ventas" style="color: white; text-decoration: none">
+          <span style="color: red">C</span>alimero
+          <span style="color: red">H</span>obby
+        </a>
+      </div>    
+      <ol>
+        <li id="loginBtn"></li>
+      </ol>
+      <label for="check" class="bar">
+        <span class="fa fa-bars" id="bars"></span>
+        <span class="fa fa-times" id="times"></span>
+      </label>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <div class="wrapper"> 
+        <aside>      
+                <ul class="menu">
+                    <li>
+                        <button id="usuarios" class="boton-menu boton-categoria active"><h2><i class="bi bi-chevron-right"></i></h2></i><h2>  Gestión de usuarios</h2></button>                      
+                    </li>
+                    <li>
+                        <button id="productos" class="boton-menu boton-categoria"><h2><i class="bi bi-chevron-right"></i></h2></i><h2>Gestión de Productos</h2></button>
+                    </li>
+                    <li>
+                        <button id="ventas" class="boton-menu boton-categoria"><h2><i class="bi bi-chevron-right"></i></h2></i><h2>Ventas</h2></button>
+                    </li>
+                    <li>
+                        <button id="clientes" class="boton-menu boton-categoria"><h2><i class="bi bi-chevron-right"></i></h2></i><h2>Clientes</h2></button>
+                    </li>
+                    <li>
+                        <button id="militaria" class="boton-menu boton-categoria"><h2><i class="bi bi-chevron-right"></i></h2></i><h2>Militaria</h2></button>
+                    </li>
+                    <li>
+                        <button id="rompecabezas" class="boton-menu boton-categoria"><h2><i class="bi bi-chevron-right"></i></h2></i><h2>Rompecabezas</h2></button>
+                    </li>
+                    
+                </ul>      
+        </aside>
+        <main>
+            <div id="contenedor-productos" class="contenedor-productos">
+                <!-- Esto se va a rellenar con JS -->
+                <div class="form-container">
+                  <h2>Registro de Usuario</h2>
+                  <br>
+                  <form action="tu-accion.php" method="POST">
+                    <div class="form-group">
+                      <label for="nombre">Nombre:</label>
+                      <input type="text" id="nombre" name="nombre" required>
+                    </div>
+              
+                    <div class="form-group">
+                      <label for="apellido">Apellido:</label>
+                      <input type="text" id="apellido" name="apellido" required>
+                    </div>
+              
+                    <div class="form-group">
+                      <label for="usuario">Usuario:</label>
+                      <input type="text" id="usuario" name="usuario" required>
+                    </div>
+              
+                    <div class="form-group">
+                      <label for="contrasena">Contraseña:</label>
+                      <input type="password" id="contrasena" name="contrasena" required>
+                    </div>
+              
+                    <div class="form-group">
+                      <label for="rol">Rol:</label>
+                      <select id="rol" name="rol" required>
+                        <option value="">Seleccione un rol</option>
+                        <option value="admin">Administrador</option>
+                        <option value="usuario">Usuario</option>
+                        <option value="invitado">Invitado</option>
+                      </select>
+                    </div>
+              
+                    <div class="form-group">
+                      <input type="submit" value="Registrar">
+                    </div>
+                  </form>
+                </div>
+        </main>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <script src="/Private/Administracion/administracion.controller.js"></script>
+</body>
+</html>

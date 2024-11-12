@@ -70,6 +70,13 @@ app.get("/Pedidos", (req, res) => {
   )
 })
 
+
+app.get("/Administracion", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "Public", "Private", "Administracion", "index.html")
+  )
+})
+
 //Rutas de end-point
 app.use("/api/auth", authRouter)
 app.use("/api/productos", productsRouter)
