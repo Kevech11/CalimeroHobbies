@@ -13,15 +13,14 @@ mpRouter.use(
 )
 
 mpRouter.post("/create_preference", async (req, res) => {
+  const items = req.body.map((item) => ({
+    title: item.title,
+    quantity: item.quantity,
+    unit_price: item.price,
+    currency_id: "ARS",
+  }))
   const body = {
-    items: [
-      {
-        title: req.body.title,
-        quantity: Number(req.body.quantity),
-        unit_price: Number(req.body.price),
-        currency_id: "ARS",
-      },
-    ],
+    items,
     back_urls: {
       success: "/http://localhost:5001/success",
       failure: "/http://localhost:5001/failure",
@@ -31,9 +30,9 @@ mpRouter.post("/create_preference", async (req, res) => {
   }
   try {
     const preference = await new Preference(client).create({ body })
-    console.log(preference)
     res.json({ redirectUrl: preference.init_point })
   } catch (error) {
+    console.error(error)
     res.json(error)
   }
 })

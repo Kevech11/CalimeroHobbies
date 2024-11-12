@@ -1,13 +1,7 @@
 import { Router } from "express"
 import ProductModel from "../models/products.model.js"
-import { checkRole, getUserData } from "../middlewares/getUserData.js"
 
 const productsRouter = Router()
-
-productsRouter.use(getUserData)
-productsRouter.use(
-  checkRole(["clientes", "gestion_ventas", "gestion_productos", "admin"])
-)
 
 productsRouter.get("/", async (req, res) => {
   try {

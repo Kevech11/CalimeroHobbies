@@ -156,20 +156,26 @@ async function comprarCarrito() {
     quantity: producto.cantidad,
   }))
 
-  const producto = productosParaComprar[0]
-
   try {
     const response = await fetch("/api/mercadopago/create_preference", {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        title: producto.title,
-        price: producto.price,
-        quantity: producto.quantity,
-      }),
+      body: JSON.stringify(productosParaComprar),
     })
+
+    console.log(response)
+    if (response.status === 403) {
+      Swal.fire({
+        title: "Error",
+        text: "Debes iniciar sesion para hacer una compra.",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      })
+      return
+    }
 
     // Verifica si la respuesta es válida y tiene el formato correcto
     if (!response.ok) {
@@ -178,6 +184,7 @@ async function comprarCarrito() {
 
     const data = await response.json()
 
+    console.log(data)
     // Verifica si el id está presente en la respuesta
     if (data.redirectUrl) {
       window.location.href = data.redirectUrl

@@ -8,6 +8,7 @@ import { clientsRouter } from "./routes/clients.router.js"
 import { salesRouter } from "./routes/sales.router.js"
 import { mpRouter } from "./routes/mercadopago.router.js"
 import { contactRouter } from "./routes/contact.router.js"
+import { adminRouter } from "./routes/admin.router.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -70,7 +71,6 @@ app.get("/Pedidos", (req, res) => {
   )
 })
 
-
 app.get("/Administracion", (req, res) => {
   res.sendFile(
     path.join(__dirname, "Public", "Private", "Administracion", "index.html")
@@ -84,6 +84,7 @@ app.use("/api/clientes", clientsRouter)
 app.use("/api/ventas", salesRouter)
 app.use("/api/mercadopago", mpRouter)
 app.use("/api/contact", contactRouter)
+app.use("/api/admin", adminRouter)
 
 const port = 5001 //Configurar Puerto
 
