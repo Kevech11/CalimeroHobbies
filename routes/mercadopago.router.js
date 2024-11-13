@@ -22,7 +22,7 @@ mpRouter.post("/create_preference", async (req, res) => {
   const body = {
     items,
     back_urls: {
-      success: "/http://localhost:5001/success",
+      success: "/http://localhost:5001/Productos/carrito.html",
       failure: "/http://localhost:5001/failure",
       pending: "/http://localhost:5001/pending",
     },

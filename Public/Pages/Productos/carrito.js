@@ -1,6 +1,5 @@
 let productosEnCarrito = localStorage.getItem("productos-en-carrito")
 productosEnCarrito = JSON.parse(productosEnCarrito)
-
 const contenedorCarritoVacio = document.querySelector("#carrito-vacio")
 const contenedorCarritoProductos = document.querySelector("#carrito-productos")
 const contenedorCarritoAcciones = document.querySelector("#carrito-acciones")
@@ -9,8 +8,8 @@ let botonesEliminar = document.querySelectorAll(".carrito-producto-eliminar")
 const botonVaciar = document.querySelector("#carrito-acciones-vaciar")
 const contenedorTotal = document.querySelector("#total")
 const botonComprar = document.querySelector("#carrito-acciones-comprar")
+const loginBtn = document.getElementById("loginBtn")
 
-// Formateador para moneda en pesos argentinos
 const formatearMoneda = (valor) => {
   return new Intl.NumberFormat("es-AR", {
     style: "currency",
@@ -69,7 +68,6 @@ function cargarProductosCarrito() {
     contenedorCarritoComprado.classList.add("disabled")
   }
 }
-
 cargarProductosCarrito()
 
 function actualizarBotonesEliminar() {
@@ -200,8 +198,6 @@ async function comprarCarrito() {
   }
 }
 
-const loginBtn = document.getElementById("loginBtn")
-
 if (loginBtn) {
   if (window.localStorage.getItem("user")) {
     loginBtn.innerHTML = `<a class="btn btn-primary" onclick='window.localStorage.removeItem("user"); window.location.reload();'>Cerrar sesion</a>`
@@ -210,15 +206,4 @@ if (loginBtn) {
   }
 }
 
-// botonComprar.addEventListener("click", comprarCarrito);
-// function comprarCarrito() {
 
-//     productosEnCarrito.length = 0;
-//     localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
-
-//     contenedorCarritoVacio.classList.add("disabled");
-//     contenedorCarritoProductos.classList.add("disabled");
-//     contenedorCarritoAcciones.classList.add("disabled");
-//     contenedorCarritoComprado.classList.remove("disabled");
-
-// }

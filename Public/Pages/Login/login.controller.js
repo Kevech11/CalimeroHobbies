@@ -1,16 +1,16 @@
 const container = document.querySelector(".container")
 const btnSignIn = document.getElementById("btn-sign-in")
 const btnSignUp = document.getElementById("btn-sign-up")
+const registerForm = document.querySelector("#sign-up")
+const loginForm = document.querySelector("#sign-in")
 
 btnSignIn.addEventListener("click", () => {
   container.classList.remove("toggle")
 })
+
 btnSignUp.addEventListener("click", () => {
   container.classList.add("toggle")
 })
-
-const registerForm = document.querySelector("#sign-up")
-const loginForm = document.querySelector("#sign-in")
 
 registerForm.addEventListener("submit", async (e) => {
   try {

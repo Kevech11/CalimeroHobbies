@@ -1,4 +1,6 @@
 const loginBtn = document.getElementById("loginBtn")
+const newUserForm = document.getElementById("new-user")
+const usersTable = document.getElementById("users-table-body")
 
 if (loginBtn) {
   if (window.localStorage.getItem("user")) {
@@ -7,9 +9,6 @@ if (loginBtn) {
     loginBtn.innerHTML = `<a href="/login" class="btn btn-primary">Iniciar sesion</a>`
   }
 }
-
-const newUserForm = document.getElementById("new-user")
-const usersTable = document.getElementById("users-table-body")
 
 newUserForm.addEventListener("submit", async (e) => {
   e.preventDefault()

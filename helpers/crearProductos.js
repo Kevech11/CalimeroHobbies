@@ -22,5 +22,4 @@ async function crearProductos() {
     await nuevoProducto.save()
   }
 }
-
 export { crearProductos }

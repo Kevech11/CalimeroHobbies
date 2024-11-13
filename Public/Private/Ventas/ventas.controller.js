@@ -2,6 +2,7 @@ const clientsInput = document.getElementById("cliente")
 const productsInput = document.getElementById("productos")
 const selectedProductsElement = document.getElementById("selected-products")
 let selectedProducts = []
+const loginBtn = document.getElementById("loginBtn")
 
 function sumarUnProducto(id) {
   selectedProducts.find((product) => {
@@ -377,7 +378,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 })
 
 ventaForm.addEventListener("submit", async function (event) {
-  event.preventDefault() // Prevenir el envío del formulario
+  event.preventDefault() 
   // Obtener los valores de los campos, incluyendo el nuevo campo de fecha
   const fecha = document.getElementById("fecha").value
   const cliente = document.getElementById("cliente").value
@@ -385,9 +386,6 @@ ventaForm.addEventListener("submit", async function (event) {
     (acc, product) => acc + product.total,
     0
   )
-
-  // HAY QUE FORMATEAR LA DATA PARA QUE COINCIDA CON EL MODELO DE VENTAS
-  // ESTA MAL LA PARTE DE PRODUCTOS, HAY QUE HACER UN MAP PARA QUE COINCIDA CON EL MODELO
 
   const dataToSend = {
     fecha,
@@ -418,8 +416,6 @@ ventaForm.addEventListener("submit", async function (event) {
     cargarVentas()
   }
 })
-
-const loginBtn = document.getElementById("loginBtn")
 
 if (loginBtn) {
   if (window.localStorage.getItem("user")) {

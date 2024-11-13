@@ -1,4 +1,4 @@
-// Obtener el formulario y la tabla
+const loginBtn = document.getElementById("loginBtn")
 const clienteForm = document.getElementById("clienteForm")
 const clientesTable = document
   .getElementById("clientesTable")
@@ -170,8 +170,6 @@ clienteForm.addEventListener("submit", async function (event) {
 
   clienteForm.reset()
 })
-
-const loginBtn = document.getElementById("loginBtn")
 
 if (loginBtn) {
   if (window.localStorage.getItem("user")) {

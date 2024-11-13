@@ -44,7 +44,8 @@ app.get("/QuienesSomos", (req, res) => {
 })
 
 app.get("/Login", (req, res) => {
-  res.sendFile(path.join(__dirname, "Public", "Pages", "Login", "index.html"))
+  res.sendFile(path.join(__dirname, "Public", "Pages", "Login", "index.html")
+  )
 })
 
 app.get("/Contacto", (req, res) => {

@@ -1,3 +1,5 @@
+const loginBtn = document.getElementById("loginBtn")
+
 const obtenerPedidos = async () => {
   try {
     const response = await fetch("/api/contact", {
@@ -20,7 +22,6 @@ const obtenerPedidos = async () => {
   }
 }
 // Función para agregar pedidos a la tabla
-
 function openModal(pedido) {
   const modal = document.getElementById("modal")
   modal.style.display = "flex"
@@ -91,8 +92,6 @@ async function agregarPedidoATabla() {
 }
 
 agregarPedidoATabla()
-
-const loginBtn = document.getElementById("loginBtn")
 
 if (loginBtn) {
   if (window.localStorage.getItem("user")) {

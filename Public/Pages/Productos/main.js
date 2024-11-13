@@ -1,7 +1,11 @@
 let productos = []
-
 const searchInput = document.getElementById("searchInput")
 const searchBtn = document.getElementById("searchBtn")
+const contenedorProductos = document.querySelector("#contenedor-productos")
+const botonesCategorias = document.querySelectorAll(".boton-categoria")
+let botonesAgregar = document.querySelectorAll(".producto-agregar")
+const numerito = document.querySelector("#numerito")
+
 function redireccionarAlBuscar() {
   const term = searchInput.value
   window.location.href = `/Productos?search=${term}`
@@ -49,11 +53,6 @@ if (new URLSearchParams(window.location.search).has("search")) {
       cargarProductos(productos)
     })
 }
-
-const contenedorProductos = document.querySelector("#contenedor-productos")
-const botonesCategorias = document.querySelectorAll(".boton-categoria")
-let botonesAgregar = document.querySelectorAll(".producto-agregar")
-const numerito = document.querySelector("#numerito")
 
 botonesCategorias.forEach((boton) =>
   boton.addEventListener("click", () => {
@@ -110,9 +109,7 @@ function actualizarBotonesAgregar() {
 }
 
 let productosEnCarrito
-
 let productosEnCarritoLS = localStorage.getItem("productos-en-carrito")
-
 if (productosEnCarritoLS) {
   productosEnCarrito = JSON.parse(productosEnCarritoLS)
   actualizarNumerito()

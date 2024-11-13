@@ -1,6 +1,7 @@
 const openMenu = document.querySelector("#open-menu")
 const closeMenu = document.querySelector("#close-menu")
 const aside = document.querySelector("aside")
+const loginBtn = document.getElementById("loginBtn")
 
 if (openMenu) {
   openMenu.addEventListener("click", () => {
@@ -13,8 +14,6 @@ if (closeMenu) {
     aside.classList.remove("aside-visible")
   })
 }
-
-const loginBtn = document.getElementById("loginBtn")
 
 if (loginBtn) {
   if (window.localStorage.getItem("user")) {
