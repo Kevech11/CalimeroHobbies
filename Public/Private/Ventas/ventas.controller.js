@@ -75,8 +75,7 @@ async function cargarVentas() {
           const height = 400
           const left = window.screen.width / 2 - width / 2
           const top = window.screen.height / 2 - height / 2
-
-          // Guardar los productos para utilizarlos luego
+         
           productosVenta = venta.productos
 
           let win = window.open(
@@ -217,31 +216,7 @@ async function cargarVentas() {
         win.print()
       })
 
-      const editButton = document.createElement("button")
-      editButton.textContent = "Editar"
-      editButton.className = "btn-edit"
-      actionsCell.appendChild(editButton)
-
-      editButton.addEventListener("click", function () {
-        if (editButton.textContent === "Editar") {
-          for (let i = 0; i < 5; i++) {
-            const cell = newRow.cells[i]
-            const input = document.createElement("input")
-            input.type = "text"
-            input.value = cell.textContent
-            cell.textContent = ""
-            cell.appendChild(input)
-          }
-          editButton.textContent = "Guardar"
-        } else {
-          for (let i = 0; i < 5; i++) {
-            const cell = newRow.cells[i]
-            const input = cell.querySelector("input")
-            cell.textContent = input.value
-          }
-          editButton.textContent = "Editar"
-        }
-      })
+      
     })
   } catch (error) {
     console.error("Error fetching ventas:", error)
