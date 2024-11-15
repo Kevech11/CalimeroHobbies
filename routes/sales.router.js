@@ -34,4 +34,13 @@ salesRouter.post("/", async (req, res) => {
   }
 })
 
+salesRouter.delete("/:id", async (req, res) => {
+  try {
+    await SalesModel.findByIdAndDelete(req.params.id)
+    res.json({ message: "Venta eliminada" })
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+})
+
 export { salesRouter }

@@ -4,7 +4,7 @@ const usersTable = document.getElementById("users-table-body")
 
 if (loginBtn) {
   if (window.localStorage.getItem("user")) {
-    loginBtn.innerHTML = `<a class="btn btn-primary" onclick='window.localStorage.removeItem("user"); window.location.reload();'>Cerrar sesion</a>`
+    loginBtn.innerHTML = `<a class="btn btn-primary" onclick='window.localStorage.removeItem("user");window.localStorage.removeItem("token"); window.location.reload();'>Cerrar sesion</a>`
   } else {
     loginBtn.innerHTML = `<a href="/login" class="btn btn-primary">Iniciar sesion</a>`
   }
@@ -21,6 +21,7 @@ newUserForm.addEventListener("submit", async (e) => {
   const response = await fetch("/api/admin/new-user", {
     method: "POST",
     headers: {
+      Authorization: `Bearer ${window.localStorage.getItem("token")}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ name, email, password, role }),
@@ -35,7 +36,11 @@ newUserForm.addEventListener("submit", async (e) => {
 })
 
 async function getUsers() {
-  const response = await fetch("/api/admin/users")
+  const response = await fetch("/api/admin/users", {
+    headers: {
+      Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    },
+  })
 
   if (response.status === 403) {
     window.location.href = "/home"

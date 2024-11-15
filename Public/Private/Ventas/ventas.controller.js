@@ -22,6 +22,74 @@ function restarUnProducto(id) {
   })
 }
 
+function imprimitVenta(venta) {
+  const ventaInfo = `
+      <h2 style="text-align:center;">
+        <span style="color:red;">C</span><span style="color:blue;">ALIMERO </span>
+        <span style="color:red;">H</span><span style="color:blue;">OBBIES</span>
+      </h2>
+      <table style="margin: 0 auto; border-collapse: collapse; text-align: center;">
+        <thead>
+          <tr>
+            <th style="border: 1px solid black; padding: 8px;">Fecha</th>
+            <th style="border: 1px solid black; padding: 8px;">Cliente</th>
+            <th style="border: 1px solid black; padding: 8px;">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="border: 1px solid black; padding: 8px; font-weight:bold;">
+              ${new Date(venta.fecha).toLocaleDateString()}
+            </td>
+            <td style="border: 1px solid black; padding: 8px; font-weight:bold;">
+              ${venta.cliente.nombre} ${venta.cliente.apellido}
+            </td>
+            <td style="border: 1px solid black; padding: 8px; font-weight:bold;">
+              $${venta.total}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <h3 style="text-align:center;">Productos</h3>
+      <table style="margin: 0 auto; border-collapse: collapse; text-align: center;">
+        <thead>
+          <tr>
+            <th style="border: 1px solid black; padding: 8px;">Producto</th>
+            <th style="border: 1px solid black; padding: 8px;">Precio</th>
+            <th style="border: 1px solid black; padding: 8px;">Cantidad</th>
+            <th style="border: 1px solid black; padding: 8px;">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${venta.productos
+            .map(
+              ({ producto, cantidad }) => `<tr>
+                  <td style="border: 1px solid black; padding: 8px; font-weight:bold;">${
+                    producto.titulo
+                  }</td>
+                  <td style="border: 1px solid black; padding: 8px; font-weight:bold;">$${
+                    producto.precio
+                  }</td>
+                  <td style="border: 1px solid black; padding: 8px; font-weight:bold;">${cantidad}</td>
+                  <td style="border: 1px solid black; padding: 8px; font-weight:bold;">$${
+                    cantidad * producto.precio
+                  }</td>
+                </tr>`
+            )
+            .join("")}
+        </tbody>
+      </table>
+    `
+
+  const win = window.open("", "", "height=600,width=800")
+  win.document.write("<html><head><title>Imprimir Venta</title></head><body>")
+  win.document.write(ventaInfo)
+  win.document.write("</body></html>")
+  win.document.close()
+  win.print()
+}
+
 async function cargarVentas() {
   try {
     const ventasTable = document.getElementById("ventasTable")
@@ -75,7 +143,7 @@ async function cargarVentas() {
           const height = 400
           const left = window.screen.width / 2 - width / 2
           const top = window.screen.height / 2 - height / 2
-         
+
           productosVenta = venta.productos
 
           let win = window.open(
@@ -146,7 +214,12 @@ async function cargarVentas() {
 
       deleteButton.addEventListener("click", function () {
         if (confirm("¿Estás seguro de que deseas eliminar esta venta?")) {
-          ventasTable.deleteRow(newRow.rowIndex - 1)
+          const deleted = eliminarVenta(venta._id)
+          if (deleted) {
+            ventasTable.deleteRow(newRow.rowIndex)
+          } else {
+            alert("No se pudo eliminar la venta")
+          }
         }
       })
 
@@ -155,72 +228,29 @@ async function cargarVentas() {
       printButton.className = "btn-print"
       actionsCell.appendChild(printButton)
 
-      printButton.addEventListener("click", function () {
-        const ventaInfo = `
-          <h2 style="text-align:center;">
-            <span style="color:red;">C</span><span style="color:blue;">ALIMERO </span>
-            <span style="color:red;">H</span><span style="color:blue;">OBBIES</span>
-          </h2>
-          <table style="margin: 0 auto; border-collapse: collapse; text-align: center;">
-            <thead>
-              <tr>
-                <th style="border: 1px solid black; padding: 8px;">Fecha</th>
-                <th style="border: 1px solid black; padding: 8px;">Cliente</th>
-                <th style="border: 1px solid black; padding: 8px;">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="border: 1px solid black; padding: 8px; font-weight:bold;">
-                  ${new Date(venta.fecha).toLocaleDateString()}
-                </td>
-                <td style="border: 1px solid black; padding: 8px; font-weight:bold;">
-                  ${venta.cliente.nombre} ${venta.cliente.apellido}
-                </td>
-                <td style="border: 1px solid black; padding: 8px; font-weight:bold;">
-                  $${venta.total}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          
-          <h3 style="text-align:center;">Productos</h3>
-          <table style="margin: 0 auto; border-collapse: collapse; text-align: center;">
-            <thead>
-              <tr>
-                <th style="border: 1px solid black; padding: 8px;">Producto</th>
-                <th style="border: 1px solid black; padding: 8px;">Precio</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${productosVenta
-                .map(
-                  (producto) =>
-                    `<tr>
-                      <td style="border: 1px solid black; padding: 8px; font-weight:bold;">${producto.titulo}</td>
-                      <td style="border: 1px solid black; padding: 8px; font-weight:bold;">$${producto.precio}</td>
-                    </tr>`
-                )
-                .join("")}
-            </tbody>
-          </table>
-        `
+      console.log(ventas)
 
-        const win = window.open("", "", "height=600,width=800")
-        win.document.write(
-          "<html><head><title>Imprimir Venta</title></head><body>"
-        )
-        win.document.write(ventaInfo)
-        win.document.write("</body></html>")
-        win.document.close()
-        win.print()
-      })
-
-      
+      printButton.addEventListener("click", () => imprimitVenta(venta))
     })
   } catch (error) {
     console.error("Error fetching ventas:", error)
   }
+}
+
+async function eliminarVenta(id) {
+  const response = await fetch(`/api/ventas/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    },
+  })
+
+  if (response.status === 200) {
+    return true
+  }
+
+  return false
 }
 
 productsInput.addEventListener("change", function () {
@@ -353,7 +383,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 })
 
 ventaForm.addEventListener("submit", async function (event) {
-  event.preventDefault() 
+  event.preventDefault()
   // Obtener los valores de los campos, incluyendo el nuevo campo de fecha
   const fecha = document.getElementById("fecha").value
   const cliente = document.getElementById("cliente").value
@@ -394,7 +424,7 @@ ventaForm.addEventListener("submit", async function (event) {
 
 if (loginBtn) {
   if (window.localStorage.getItem("user")) {
-    loginBtn.innerHTML = `<a class="btn btn-primary" onclick='window.localStorage.removeItem("user"); window.location.reload();'>Cerrar sesion</a>`
+    loginBtn.innerHTML = `<a class="btn btn-primary" onclick='window.localStorage.removeItem("user");window.localStorage.removeItem("token"); window.location.reload();'>Cerrar sesion</a>`
   } else {
     loginBtn.innerHTML = `<a href="/login" class="btn btn-primary">Iniciar sesion</a>`
   }

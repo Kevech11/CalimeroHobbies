@@ -29,6 +29,38 @@ async function getClients() {
   return await response.json()
 }
 
+async function deleteClient(id) {
+  const response = await fetch(`/api/clientes/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    },
+  })
+
+  if (response.status === 200) {
+    return true
+  }
+
+  return false
+}
+
+async function editClient(id, client) {
+  const response = await fetch(`/api/clientes/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(client),
+  })
+
+  const data = await response.json()
+
+  console.log(data)
+
+  return data
+}
+
 document.addEventListener("DOMContentLoaded", async function () {
   const clients = await getClients()
   clients.forEach((client) => {
@@ -56,13 +88,18 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     deleteButton.addEventListener("click", function () {
       if (confirm("¿Estás seguro de que deseas eliminar este cliente?")) {
-        clientesTable.deleteRow(newRow.rowIndex - 1)
+        const deleted = deleteClient(client._id)
+        if (deleted) {
+          clientesTable.deleteRow(newRow.rowIndex - 1)
+        } else {
+          alert("No se pudo eliminar el cliente")
+        }
       }
     })
 
     editButton.addEventListener("click", function () {
       if (editButton.textContent === "Editar") {
-        for (let i = 0; i < 8; i++) {
+        for (let i = 1; i < 8; i++) {
           const cell = newRow.cells[i]
           const input = document.createElement("input")
           input.type = "text"
@@ -72,7 +109,17 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
         editButton.textContent = "Guardar"
       } else {
-        for (let i = 0; i < 8; i++) {
+        const editedClient = {
+          nombre: newRow.cells[1].querySelector("input").value,
+          apellido: newRow.cells[2].querySelector("input").value,
+          pais: newRow.cells[3].querySelector("input").value,
+          provincia: newRow.cells[4].querySelector("input").value,
+          localidad: newRow.cells[5].querySelector("input").value,
+          direccion: newRow.cells[6].querySelector("input").value,
+          telefono: newRow.cells[7].querySelector("input").value,
+        }
+        editClient(client._id, editedClient)
+        for (let i = 1; i < 8; i++) {
           const cell = newRow.cells[i]
           const input = cell.querySelector("input")
           cell.textContent = input.value
@@ -173,7 +220,7 @@ clienteForm.addEventListener("submit", async function (event) {
 
 if (loginBtn) {
   if (window.localStorage.getItem("user")) {
-    loginBtn.innerHTML = `<a class="btn btn-primary" onclick='window.localStorage.removeItem("user"); window.location.reload();'>Cerrar sesion</a>`
+    loginBtn.innerHTML = `<a class="btn btn-primary" onclick='window.localStorage.removeItem("user");window.localStorage.removeItem("token"); window.location.reload();'>Cerrar sesion</a>`
   } else {
     loginBtn.innerHTML = `<a href="/login" class="btn btn-primary">Iniciar sesion</a>`
   }
