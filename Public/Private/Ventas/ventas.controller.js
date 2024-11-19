@@ -26,7 +26,7 @@ function imprimitVenta(venta) {
   const ventaInfo = `
       <h2 style="text-align:center; font-family: 'Nunito Sans', sans-serif;">
         <span style="color:red;">C</span><span style="color:blue;">alimero </span>
-        <span style="color:red;">H</span><span style="color:blue;">obby</span>
+        <span style="color:red;">H</span><span style="color:blue;">oobby</span>
       </h2>
       <table style="margin: 0 auto; border-collapse: collapse; text-align: center;">
         <thead>
