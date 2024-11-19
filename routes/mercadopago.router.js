@@ -22,7 +22,7 @@ mpRouter.post("/create_preference", async (req, res) => {
   const body = {
     items,
     back_urls: {
-      success: "http://localhost:5001/success",
+      success: "http://localhost:5001/api/mercadopago/success",
       failure: "http://localhost:5001/failure",
       pending: "http://localhost:5001/pending",
     },
@@ -36,5 +36,17 @@ mpRouter.post("/create_preference", async (req, res) => {
     res.json(error)
   }
 })
+
+
+
+mpRouter.get("/success", (req, res) => {
+  res.status(200).send(`
+    <script>
+      alert("¡Su compra fue exitosa! Le hemos enviado el comprobante a su correo.");
+      localStorage.removeItem('cart'); 
+      window.location.href = "/Public/Pages/Productos/index.html"; 
+    </script>
+  `);
+});
 
 export { mpRouter }

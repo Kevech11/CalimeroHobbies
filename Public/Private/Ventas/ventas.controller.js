@@ -24,55 +24,55 @@ function restarUnProducto(id) {
 
 function imprimitVenta(venta) {
   const ventaInfo = `
-      <h2 style="text-align:center;">
-        <span style="color:red;">C</span><span style="color:blue;">ALIMERO </span>
-        <span style="color:red;">H</span><span style="color:blue;">OBBIES</span>
+      <h2 style="text-align:center; font-family: 'Nunito Sans', sans-serif;">
+        <span style="color:red;">C</span><span style="color:blue;">alimero </span>
+        <span style="color:red;">H</span><span style="color:blue;">obbies</span>
       </h2>
       <table style="margin: 0 auto; border-collapse: collapse; text-align: center;">
         <thead>
           <tr>
-            <th style="border: 1px solid black; padding: 8px;">Fecha</th>
-            <th style="border: 1px solid black; padding: 8px;">Cliente</th>
-            <th style="border: 1px solid black; padding: 8px;">Total</th>
+            <th style="border: 1px solid black; padding: 8px; font-family: 'Nunito Sans', sans-serif">Fecha</th>
+            <th style="border: 1px solid black; padding: 8px; font-family: 'Nunito Sans', sans-serif">Cliente</th>
+            <th style="border: 1px solid black; padding: 8px; font-family: 'Nunito Sans', sans-serif">Total</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td style="border: 1px solid black; padding: 8px; font-weight:bold;">
+            <td style="border: 1px solid black; padding: 8px; font-weight:bold; font-family: 'Nunito Sans', sans-serif">
               ${new Date(venta.fecha).toLocaleDateString()}
             </td>
-            <td style="border: 1px solid black; padding: 8px; font-weight:bold;">
+            <td style="border: 1px solid black; padding: 8px; font-weight:bold; font-family: 'Nunito Sans', sans-serif">
               ${venta.cliente.nombre} ${venta.cliente.apellido}
             </td>
-            <td style="border: 1px solid black; padding: 8px; font-weight:bold;">
+            <td style="border: 1px solid black; padding: 8px; font-weight:bold; font-family: 'Nunito Sans', sans-serif">
               $${venta.total}
             </td>
           </tr>
         </tbody>
       </table>
       
-      <h3 style="text-align:center;">Productos</h3>
+      <h3 style="text-align:center; font-family: 'Nunito Sans', sans-serif">Productos</h3>
       <table style="margin: 0 auto; border-collapse: collapse; text-align: center;">
         <thead>
           <tr>
-            <th style="border: 1px solid black; padding: 8px;">Producto</th>
-            <th style="border: 1px solid black; padding: 8px;">Precio</th>
-            <th style="border: 1px solid black; padding: 8px;">Cantidad</th>
-            <th style="border: 1px solid black; padding: 8px;">Subtotal</th>
+            <th style="border: 1px solid black; padding: 8px; font-family: 'Nunito Sans', sans-serif">Producto</th>
+            <th style="border: 1px solid black; padding: 8px; font-family: 'Nunito Sans', sans-serif">Precio</th>
+            <th style="border: 1px solid black; padding: 8px; font-family: 'Nunito Sans', sans-serif">Cantidad</th>
+            <th style="border: 1px solid black; padding: 8px; font-family: 'Nunito Sans', sans-serif">Subtotal</th>
           </tr>
         </thead>
         <tbody>
           ${venta.productos
             .map(
               ({ producto, cantidad }) => `<tr>
-                  <td style="border: 1px solid black; padding: 8px; font-weight:bold;">${
+                  <td style="border: 1px solid black; padding: 8px; font-weight:bold; font-family: 'Nunito Sans', sans-serif">${
                     producto.titulo
                   }</td>
-                  <td style="border: 1px solid black; padding: 8px; font-weight:bold;">$${
+                  <td style="border: 1px solid black; padding: 8px; font-weight:bold; font-family: 'Nunito Sans', sans-serif">$${
                     producto.precio
                   }</td>
-                  <td style="border: 1px solid black; padding: 8px; font-weight:bold;">${cantidad}</td>
-                  <td style="border: 1px solid black; padding: 8px; font-weight:bold;">$${
+                  <td style="border: 1px solid black; padding: 8px; font-weight:bold; font-family: 'Nunito Sans', sans-serif">${cantidad}</td>
+                  <td style="border: 1px solid black; padding: 8px; font-weight:bold; font-family: 'Nunito Sans', sans-serif">$${
                     cantidad * producto.precio
                   }</td>
                 </tr>`
