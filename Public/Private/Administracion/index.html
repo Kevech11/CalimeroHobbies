@@ -53,7 +53,7 @@
                 </ul>      
         </aside>
         <main>
-            <div id="contenedor-productos" class="contenedor-productos">
+            <div id="contenedor-usuarios" class="contenedor-usuarios contenedor">
                 <!-- Esto se va a rellenar con JS -->
                 <div class="form-container">
                   <h2>Registro de Usuario</h2>
@@ -91,7 +91,7 @@
                   </form>
                 </div>
 
-                <table class="users-table">
+                <table class="users-table contenedor">
                   <thead>
                     <tr>
                       <th>Nombre</th>
@@ -104,6 +104,45 @@
                     <!-- Esto se va a rellenar con JS -->
                   </tbody>
                 </table>
+
+              </div>
+              <div id="contenedor-productos" class="contenedor-productos contenedor">
+                <form id="formulario-productos">
+                  <div class="form-group form-group-productos">
+                    <label for="titulo">Titulo:</label>
+                    <input type="text" id="titulo" name="titulo" required>
+                  </div>
+
+                  <div class="form-group form-group-productos">
+                    <label for="marca">Marca:</label>
+                    <input type="text" id="marca" name="marca" required>
+                  </div>
+
+                  <div class="form-group form-group-productos">
+                    <label for="precio">Precio:</label>
+                    <input type="number" id="precio" name="precio" required>
+                  </div>
+
+                  <div class="form-group form-group-productos">
+                    <label for="imagen">Imagen:</label>
+                    <input type="file" id="imagen" name="imagen">
+                  </div>
+
+                  <div class="form-group form-group-productos">
+                    <label for="categoria">Categoría:</label>
+                    <select id="categoria" name="categoria" required>
+                      <option value="" disabled selected>Seleccione una categoría</option>
+                      <option value="rompecabezas">Rompecabezas</option>
+                      <option value="militaria">Militaria</option>
+                      <option value="modelismo">Modelismo</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group form-group-productos">
+                    <input type="submit" value="Cargar producto">
+                  </div>
+                </form>
+                </div>
         </main>
     </div>
 

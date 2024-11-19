@@ -340,7 +340,7 @@ main {
     margin-bottom: 2rem;
 }
 
-.contenedor-productos {
+.contenedor-usuarios {
     display: flex;
     justify-content: center;
     gap: 1rem;
@@ -488,4 +488,8 @@ main {
     cursor: pointer;
     border-radius: 4px;
     transition: background-color 0.3s ease;
+}
+
+.contenedor-productos {
+    display: none;
 }

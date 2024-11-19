@@ -1,6 +1,11 @@
 const loginBtn = document.getElementById("loginBtn")
 const newUserForm = document.getElementById("new-user")
 const usersTable = document.getElementById("users-table-body")
+const botonesCategorias = document.querySelectorAll(".boton-categoria")
+const contenedores = document.querySelectorAll(".contenedor")
+const contenedorUsuarios = document.getElementById("contenedor-usuarios")
+const contenedorProductos = document.getElementById("contenedor-productos")
+const formularioProductos = document.querySelector("#formulario-productos")
 
 if (loginBtn) {
   if (window.localStorage.getItem("user")) {
@@ -86,4 +91,55 @@ async function renderUsers() {
   )
 }
 
+async function cargarProducto(producto) {
+  const response = await fetch("/api/productos", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(producto),
+  })
+
+  if (response.status === 201) {
+    alert("Producto creado exitosamente")
+    window.location.reload()
+  } else {
+    alert("Error al crear producto")
+  }
+}
+
 renderUsers()
+
+formularioProductos.addEventListener("submit", async (e) => {
+  e.preventDefault()
+
+  const titulo = document.getElementById("titulo").value
+  const marca = document.getElementById("marca").value
+  const precio = document.getElementById("precio").value
+  const categoria = document.getElementById("categoria").value
+
+  cargarProducto({ titulo, marca, precio, categoria })
+})
+
+botonesCategorias.forEach((boton) => {
+  boton.addEventListener("click", (e) => {
+    botonesCategorias.forEach((boton) => boton.classList.remove("active"))
+    contenedores.forEach((contenedor) => (contenedor.style.display = "none"))
+
+    e.currentTarget.classList.add("active")
+
+    switch (e.currentTarget.id) {
+      case "usuarios":
+        contenedorUsuarios.style.display = "flex"
+        const tabla = document.querySelector(".users-table")
+        tabla.style.display = "block"
+        tabla.style.width = "100%"
+        renderUsers()
+        break
+      case "productos":
+        contenedorProductos.style.display = "block"
+        break
+    }
+  })
+})
