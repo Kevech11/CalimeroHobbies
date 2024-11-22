@@ -24,13 +24,13 @@
         </a>
       </div>
       <div class="search_box">
-        <input type="search" placeholder="¿Qué estas buscando?" />
-        <span class="fa fa-search"></span>
+        <input type="search"placeholder="¿Qué estas buscando?" id="searchInput"/>
+        <span class="fa fa-search" id="searchBtn"></span>
       </div>
       <ol>
         <li><a href="/QuienesSomos">Nosotros</a></li>
-        <li><a href="/Productos">productos</a></li>
-        <li><a href="/Contacto">contacto</a></li>
+        <li><a href="/Productos">Productos</a></li>
+        <li><a href="/Contacto">Contacto</a></li>
         <li id="loginBtn"></li>
       </ol>
       <div href="/carrito" class="Carrito">
@@ -120,17 +120,6 @@
       </div>
     </footer>
 
-    <script>
-      const loginBtn = document.getElementById("loginBtn")
-
-      if (loginBtn) {
-        if (window.localStorage.getItem("user")) {
-          loginBtn.innerHTML = `<a class="btn btn-primary" onclick='window.localStorage.removeItem("user"); window.location.reload();'>Cerrar sesion</a>`
-        } else {
-          console.log("no hay usuario")
-          loginBtn.innerHTML = `<a href="/login" class="btn btn-primary">Iniciar sesion</a>`
-        }
-      }
-    </script>
+    <script src="/Pages/QuienesSomos/nosotros.js"></script>
   </body>
 </html>

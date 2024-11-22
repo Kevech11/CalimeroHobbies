@@ -1,5 +1,7 @@
 const loginBtn = document.getElementById("loginBtn")
 const contactForm = document.getElementById("contact-form")
+const searchInput = document.getElementById("searchInput")
+const searchBtn = document.getElementById("searchBtn")
 
 if (loginBtn) {
   if (window.localStorage.getItem("user")) {
@@ -51,5 +53,18 @@ contactForm.addEventListener("submit", async (event) => {
       icon: "error",
       confirmButtonText: "Aceptar",
     })
+  }
+})
+
+function redireccionarAlBuscar() {
+  const term = searchInput.value
+  window.location.href = `/Productos?search=${term}`
+}
+
+searchBtn.addEventListener("click", redireccionarAlBuscar)
+searchInput.addEventListener("keypress", (e) => {
+  console.log(e.key)
+  if (e.key === "Enter") {
+    redireccionarAlBuscar()
   }
 })
