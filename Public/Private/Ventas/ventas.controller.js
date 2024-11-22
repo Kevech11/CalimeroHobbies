@@ -1,6 +1,6 @@
 const clientsInput = document.getElementById("cliente")
 const productsInput = document.getElementById("productos")
-const categoriesInput = document.getElementById("categoria") //
+const categoriesInput = document.getElementById("categoria")
 const selectedProductsElement = document.getElementById("selected-products")
 let selectedProducts = []
 const loginBtn = document.getElementById("loginBtn")
@@ -94,7 +94,7 @@ function imprimitVenta(venta) {
 //Mostrar venta en la tabla
 async function cargarVentas() {
   try {
-    const ventasTable = document.getElementById("ventasTable");
+    const ventasTable = document.getElementById("ventasTable")
     ventasTable.innerHTML = `
       <tr>
         <th>Fecha</th>
@@ -103,59 +103,59 @@ async function cargarVentas() {
         <th style="text-align: right;">Total</th> <!-- Encabezado alineado -->
         <th>Acciones</th>
       </tr>
-    `;
+    `
     const response = await fetch("/api/ventas", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${window.localStorage.getItem("token")}`,
       },
-    });
+    })
 
     if (response.status === 403) {
-      window.location.href = "/home";
+      window.location.href = "/home"
     }
 
-    const ventas = await response.json();
-    console.log(ventas);
+    const ventas = await response.json()
+    console.log(ventas)
 
     ventas.forEach((venta) => {
-      let productosVenta = []; // Para almacenar los productos
+      let productosVenta = [] // Para almacenar los productos
 
-      const newRow = ventasTable.insertRow();
+      const newRow = ventasTable.insertRow()
       newRow.insertCell(0).textContent = new Date(
         venta.fecha
-      ).toLocaleDateString();
+      ).toLocaleDateString()
       newRow.insertCell(
         1
-      ).textContent = `${venta.cliente.nombre} ${venta.cliente.apellido}`;
+      ).textContent = `${venta.cliente.nombre} ${venta.cliente.apellido}`
       newRow.insertCell(
         2
-      ).innerHTML = `<button type="button" class="btn btn-primary">Ver productos</button>`;
-      
-      const totalCell = newRow.insertCell(3);
+      ).innerHTML = `<button type="button" class="btn btn-primary">Ver productos</button>`
+
+      const totalCell = newRow.insertCell(3)
       totalCell.textContent = new Intl.NumberFormat("es-AR", {
         style: "currency",
         currency: "ARS",
         minimumFractionDigits: 2,
-      }).format(venta.total);
-      totalCell.style.textAlign = "right"; // Aplica el estilo en línea
+      }).format(venta.total)
+      totalCell.style.textAlign = "right" // Aplica el estilo en línea
 
       newRow.cells[2]
         .querySelector("button")
         .addEventListener("click", function () {
-          const width = 600;
-          const height = 400;
-          const left = window.screen.width / 2 - width / 2;
-          const top = window.screen.height / 2 - height / 2;
+          const width = 600
+          const height = 400
+          const left = window.screen.width / 2 - width / 2
+          const top = window.screen.height / 2 - height / 2
 
-          productosVenta = venta.productos;
+          productosVenta = venta.productos
 
           let win = window.open(
             "",
             "",
             `height=${height},width=${width},top=${top},left=${left}`
-          );
+          )
 
           // Crear el contenido HTML con una tabla
           win.document.write(`
@@ -199,7 +199,7 @@ async function cargarVentas() {
                       <th class="right">Total</th>
                     </tr>
                   </thead>
-                  <tbody>`);
+                  <tbody>`)
 
           // Añadir los productos a la tabla
           productosVenta.forEach(({ producto, cantidad }) => {
@@ -217,45 +217,45 @@ async function cargarVentas() {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}</td>
-              </tr>`);
-          });
+              </tr>`)
+          })
 
-          win.document.write(`</tbody></table></body></html>`);
-          win.document.close();
+          win.document.write(`</tbody></table></body></html>`)
+          win.document.close()
 
           win.onunload = function () {
-            win = null;
-          };
-        });
+            win = null
+          }
+        })
 
-      const actionsCell = newRow.insertCell(4);
+      const actionsCell = newRow.insertCell(4)
 
-      const deleteButton = document.createElement("button");
-      deleteButton.textContent = "Eliminar";
-      deleteButton.className = "btn-delete";
-      actionsCell.appendChild(deleteButton);
+      const deleteButton = document.createElement("button")
+      deleteButton.textContent = "Eliminar"
+      deleteButton.className = "btn-delete"
+      actionsCell.appendChild(deleteButton)
 
       deleteButton.addEventListener("click", function () {
         if (confirm("¿Estás seguro de que deseas eliminar esta venta?")) {
-          const deleted = eliminarVenta(venta._id);
+          const deleted = eliminarVenta(venta._id)
           if (deleted) {
-            ventasTable.deleteRow(newRow.rowIndex);
+            ventasTable.deleteRow(newRow.rowIndex)
           } else {
-            alert("No se pudo eliminar la venta");
+            alert("No se pudo eliminar la venta")
           }
         }
-      });
+      })
 
-      const printButton = document.createElement("button");
-      printButton.textContent = "Imprimir";
-      printButton.className = "btn-print";
-      actionsCell.appendChild(printButton);
+      const printButton = document.createElement("button")
+      printButton.textContent = "Imprimir"
+      printButton.className = "btn-print"
+      actionsCell.appendChild(printButton)
 
-      console.log(ventas);
-      printButton.addEventListener("click", () => imprimitVenta(venta));
-    });
+      console.log(ventas)
+      printButton.addEventListener("click", () => imprimitVenta(venta))
+    })
   } catch (error) {
-    console.error("Error fetching ventas:", error);
+    console.error("Error fetching ventas:", error)
   }
 }
 
@@ -344,17 +344,17 @@ async function getClients() {
       "Content-Type": "application/json",
       Authorization: `Bearer ${window.localStorage.getItem("token")}`,
     },
-  });
+  })
 
   if (response.status === 403) {
-    window.location.href = "/home";
+    window.location.href = "/home"
   }
 
-  const clients = await response.json();
+  const clients = await response.json()
 
   // Ordenar alfabéticamente por el nombre del cliente
-  clients.sort((a, b) => a.nombre.localeCompare(b.nombre));
-  return clients;
+  clients.sort((a, b) => a.nombre.localeCompare(b.nombre))
+  return clients
 }
 
 async function getProducts() {
@@ -364,13 +364,13 @@ async function getProducts() {
       "Content-Type": "application/json",
       Authorization: `Bearer ${window.localStorage.getItem("token")}`,
     },
-  });
+  })
 
-  const products = await response.json();
+  const products = await response.json()
 
   // Ordenar alfabéticamente por el nombre o título del producto
-  products.sort((a, b) => a.titulo.localeCompare(b.titulo));
-  return products;
+  products.sort((a, b) => a.titulo.localeCompare(b.titulo))
+  return products
 }
 
 function actualizarTotal() {
@@ -415,7 +415,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 //capturar venta
 ventaForm.addEventListener("submit", async function (event) {
   event.preventDefault()
-  
+
   const fecha = document.getElementById("fecha").value
   const cliente = document.getElementById("cliente").value
   const total = selectedProducts.reduce(
@@ -460,3 +460,7 @@ if (loginBtn) {
     loginBtn.innerHTML = `<a href="/login" class="btn btn-primary">Iniciar sesion</a>`
   }
 }
+
+// En la linea 403 traemos todos los productos de entrada
+// Hay que modificar eso para que los traiga una vez que el usuario haya seleccionado una categoria
+// o cambie la categoria seleccionada

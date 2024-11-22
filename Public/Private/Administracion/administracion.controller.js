@@ -91,15 +91,14 @@ async function renderUsers() {
   )
 }
 
-async function cargarProducto(producto) {
-  const response = await fetch("/api/productos", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(producto),
-  })
+renderUsers()
+
+// Crear productos
+formularioProductos.addEventListener("submit", async (e) => {
+  e.preventDefault()
+
+  const formData = new FormData(formularioProductos)
+  const response = await cargarProducto(formData)
 
   if (response.status === 201) {
     alert("Producto creado exitosamente")
@@ -107,20 +106,17 @@ async function cargarProducto(producto) {
   } else {
     alert("Error al crear producto")
   }
-}
-
-renderUsers()
-
-formularioProductos.addEventListener("submit", async (e) => {
-  e.preventDefault()
-
-  const titulo = document.getElementById("titulo").value
-  const marca = document.getElementById("marca").value
-  const precio = document.getElementById("precio").value
-  const categoria = document.getElementById("categoria").value
-
-  cargarProducto({ titulo, marca, precio, categoria })
 })
+
+async function cargarProducto(formData) {
+  return await fetch("/api/productos", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    },
+    body: formData,
+  })
+}
 
 botonesCategorias.forEach((boton) => {
   boton.addEventListener("click", (e) => {

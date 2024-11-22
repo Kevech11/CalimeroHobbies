@@ -1,6 +1,7 @@
 import { Router } from "express"
 import ProductModel from "../models/products.model.js"
 import { getUserData, checkRole } from "../middlewares/getUserData.js"
+import { upload } from "../config/multer.js"
 
 const productsRouter = Router()
 
@@ -34,11 +35,21 @@ productsRouter.get("/search", async (req, res) => {
 
 productsRouter.use(getUserData)
 productsRouter.use(checkRole("admin"))
-productsRouter.post("/", async (req, res) => {
+productsRouter.post("/", upload.single("imagen"), async (req, res) => {
   const { titulo, marca, precio, categoria } = req.body
+  const { filename, destination } = req.file
+  // filename: "1626804275052-iphone12.png"
+  // destination: "/home/alejandro/Documentos/Proyecto-Final-Panaderia/Public/Pages/Productos/img"
+  // mimetype: "image/png"
 
   try {
-    const newProduct = new ProductModel({ titulo, marca, precio, categoria })
+    const newProduct = new ProductModel({
+      titulo,
+      marca,
+      precio,
+      categoria,
+      imagen: filename,
+    })
     await newProduct.save()
     return res.status(201).json(newProduct)
   } catch (error) {

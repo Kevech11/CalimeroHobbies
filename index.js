@@ -21,6 +21,10 @@ app.use(express.urlencoded({ extended: true }))
 //levantar nuestro FRON-END
 app.use(express.static("./Public"))
 
+app.get("/", (req, res) => {
+  res.redirect("/Home")
+})
+
 app.get("/Home", (req, res) => {
   res.sendFile(path.join(__dirname, "Public", "Pages", "Home", "index.html"))
 })
@@ -44,8 +48,7 @@ app.get("/QuienesSomos", (req, res) => {
 })
 
 app.get("/Login", (req, res) => {
-  res.sendFile(path.join(__dirname, "Public", "Pages", "Login", "index.html")
-  )
+  res.sendFile(path.join(__dirname, "Public", "Pages", "Login", "index.html"))
 })
 
 app.get("/Contacto", (req, res) => {
