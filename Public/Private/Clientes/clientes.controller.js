@@ -63,6 +63,7 @@ async function editClient(id, client) {
 
 document.addEventListener("DOMContentLoaded", async function () {
   const clients = await getClients()
+  clients.sort((a, b) => a.nombre.localeCompare(b.nombre, "es", { sensitivity: "base" }));
   clients.forEach((client) => {
     const newRow = clientesTable.insertRow()
     newRow.insertCell(0).textContent = client._id.slice(19)

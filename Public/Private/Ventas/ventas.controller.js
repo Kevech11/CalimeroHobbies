@@ -24,6 +24,10 @@ function restarUnProducto(id) {
 }
 
 function imprimitVenta(venta) {
+  const productosOrdenados = venta.productos.sort((a, b) =>
+    a.producto.titulo.localeCompare(b.producto.titulo)
+  )
+
   const ventaInfo = `
       <h2 style="text-align:center; font-family: 'Nunito Sans', sans-serif;">
         <span style="color:red;">C</span><span style="color:blue;">alimero </span>
@@ -149,7 +153,9 @@ async function cargarVentas() {
           const left = window.screen.width / 2 - width / 2
           const top = window.screen.height / 2 - height / 2
 
-          productosVenta = venta.productos
+          const productosVenta = venta.productos.sort((a, b) =>
+            a.producto.titulo.localeCompare(b.producto.titulo)
+          )
 
           let win = window.open(
             "",
