@@ -29,63 +29,70 @@ function imprimitVenta(venta) {
   )
 
   const ventaInfo = `
-      <h2 style="text-align:center; font-family: 'Nunito Sans', sans-serif;">
+  <div style="font-family: 'Nunito Sans', sans-serif; width: 600px; margin: 0 auto; border: 1px solid black; padding: 16px;">
+    <!-- Encabezado -->
+    <header style="text-align: center; border-bottom: 2px solid black; padding-bottom: 10px;">
+      <h1 style="margin: 0;">
         <span style="color:red;">C</span><span style="color:blue;">alimero </span>
-        <span style="color:red;">H</span><span style="color:blue;">oobby</span>
-      </h2>
-      <table style="margin: 0 auto; border-collapse: collapse; text-align: center;">
+        <span style="color:red;">H</span><span style="color:blue;">obby</span>
+      </h1>
+      <p style="margin: 5px 0;">RUC: 1234567890 - Dirección: Dean Funes 250</p>
+      <p style="margin: 5px 0;">Teléfono: (351) 371-9898 - Email: calimerohobby@gmail.com</p>
+    </header>
+
+    <!-- Datos de la venta -->
+    <section style="margin: 16px 0;">
+      <table style="width: 100%; border-collapse: collapse;">
         <thead>
           <tr>
-            <th style="border: 1px solid black; padding: 8px; font-family: 'Nunito Sans', sans-serif">Fecha</th>
-            <th style="border: 1px solid black; padding: 8px; font-family: 'Nunito Sans', sans-serif">Cliente</th>
-            <th style="border: 1px solid black; padding: 8px; font-family: 'Nunito Sans', sans-serif">Total</th>
+            <th style="text-align: left; padding: 8px; font-weight: bold;">Fecha:</th>
+            <td style="padding: 8px;">${new Date(venta.fecha).toLocaleDateString()}</td>
+          </tr>
+          <tr>
+            <th style="text-align: left; padding: 8px; font-weight: bold;">Cliente:</th>
+            <td style="padding: 8px;">${venta.cliente.nombre} ${venta.cliente.apellido}</td>
+          </tr>
+          <tr>
+            <th style="text-align: left; padding: 8px; font-weight: bold;">Total:</th>
+            <td style="padding: 8px;">${new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(venta.total)}</td>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td style="border: 1px solid black; padding: 8px; font-weight:bold; font-family: 'Nunito Sans', sans-serif">
-              ${new Date(venta.fecha).toLocaleDateString()}
-            </td>
-            <td style="border: 1px solid black; padding: 8px; font-weight:bold; font-family: 'Nunito Sans', sans-serif">
-              ${venta.cliente.nombre} ${venta.cliente.apellido}
-            </td>
-            <td style="border: 1px solid black; padding: 8px; font-weight:bold; font-family: 'Nunito Sans', sans-serif">
-              $${venta.total}
-            </td>
-          </tr>
-        </tbody>
       </table>
-      
-      <h3 style="text-align:center; font-family: 'Nunito Sans', sans-serif">Productos</h3>
-      <table style="margin: 0 auto; border-collapse: collapse; text-align: center;">
-        <thead>
-          <tr>
-            <th style="border: 1px solid black; padding: 8px; font-family: 'Nunito Sans', sans-serif">Producto</th>
-            <th style="border: 1px solid black; padding: 8px; font-family: 'Nunito Sans', sans-serif">Precio</th>
-            <th style="border: 1px solid black; padding: 8px; font-family: 'Nunito Sans', sans-serif">Cantidad</th>
-            <th style="border: 1px solid black; padding: 8px; font-family: 'Nunito Sans', sans-serif">Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${venta.productos
-            .map(
-              ({ producto, cantidad }) => `<tr>
-                  <td style="border: 1px solid black; padding: 8px; font-weight:bold; font-family: 'Nunito Sans', sans-serif">${
-                    producto.titulo
-                  }</td>
-                  <td style="border: 1px solid black; padding: 8px; font-weight:bold; font-family: 'Nunito Sans', sans-serif">$${
-                    producto.precio
-                  }</td>
-                  <td style="border: 1px solid black; padding: 8px; font-weight:bold; font-family: 'Nunito Sans', sans-serif">${cantidad}</td>
-                  <td style="border: 1px solid black; padding: 8px; font-weight:bold; font-family: 'Nunito Sans', sans-serif">$${
-                    cantidad * producto.precio
-                  }</td>
-                </tr>`
-            )
-            .join("")}
-        </tbody>
-      </table>
-    `
+    </section>
+
+    <!-- Tabla de productos -->
+    <h3 style="text-align:center; margin-top: 16px; margin-bottom: 10px;">Detalle de Productos</h3>
+    <table style="width: 100%; border-collapse: collapse; text-align: center;">
+      <thead>
+        <tr>
+          <th style="border: 1px solid black; padding: 8px;">Producto</th>
+          <th style="border: 1px solid black; padding: 8px;">Precio</th>
+          <th style="border: 1px solid black; padding: 8px;">Cantidad</th>
+          <th style="border: 1px solid black; padding: 8px;">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${venta.productos
+          .map(
+            ({ producto, cantidad }) => `
+              <tr>
+                <td style="border: 1px solid black; padding: 8px;">${producto.titulo}</td>
+                <td style="border: 1px solid black; padding: 8px;">${new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(producto.precio)}</td>
+                <td style="border: 1px solid black; padding: 8px;">${cantidad}</td>
+                <td style="border: 1px solid black; padding: 8px;">${new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(cantidad * producto.precio)}</td>
+              </tr>`
+          )
+          .join("")}
+      </tbody>
+    </table>
+
+    <!-- Pie de página -->
+    <footer style="text-align: center; border-top: 2px solid black; margin-top: 16px; padding-top: 10px;">
+      <p style="margin: 0;">Gracias por su compra en <strong>Calimero Hobby</strong>.</p>
+      <p style="margin: 5px 0;">¡Vuelva pronto!</p>
+    </footer>
+  </div>
+`
 
   const win = window.open("", "", "height=600,width=800")
   win.document.write("<html><head><title>Imprimir Venta</title></head><body>")
