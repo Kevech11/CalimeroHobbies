@@ -46,15 +46,22 @@ function imprimitVenta(venta) {
         <thead>
           <tr>
             <th style="text-align: left; padding: 8px; font-weight: bold;">Fecha:</th>
-            <td style="padding: 8px;">${new Date(venta.fecha).toLocaleDateString()}</td>
+            <td style="padding: 8px;">${new Date(
+              venta.fecha
+            ).toLocaleDateString()}</td>
           </tr>
           <tr>
             <th style="text-align: left; padding: 8px; font-weight: bold;">Cliente:</th>
-            <td style="padding: 8px;">${venta.cliente.nombre} ${venta.cliente.apellido}</td>
+            <td style="padding: 8px;">${venta.cliente.nombre} ${
+    venta.cliente.apellido
+  }</td>
           </tr>
           <tr>
             <th style="text-align: left; padding: 8px; font-weight: bold;">Total:</th>
-            <td style="padding: 8px;">${new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(venta.total)}</td>
+            <td style="padding: 8px;">${new Intl.NumberFormat("es-AR", {
+              style: "currency",
+              currency: "ARS",
+            }).format(venta.total)}</td>
           </tr>
         </thead>
       </table>
@@ -76,10 +83,18 @@ function imprimitVenta(venta) {
           .map(
             ({ producto, cantidad }) => `
               <tr>
-                <td style="border: 1px solid black; padding: 8px;">${producto.titulo}</td>
-                <td style="border: 1px solid black; padding: 8px;">${new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(producto.precio)}</td>
+                <td style="border: 1px solid black; padding: 8px;">${
+                  producto.titulo
+                }</td>
+                <td style="border: 1px solid black; padding: 8px;">${new Intl.NumberFormat(
+                  "es-AR",
+                  { style: "currency", currency: "ARS" }
+                ).format(producto.precio)}</td>
                 <td style="border: 1px solid black; padding: 8px;">${cantidad}</td>
-                <td style="border: 1px solid black; padding: 8px;">${new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(cantidad * producto.precio)}</td>
+                <td style="border: 1px solid black; padding: 8px;">${new Intl.NumberFormat(
+                  "es-AR",
+                  { style: "currency", currency: "ARS" }
+                ).format(cantidad * producto.precio)}</td>
               </tr>`
           )
           .join("")}
@@ -413,8 +428,32 @@ document.addEventListener("DOMContentLoaded", async function () {
     clientsInput.appendChild(option)
   })
 
-  const products = await getProducts()
+  // const products = await getProducts()
 
+  // products.forEach((product) => {
+  //   const option = document.createElement("option")
+  //   option.value = product._id
+  //   option.textContent = product.titulo
+  //   option.dataset.precio = product.precio
+  //   option.dataset.cantidad = 1
+  //   productsInput.appendChild(option)
+  // })
+})
+
+categoriesInput.addEventListener("change", async function () {
+  const categoryId = categoriesInput.value
+
+  const response = await fetch(`/api/productos/categoria/${categoryId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    },
+  })
+
+  const products = await response.json()
+
+  productsInput.innerHTML = ""
   products.forEach((product) => {
     const option = document.createElement("option")
     option.value = product._id
@@ -473,7 +512,3 @@ if (loginBtn) {
     loginBtn.innerHTML = `<a href="/login" class="btn btn-primary">Iniciar sesion</a>`
   }
 }
-
-// En la linea 403 traemos todos los productos de entrada
-// Hay que modificar eso para que los traiga una vez que el usuario haya seleccionado una categoria
-// o cambie la categoria seleccionada

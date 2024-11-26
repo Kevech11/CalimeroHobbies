@@ -136,6 +136,9 @@ botonesCategorias.forEach((boton) => {
       case "productos":
         contenedorProductos.style.display = "block"
         break
+      case "ventas":
+        window.location.href = "/ventas"
+        break
     }
   })
 })

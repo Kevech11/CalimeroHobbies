@@ -2,7 +2,7 @@
     {
         "id": "aviones-01",
         "titulo": "Emirates A380-800",
-        "imagen": "Pages/Productos/img/aviones/A380.png",
+        "imagen": "A380.png",
         "marca": "Revell - 1/144",
         "categoria": {
             "nombre": "Aviones",
@@ -13,7 +13,7 @@
     {
         "id": "aviones-02",
         "titulo": "Bae HAWK T2",
-        "imagen": "Pages/Productos/img/aviones/Bae hawk.png",
+        "imagen": "Bae hawk.png",
         "marca": "Revell - 1/32",
         "categoria": {
             "nombre": "Aviones",
@@ -24,7 +24,7 @@
     {
         "id": "aviones-03",
         "titulo": "F/A-18F Super Hornet",
-        "imagen": "Pages/Productos/img/aviones/thypoon.webp",
+        "imagen": "thypoon.webp",
         "marca": "Revell - 1/32",
         "categoria": {
             "nombre": "Aviones",
@@ -35,7 +35,7 @@
     {
         "id": "aviones-04",
         "titulo": "AH-64A Apache",
-        "imagen": "Pages/Productos/img/aviones/AH-64A Apache .jpg",
+        "imagen": "AH-64A Apache .jpg",
         "marca": "Academy - 1/48",
         "categoria": {
             "nombre": "Aviones",
@@ -46,7 +46,7 @@
     {
         "id": "aviones-05",
         "titulo": "A-10 Wharlog",
-        "imagen": "Pages/Productos/img/aviones/A-10.jpeg",
+        "imagen": "A-10.jpeg",
         "marca": "Tamiya - 1/72",
         "categoria": {
             "nombre": "Aviones",
@@ -57,7 +57,7 @@
     {
         "id": "aviones-06",
         "titulo": "Sea Viken FAW 2",
-        "imagen": "Pages/Productos/img/aviones/seaviken.webp",
+        "imagen": "seaviken.webp",
         "marca": "Revell - 1/72",
         "categoria": {
             "nombre": "Aviones",
@@ -68,7 +68,7 @@
     {
         "id": "aviones-07",
         "titulo": "Mig-17 Fresco",
-        "imagen": "Pages/Productos/img/aviones/mig-17.webp",
+        "imagen": "mig-17.webp",
         "marca": "Airfix - 1/72",
         "categoria": {
             "nombre": "Aviones",
@@ -79,7 +79,7 @@
     {
         "id": "aviones-08",
         "titulo": "F-35 Lightning II",
-        "imagen": "Pages/Productos/img/aviones/f-35.jpeg",
+        "imagen": "f-35.jpeg",
         "marca": "Italeri - 1/72",
         "categoria": {
             "nombre": "Aviones",
@@ -90,7 +90,7 @@
     {
         "id": "pinturas-01",
         "titulo": "Naranja Intenso - 70851",
-        "imagen": "Pages/Productos/img/insumos/70851.jpg",
+        "imagen": "70851.jpg",
         "marca": "Vallejo",
         "categoria": {
             "nombre": "Pinturas",
@@ -101,7 +101,7 @@
     {
         "id": "pinturas-02",
         "titulo": "Oro - 70966",
-        "imagen": "Pages/Productos/img/insumos/70996.jpg",
+        "imagen": "70996.jpg",
         "marca": "Vallejo",
         "categoria": {
             "nombre": "Pinturas",
@@ -112,7 +112,7 @@
     {
         "id": "pinturas-03",
         "titulo": "Camuflaje Pardo Negro - 70822",
-        "imagen": "Pages/Productos/img/insumos/70822.jpg",
+        "imagen": "70822.jpg",
         "marca": "Vallejo",
         "categoria": {
             "nombre": "Pinturas",
@@ -123,7 +123,7 @@
     {
         "id": "pinturas-04",
         "titulo": "Verde Lima - 70827",
-        "imagen": "Pages/Productos/img/insumos/70827.jpg",
+        "imagen": "70827.jpg",
         "marca": "Vallejo",
         "categoria": {
             "nombre": "Pinturas",
@@ -134,7 +134,7 @@
     {
         "id": "pinturas-05",
         "titulo": "Unif. Japonés WWII - 70923",
-        "imagen": "Pages/Productos/img/insumos/70923.jpg",
+        "imagen": "70923.jpg",
         "marca": "Vallejo",
         "categoria": {
             "nombre": "Pinturas",
@@ -145,7 +145,7 @@
     {
         "id": "pinturas-06",
         "titulo": "Rojo Mate - 70957",
-        "imagen": "Pages/Productos/img/insumos/70957.jpg",
+        "imagen": "70957.jpg",
         "marca": "Revell",
         "categoria": {
             "nombre": "Pinturas",
@@ -156,7 +156,7 @@
     {
         "id": "pinturas-07",
         "titulo": "Violeta Claro - 70750",
-        "imagen": "Pages/Productos/img/insumos/70750.jpg",
+        "imagen": "70750.jpg",
         "marca": "Vallejo",
         "categoria": {
             "nombre": "Pinturas",
@@ -167,7 +167,7 @@
     {
         "id": "pinturas-08",
         "titulo": "Purpura Real - 70810",
-        "imagen": "Pages/Productos/img/insumos/70810.jpg",
+        "imagen": "70810.jpg",
         "marca": "Vallejo",
         "categoria": {
             "nombre": "Pinturas",
@@ -178,7 +178,7 @@
     {
         "id": "pinturas-09",
         "titulo": "Carne Oscura - 70927",
-        "imagen": "Pages/Productos/img/insumos/70927.jpg",
+        "imagen": "70927.jpg",
         "marca": "Vallejo",
         "categoria": {
             "nombre": "Pinturas",
@@ -189,7 +189,7 @@
     {
         "id": "insumos-01",
         "titulo": "MR.CEMENT SP - 40ml",
-        "imagen": "Pages/Productos/img/insumos/mr.cement.jpeg",
+        "imagen": "mr.cement.jpeg",
         "marca": "Mr.Hobby",
         "categoria": {
             "nombre": "Insumos",
@@ -200,7 +200,7 @@
     {
         "id": "insumos-02",
         "titulo": "Cinta de Enmascarar",
-        "imagen": "Pages/Productos/img/insumos/cinta15mm.jpg",
+        "imagen": "cinta15mm.jpg",
         "marca": "DSPIAE 15mm x 18 mts",
         "categoria": {
             "nombre": "Insumos",
@@ -211,7 +211,7 @@
     {
         "id": "insumos-03",
         "titulo": "MR.METAL PRIMER-R - 40ml",
-        "imagen": "Pages/Productos/img/insumos/mr,metal.jpeg",
+        "imagen": "mr,metal.jpeg",
         "marca": "Mr.Hobby",
         "categoria": {
             "nombre": "Insumos",
@@ -222,7 +222,7 @@
     {
         "id": "insumos-04",
         "titulo": "Abridor de Frascos",
-        "imagen": "Pages/Productos/img/insumos/abridor.jpeg",
+        "imagen": "abridor.jpeg",
         "marca": "Mr.Hobby",
         "categoria": {
             "nombre": "Insumos",
@@ -233,7 +233,7 @@
     {
         "id": "aviones-10",
         "titulo": "F/A-18F Super Hornet",
-        "imagen": "Pages/Productos/img/aviones/F-18meng.jpeg",
+        "imagen": "F-18meng.jpeg",
         "marca": "Meng - 1/48",
         "categoria": {
             "nombre": "Aviones",
@@ -244,7 +244,7 @@
     {
         "id": "aviones-12",
         "titulo": "MI-24V/VP",
-        "imagen": "Pages/Productos/img/aviones/mi24zveda.jpg",
+        "imagen": "mi24zveda.jpg",
         "marca": "Zvezda - 1/48",
         "categoria": {
             "nombre": "Aviones",
@@ -255,7 +255,7 @@
     {
         "id": "aviones-09",
         "titulo": "Sukhoi SU-34/SU-32 FN",
-        "imagen": "Pages/Productos/img/aviones/su-34.jpeg",
+        "imagen": "su-34.jpeg",
         "marca": "Italeri - 1/72",
         "categoria": {
             "nombre": "Aviones",
@@ -266,7 +266,7 @@
     {
         "id": "aviones-11",
         "titulo": "SH-60F Ocean Hawk",
-        "imagen": "Pages/Productos/img/aviones/sh60.jpg",
+        "imagen": "sh60.jpg",
         "marca": "Kitty Hawk - 1/35",
         "categoria": {
             "nombre": "Aviones",
@@ -277,7 +277,7 @@
     {
         "id": "militaria-01",
         "titulo": "M 109 US Army",
-        "imagen": "Pages/Productos/img/militaria/M109.jpeg",
+        "imagen": "M109.jpeg",
         "marca": "Revell - 1/72",
         "categoria": {
             "nombre": "Militaria",
@@ -288,7 +288,7 @@
     {
         "id": "militaria-02",
         "titulo": "Tiger II Ausf.B",
-        "imagen": "Pages/Productos/img/militaria/TigerII.webp",
+        "imagen": "TigerII.webp",
         "marca": "Revell - 1/72",
         "categoria": {
             "nombre": "Militaria",
@@ -299,7 +299,7 @@
     {
         "id": "militaria-03",
         "titulo": "Flakpanzer III Ostwind",
-        "imagen": "Pages/Productos/img/militaria/flakpanzer.jpeg",
+        "imagen": "flakpanzer.jpeg",
         "marca": "Revell - 1/72",
         "categoria": {
             "nombre": "Militaria",
@@ -310,7 +310,7 @@
     {
         "id": "militaria-04",
         "titulo": "Leopard 2a5/a5nl",
-        "imagen": "Pages/Productos/img/militaria/leopard.webp",
+        "imagen": "leopard.webp",
         "marca": "Revell - 1/72",
         "categoria": {
             "nombre": "Militaria",
@@ -321,7 +321,7 @@
     {
         "id": "militaria-05",
         "titulo": "German Infantry",
-        "imagen": "Pages/Productos/img/militaria/soldados.jpeg",
+        "imagen": "soldados.jpeg",
         "marca": "Hobby Boos - 1/35",
         "categoria": {
             "nombre": "Militaria",

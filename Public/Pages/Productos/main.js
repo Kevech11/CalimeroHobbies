@@ -67,12 +67,28 @@ function cargarProductos(productosElegidos) {
     const div = document.createElement("div")
     div.classList.add("producto")
     div.innerHTML = `
-            <img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
+            <img class="producto-imagen" src="Pages/Productos/img/${
+              producto.categoria === "Pinturas"
+                ? "insumos"
+                : producto.categoria === "aeromodelismo"
+                ? "aviones"
+                : producto.categoria
+            }/${producto.imagen}" alt="${producto.titulo}">
             <div class="producto-detalles">
                 <h1 class="producto-titulo">${producto.titulo}</h1>
                 <h4 class="producto-marca">${producto.marca}</h4>
-                <p class="producto-precio">${producto.precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
-                <button class="producto-agregar" id="${producto.id}">Agregar</button>
+                <p class="producto-precio">${producto.precio.toLocaleString(
+                  "es-AR",
+                  {
+                    style: "currency",
+                    currency: "ARS",
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                  }
+                )}</p>
+                <button class="producto-agregar" id="${
+                  producto.id
+                }">Agregar</button>
             </div>
         `
 
@@ -87,12 +103,13 @@ botonesCategorias.forEach((boton) => {
     e.currentTarget.classList.add("active")
 
     if (e.currentTarget.id != "todos") {
-      const productoCategoria = productos.find(
-        (producto) => producto.categoria.toLowerCase() === e.currentTarget.id
-      )
-      const productosBoton = productos.filter(
-        (producto) => producto.categoria.toLowerCase() === e.currentTarget.id
-      )
+      const productosBoton = productos.filter((producto) => {
+        if (producto.categoria === "aeromodelismo") {
+          return e.currentTarget.id === "aviones"
+        }
+
+        return producto.categoria.toLowerCase() === e.currentTarget.id
+      })
       cargarProductos(productosBoton)
     } else {
       cargarProductos(productos)
@@ -166,4 +183,3 @@ function actualizarNumerito() {
   )
   numerito.innerText = nuevoNumerito
 }
-
