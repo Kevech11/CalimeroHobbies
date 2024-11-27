@@ -50,9 +50,7 @@ async function getUsers() {
   if (response.status === 403) {
     window.location.href = "/home"
   }
-
   const users = await response.json()
-
   return users
 }
 

@@ -394,11 +394,7 @@ async function getProducts() {
     },
   })
 
-  const products = await response.json()
-
-  // Ordenar alfabéticamente por el nombre o título del producto
-  products.sort((a, b) => a.titulo.localeCompare(b.titulo))
-  return products
+  
 }
 
 function actualizarTotal() {
@@ -428,16 +424,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     clientsInput.appendChild(option)
   })
 
-  // const products = await getProducts()
-
-  // products.forEach((product) => {
-  //   const option = document.createElement("option")
-  //   option.value = product._id
-  //   option.textContent = product.titulo
-  //   option.dataset.precio = product.precio
-  //   option.dataset.cantidad = 1
-  //   productsInput.appendChild(option)
-  // })
+  
 })
 
 categoriesInput.addEventListener("change", async function () {
@@ -451,7 +438,8 @@ categoriesInput.addEventListener("change", async function () {
     },
   })
 
-  const products = await response.json()
+  let products = await response.json()
+  products = products.sort((a, b) => a.titulo.localeCompare(b.titulo))
 
   productsInput.innerHTML = ""
   products.forEach((product) => {

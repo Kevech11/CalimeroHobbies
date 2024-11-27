@@ -237,7 +237,7 @@ a {
 }
 
 aside {
-    margin-left: -38px;
+    margin-left: -42px;
     padding: 5rem;
     padding-right: 0;
     color: var(--clr-white);
@@ -492,4 +492,21 @@ main {
 
 .contenedor-productos {
     display: none;
+}
+
+#btnEnviar {
+    width: 200px; 
+    height: 40px; 
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#btnEnviar:hover {
+    background-color: #45a049;
 }
