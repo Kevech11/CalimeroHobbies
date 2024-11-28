@@ -10,6 +10,28 @@ if (loginBtn) {
   }
 }
 
+
+// if (loginBtn) {
+//   if (window.localStorage.getItem("user")) {
+    
+//     loginBtn.innerHTML = `
+//       <a href="/MiCuenta" class="btn btn-secondary">Mi Cuenta</a>
+//       <a class="btn btn-primary" onclick='cerrarSesion()'>Cerrar sesión</a>
+//     `;
+//   } else {
+    
+//     loginBtn.innerHTML = `<a href="/login" class="btn btn-primary">Iniciar sesión</a>`;
+//   }
+// }
+
+
+// function cerrarSesion() {
+//   window.localStorage.removeItem("user");
+//   window.location.reload(); // Recargar para actualizar el estado del navbar
+// }
+
+
+
 function redireccionarAlBuscar() {
   const term = searchInput.value
   window.location.href = `/Productos?search=${term}`
@@ -22,3 +44,4 @@ searchInput.addEventListener("keypress", (e) => {
     redireccionarAlBuscar()
   }
 })
+

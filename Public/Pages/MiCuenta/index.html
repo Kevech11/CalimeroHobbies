@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta | Calimero Hobby</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"/>
+    <link rel="stylesheet" href="/Pages/MiCuenta/style.css" />
+    <link href="/Pages/Home/fontawesome-free-6.6.0-web/css/all.css" rel="stylesheet"/>
+</head>
+<body>
+    <input type="checkbox" id="check" />
+    <nav>
+      <div class="icon">
+        <a href="/home" style="color: white; text-decoration: none">
+          <span style="color: red">C</span>alimero
+          <span style="color: red">H</span>obby
+        </a>
+      </div>
+      <div class="search_box">
+        <input type="search"placeholder="¿Qué estas buscando?" id="searchInput"/>
+        <span class="fa fa-search" id="searchBtn"></span>
+      </div>
+      <ol>
+        <li><a href="/QuienesSomos">Nosotros</a></li>
+        <li><a href="/Productos">Productos</a></li>
+        <li><a href="/Contacto">Contacto</a></li>
+        <li id="loginBtn"></li>
+      </ol>
+      <div href="/carrito" class="Carrito">
+        <a href="/Carrito"><i class="bi bi-cart"></i></a>
+      </div>
+      <label for="check" class="bar">
+        <span class="fa fa-bars" id="bars"></span>
+        <span class="fa fa-times" id="times"></span>
+      </label>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">      
+        <div class="form-container">
+            <form id="userForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" placeholder="Ingresa tu nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" id="apellido" placeholder="Ingresa tu apellido" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                    <input type="date" id="fechaNacimiento" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Ingresa tu correo electrónico" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="pais">País</label>
+                    <select id="pais" required>
+                        <option value="">Selecciona tu país</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Chile">Chile</option>
+                        <option value="Uruguay">Uruguay</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="provincia">Provincia</label>
+                    <input type="text" id="provincia" placeholder="Ingresa tu provincia" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="localidad">Localidad</label>
+                    <input type="text" id="localidad" placeholder="Ingresa tu localidad" required>
+                </div>
+
+                <button type="submit">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <script src="/Pages/MiCuenta/micuenta.js"></script>
+</body>
+</html>

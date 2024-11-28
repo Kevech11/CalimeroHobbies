@@ -81,6 +81,12 @@ app.get("/Administracion", (req, res) => {
   )
 })
 
+app.get("/MiCuenta", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "Public", "Pages", "MiCuenta", "index.html")
+  )
+})
+
 //Rutas de end-point
 app.use("/api/auth", authRouter)
 app.use("/api/productos", productsRouter)
