@@ -63,4 +63,22 @@ authRouter.post("/login", async (req, res) => {
   }
 })
 
+authRouter.get("/me", async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1]
+    if (!token) {
+      return res.status(401).send("No estas autorizado")
+    }
+    const payload = jwt.verify(token, "claveSecreta")
+    if (!payload._id) {
+      return res.status(401).send("No estas autorizado")
+    }
+    const user = await UserModel.findById(payload._id)
+    res.status(200).json(user)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+})
+
 export { authRouter }

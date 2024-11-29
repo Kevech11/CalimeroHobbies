@@ -68,7 +68,7 @@ function cargarProductos(productosElegidos) {
     div.classList.add("producto")
     div.innerHTML = `
             <img class="producto-imagen" src="Pages/Productos/img/${
-              producto.categoria === "Pinturas"
+              producto.categoria === "pinturas"
                 ? "insumos"
                 : producto.categoria === "aeromodelismo"
                 ? "aviones"

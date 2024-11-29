@@ -45,6 +45,24 @@ nav ol li:hover a{
     background: #d1cfcf;
     color: rgb(31, 31, 78);
 }
+
+nav ol li button {
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+nav ol li:hover button{
+    background: #d1cfcf;
+    color: rgb(31, 31, 78);
+}
+
 nav .search_box{
     display: flex;
     margin: auto 0;

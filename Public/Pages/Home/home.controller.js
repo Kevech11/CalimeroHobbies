@@ -2,35 +2,33 @@ const loginBtn = document.getElementById("loginBtn")
 const searchInput = document.getElementById("searchInput")
 const searchBtn = document.getElementById("searchBtn")
 
-if (loginBtn) {
-  if (window.localStorage.getItem("user")) {
-    loginBtn.innerHTML = `<a class="btn btn-primary" onclick='window.localStorage.removeItem("user"); window.location.reload();'>Cerrar sesion</a>`
-  } else {
-    loginBtn.innerHTML = `<a href="/login" class="btn btn-primary">Iniciar sesion</a>`
-  }
-}
-
-
 // if (loginBtn) {
 //   if (window.localStorage.getItem("user")) {
-    
-//     loginBtn.innerHTML = `
-//       <a href="/MiCuenta" class="btn btn-secondary">Mi Cuenta</a>
-//       <a class="btn btn-primary" onclick='cerrarSesion()'>Cerrar sesión</a>
-//     `;
+//     loginBtn.innerHTML = `<a class="btn btn-primary" onclick='window.localStorage.removeItem("user"); window.location.reload();'>Cerrar sesion</a>`
 //   } else {
-    
-//     loginBtn.innerHTML = `<a href="/login" class="btn btn-primary">Iniciar sesión</a>`;
+//     loginBtn.innerHTML = `<a href="/login" class="btn btn-primary">Iniciar sesion</a>`
 //   }
 // }
 
+if (loginBtn) {
+  if (window.localStorage.getItem("user")) {
+    loginBtn.innerHTML = `
+      <a href="/MiCuenta" class="btn btn-secondary">Mi Cuenta</a>
+    `
+    const cerrarSesionLi = document.createElement("li")
+    cerrarSesionLi.innerHTML = `<button class="btn btn-primary">Cerrar sesión</button>`
+    loginBtn.parentNode.appendChild(cerrarSesionLi)
 
-// function cerrarSesion() {
-//   window.localStorage.removeItem("user");
-//   window.location.reload(); // Recargar para actualizar el estado del navbar
-// }
+    cerrarSesionLi.addEventListener("click", cerrarSesion)
+  } else {
+    loginBtn.innerHTML = `<a href="/login">Iniciar sesión</a>`
+  }
+}
 
-
+function cerrarSesion() {
+  window.localStorage.removeItem("user")
+  window.location.reload() // Recargar para actualizar el estado del navbar
+}
 
 function redireccionarAlBuscar() {
   const term = searchInput.value
@@ -44,4 +42,3 @@ searchInput.addEventListener("keypress", (e) => {
     redireccionarAlBuscar()
   }
 })
-
