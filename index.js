@@ -51,6 +51,12 @@ app.get("/Login", (req, res) => {
   res.sendFile(path.join(__dirname, "Public", "Pages", "Login", "index.html"))
 })
 
+app.get("/Recuperar", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "Public", "Pages", "Recuperar", "index.html")
+  )
+})
+
 app.get("/Contacto", (req, res) => {
   res.sendFile(
     path.join(__dirname, "Public", "Pages", "Contacto", "index.html")

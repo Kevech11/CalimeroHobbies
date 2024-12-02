@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar</title>
+    <link rel="stylesheet" href="/Pages/Recuperar/style.css" />
+</head>
+<body>
+    <div class="container toggle" id="password-recovery-container">
+
+        <div class="container-welcome">
+            <div class="welcome">
+              <h1>
+                <b style="color: red">C</b>alimero <b style="color: red">H</b>obby
+              </h1>
+              <h2>¡Recupera tu acceso!</h2>
+              <p>
+                Ingresa tu correo y sigue los pasos para restablecer tu contraseña.
+              </p>
+            </div>
+        </div>
+
+        <div class="container-form">
+          <form class="password-recovery" id="password-recovery">
+            <h2>Recuperar Contraseña</h2>
+            <div class="container-input">
+              <ion-icon name="mail-outline"></ion-icon>
+              <input type="text" placeholder="Email" name="email" id="recovery-email" />
+            </div>
+            <button class="button" id="send-code-button">ENVIAR CÓDIGO</button>
+      
+            <!-- Campo para código de verificación, inicialmente oculto -->
+            <div class="container-input" id="verification-code-container" style="display: none;">
+              <ion-icon name="key-outline"></ion-icon>
+              <input type="text" placeholder="Código de Verificación" maxlength="6" id="verification-code" />
+            </div>
+            <button class="button" id="verify-code-button" style="display: none;">VERIFICAR</button>
+            <br>
+            <a href="/Pages/Login/index.html" id="back-to-login">Volver a Iniciar Sesión</a>
+          </form>
+        </div>
+
+    </div>
+    
+    <script src="/Pages/Recuperar/recuperar.js"></script>
+</body>
+</html>
