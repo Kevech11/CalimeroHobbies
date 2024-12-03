@@ -1,33 +1,39 @@
 import mongoose from "mongoose"
 
 const clientSchema = new mongoose.Schema({
-  nombre: {
+  name: {
     type: String,
     required: true,
   },
-  apellido: {
+  email: {
     type: String,
     required: true,
   },
-  pais: {
+  role: {
+    type: String,
+    default: "cliente",
+  },
+  password: {
     type: String,
     required: true,
   },
-  provincia: {
+  lastName: {
     type: String,
-    required: true,
   },
-  localidad: {
+  country: {
     type: String,
-    required: true,
   },
-  direccion: {
+  province: {
     type: String,
-    required: true,
   },
-  telefono: {
+  city: {
     type: String,
-    required: true,
+  },
+  address: {
+    type: String,
+  },
+  phone: {
+    type: String,
   },
 })
 

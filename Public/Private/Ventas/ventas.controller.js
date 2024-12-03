@@ -52,8 +52,8 @@ function imprimitVenta(venta) {
           </tr>
           <tr>
             <th style="text-align: left; padding: 8px; font-weight: bold;">Cliente:</th>
-            <td style="padding: 8px;">${venta.cliente.nombre} ${
-    venta.cliente.apellido
+            <td style="padding: 8px;">${venta.cliente.name} ${
+    venta.cliente.lastName
   }</td>
           </tr>
           <tr>
@@ -154,7 +154,7 @@ async function cargarVentas() {
       ).toLocaleDateString()
       newRow.insertCell(
         1
-      ).textContent = `${venta.cliente.nombre} ${venta.cliente.apellido}`
+      ).textContent = `${venta.cliente.name} ${venta.cliente.lastName}`
       newRow.insertCell(
         2
       ).innerHTML = `<button type="button" class="btn btn-primary">Ver productos</button>`
@@ -379,9 +379,10 @@ async function getClients() {
   }
 
   const clients = await response.json()
+  console.log(clients)
 
   // Ordenar alfabéticamente por el nombre del cliente
-  clients.sort((a, b) => a.nombre.localeCompare(b.nombre))
+  clients.sort((a, b) => a.name.localeCompare(b.name))
   return clients
 }
 
@@ -393,8 +394,6 @@ async function getProducts() {
       Authorization: `Bearer ${window.localStorage.getItem("token")}`,
     },
   })
-
-  
 }
 
 function actualizarTotal() {
@@ -420,11 +419,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   clients.forEach((client) => {
     const option = document.createElement("option")
     option.value = client._id
-    option.textContent = `${client.nombre} ${client.apellido}`
+    option.textContent = `${client.name} ${client.lastName}`
     clientsInput.appendChild(option)
   })
-
-  
 })
 
 categoriesInput.addEventListener("change", async function () {

@@ -150,8 +150,53 @@ function actualizarTotal() {
   contenedorTotal.innerText = formatearMoneda(totalCalculado)
 }
 
+async function obtenerDatosCliente() {
+  try {
+    const response = await fetch("/api/auth/me", {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
+    })
+
+    if (!response.ok) {
+      throw new Error("No autorizado")
+    }
+
+    const user = await response.json()
+
+    return user
+  } catch (error) {
+    console.error("Error al obtener los datos del cliente:", error)
+    return null
+  }
+}
+
 botonComprar.addEventListener("click", comprarCarrito)
 async function comprarCarrito() {
+  const cliente = await obtenerDatosCliente()
+
+  if (
+    !cliente.name ||
+    !cliente.lastName ||
+    !cliente.country ||
+    !cliente.city ||
+    !cliente.address ||
+    !cliente.province ||
+    !cliente.phone
+  ) {
+    Swal.fire({
+      title: "Error",
+      text: "Debes completar tus datos antes de realizar la compra.",
+      icon: "error",
+      confirmButtonText: "Aceptar",
+    }).then((result) => {
+      window.location.href = "/MiCuenta?redirecturl=/Carrito"
+    })
+    return
+  }
+
+  console.log(cliente)
+
   const productosParaComprar = productosEnCarrito.map((producto) => ({
     title: producto.titulo,
     price: producto.precio,

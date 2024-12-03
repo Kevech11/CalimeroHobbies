@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken"
 import UserModel from "../models/user.model.js"
+import ClientModel from "../models/client.model.js"
 
 export async function getUserData(req, res, next) {
   try {
@@ -9,7 +10,15 @@ export async function getUserData(req, res, next) {
       return res.status(401).send("No autorizado")
     }
 
-    const user = await UserModel.findById(userData._id)
+    let user = await UserModel.findById(userData._id)
+    if (!user) {
+      user = await ClientModel.findById(userData._id)
+    }
+
+    if (!user) {
+      return res.status(404).send("Usuario no encontrado")
+    }
+
     req.user = user
     next()
   } catch (error) {
