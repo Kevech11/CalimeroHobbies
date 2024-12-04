@@ -6,6 +6,7 @@ const contenedores = document.querySelectorAll(".contenedor")
 const contenedorUsuarios = document.getElementById("contenedor-usuarios")
 const contenedorProductos = document.getElementById("contenedor-productos")
 const formularioProductos = document.querySelector("#formulario-productos")
+const btnReportes = document.getElementById("btn-reportes");
 
 if (loginBtn) {
   if (window.localStorage.getItem("user")) {
@@ -140,3 +141,48 @@ botonesCategorias.forEach((boton) => {
     }
   })
 })
+
+
+
+//nuevo
+btnReportes.addEventListener("click", () => {
+  mostrarSeccion("contenedor-reportes");
+});
+
+
+function mostrarSeccion(seccionId) {
+  const secciones = document.querySelectorAll(".contenedor"); 
+  secciones.forEach((seccion) => {
+    if (seccion.id === seccionId) {
+      seccion.style.display = "block"; 
+    } else {
+      seccion.style.display = "none"; 
+    }
+  });
+}
+
+//GRAFICO
+const ctx = document.getElementById('miGrafico').getContext('2d');
+
+const miGrafico = new Chart(ctx, {
+  type: 'bar', // Tipo de gráfico: barra (bar) lineas (line) 
+  data: {
+    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo','Junio','Julio','Agosto','Septiembre', 'Octubre', 
+              'Noviembre','Diciembre',], // Etiquetas en el eje X
+    datasets: [{
+      label: 'Ventas por mes', // Nombre del dataset
+      data: [12, 19, 3, 5, 2 ,6 , 25 , 18 , 10 , 14 , 12, 34 ], // Datos para cada etiqueta
+      backgroundColor: 'rgb(31, 31, 78)', // Color de las barras
+      borderColor: 'rgba(75, 192, 192, 1)', // Color del borde de las barras
+      borderWidth: 3 // Grosor del borde
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true // Comenzar el eje Y desde cero
+      }
+    }
+  }
+});
+

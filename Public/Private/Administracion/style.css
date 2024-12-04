@@ -193,11 +193,6 @@ input[type="checkbox"]{
         opacity: 1;
     }
 }
-.Carrito{
-    color: #fff;
-    cursor: pointer;
-    font-size: 33px;
-}
 
 
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
@@ -307,24 +302,6 @@ aside {
 .boton-menu > i.bi-hand-index-thumb {
     transform: rotateZ(90deg);
 }
-
-.boton-carrito {
-    margin-top: 2rem;
-    
-}
-
-.numerito {
-    background-color: var(--clr-white);
-    color: var(--clr-main);
-    padding: .15rem .25rem;
-    border-radius: .25rem;
-}
-
-.boton-carrito.active .numerito {
-    background-color: var(--clr-main);
-    color: var(--clr-white);
-}
-
 
 main {
     background-color: var(--clr-white);
@@ -508,5 +485,40 @@ main {
 }
 
 #btnEnviar:hover {
+    background-color: #45a049;
+}
+
+.contenedor-reportes {
+    display: none;
+    padding: 1rem;
+  }
+  
+  #formulario-reportes {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  #resultado-reporte {
+    margin-top: 1rem;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  #generar-reporte{
+    width: 200px; 
+    height: 40px; 
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  #generar-reporte:hover {
     background-color: #45a049;
 }
