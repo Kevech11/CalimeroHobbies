@@ -7,7 +7,7 @@ const salesSchema = new mongoose.Schema({
   },
   cliente: {
     type: String,
-    ref: "Client",
+    ref: "ClientMayorista",
   },
   productos: [
     {

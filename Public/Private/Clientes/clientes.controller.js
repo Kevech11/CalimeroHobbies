@@ -5,7 +5,7 @@ const clientesTable = document
   .getElementsByTagName("tbody")[0]
 
 async function createClient(client) {
-  const response = await fetch("/api/clientes", {
+  const response = await fetch("/api/clientesmayorista", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -18,7 +18,7 @@ async function createClient(client) {
 }
 
 async function getClients() {
-  const response = await fetch("/api/clientes", {
+  const response = await fetch("/api/clientesmayorista", {
     headers: {
       Authorization: `Bearer ${window.localStorage.getItem("token")}`,
     },
@@ -30,7 +30,7 @@ async function getClients() {
 }
 
 async function deleteClient(id) {
-  const response = await fetch(`/api/clientes/${id}`, {
+  const response = await fetch(`/api/clientesmayorista/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${window.localStorage.getItem("token")}`,
@@ -45,7 +45,7 @@ async function deleteClient(id) {
 }
 
 async function editClient(id, client) {
-  const response = await fetch(`/api/clientes/${id}`, {
+  const response = await fetch(`/api/clientesmayorista/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -63,17 +63,20 @@ async function editClient(id, client) {
 
 document.addEventListener("DOMContentLoaded", async function () {
   const clients = await getClients()
-  clients.sort((a, b) => a.nombre.localeCompare(b.nombre, "es", { sensitivity: "base" }));
+  console.log(clients)
+  clients.sort((a, b) =>
+    a.nombre.localeCompare(b.nombre, "es", { sensitivity: "base" })
+  )
   clients.forEach((client) => {
     const newRow = clientesTable.insertRow()
     newRow.insertCell(0).textContent = client._id.slice(19)
-    newRow.insertCell(1).textContent = client.nombre
-    newRow.insertCell(2).textContent = client.apellido
-    newRow.insertCell(3).textContent = client.pais
-    newRow.insertCell(4).textContent = client.provincia
-    newRow.insertCell(5).textContent = client.localidad
-    newRow.insertCell(6).textContent = client.direccion
-    newRow.insertCell(7).textContent = client.telefono
+    newRow.insertCell(1).textContent = client.name
+    newRow.insertCell(2).textContent = client.lastName
+    newRow.insertCell(3).textContent = client.country
+    newRow.insertCell(4).textContent = client.province
+    newRow.insertCell(5).textContent = client.city
+    newRow.insertCell(6).textContent = client.address
+    newRow.insertCell(7).textContent = client.phone
 
     const actionsCell = newRow.insertCell(8)
     const deleteButton = document.createElement("button")
@@ -203,13 +206,13 @@ clienteForm.addEventListener("submit", async function (event) {
 
   try {
     const newClient = await createClient({
-      nombre,
-      apellido,
-      pais,
-      provincia,
-      localidad,
-      direccion,
-      telefono,
+      name: nombre,
+      lastName: apellido,
+      country: pais,
+      province: provincia,
+      city: localidad,
+      address: direccion,
+      phone: telefono,
     })
     console.log(newClient)
   } catch (error) {

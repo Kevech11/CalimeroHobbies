@@ -1,21 +1,13 @@
 import mongoose from "mongoose"
 
-const clientSchema = new mongoose.Schema({
+const clientMayoristaSchema = new mongoose.Schema({
   name: {
-    type: String,
-    required: true,
-  },
-  email: {
     type: String,
     required: true,
   },
   role: {
     type: String,
     default: "cliente",
-  },
-  password: {
-    type: String,
-    required: true,
   },
   lastName: {
     type: String,
@@ -35,12 +27,8 @@ const clientSchema = new mongoose.Schema({
   phone: {
     type: String,
   },
-  resetToken: {
-    type: String,
-    default: null,
-  },
 })
 
-const Client = mongoose.model("Client", clientSchema)
+const ClientMayorista = mongoose.model("ClientMayorista", clientMayoristaSchema)
 
-export default Client
+export default ClientMayorista

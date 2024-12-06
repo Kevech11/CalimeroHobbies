@@ -9,6 +9,7 @@ import { salesRouter } from "./routes/sales.router.js"
 import { mpRouter } from "./routes/mercadopago.router.js"
 import { contactRouter } from "./routes/contact.router.js"
 import { adminRouter } from "./routes/admin.router.js"
+import clientsMayoristaRouter from "./routes/clientsMayorista.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -103,6 +104,7 @@ app.get("/MiCuenta", (req, res) => {
 app.use("/api/auth", authRouter)
 app.use("/api/productos", productsRouter)
 app.use("/api/clientes", clientsRouter)
+app.use("/api/clientesmayorista", clientsMayoristaRouter)
 app.use("/api/ventas", salesRouter)
 app.use("/api/mercadopago", mpRouter)
 app.use("/api/contact", contactRouter)

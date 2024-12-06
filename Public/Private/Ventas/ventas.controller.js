@@ -366,7 +366,7 @@ productsInput.addEventListener("change", function () {
 })
 
 async function getClients() {
-  const response = await fetch("/api/clientes", {
+  const response = await fetch("/api/clientesmayorista", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

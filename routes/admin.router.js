@@ -1,5 +1,6 @@
 import { Router } from "express"
 import UserModel from "../models/user.model.js"
+import ClientModel from "../models/client.model.js"
 import bcrypt from "bcrypt"
 import { getUserData, checkRole } from "../middlewares/getUserData.js"
 
@@ -11,7 +12,8 @@ adminRouter.use(checkRole("admin"))
 adminRouter.get("/users", async (req, res) => {
   try {
     const users = await UserModel.find()
-    res.status(200).send(users)
+    const clients = await ClientModel.find()
+    res.status(200).send([...users, ...clients])
   } catch (error) {
     res.status(500).send(error.message)
   }
