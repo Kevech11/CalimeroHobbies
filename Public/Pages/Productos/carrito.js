@@ -262,7 +262,13 @@ if (loginBtn) {
   }
 }
 
-function cerrarSesion() {
-  window.localStorage.removeItem("user")
-  window.location.reload() // Recargar para actualizar el estado del navbar
+function cerrarSesion() {  
+  window.localStorage.removeItem("user");
+  window.localStorage.removeItem("productos-en-carrito");
+  window.location.href = "/home";
 }
+
+// function cerrarSesion() {
+//   window.localStorage.removeItem("user")
+//   window.location.reload() // Recargar para actualizar el estado del navbar
+// }

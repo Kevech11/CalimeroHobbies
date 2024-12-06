@@ -193,11 +193,12 @@ input[type="checkbox"]{
         opacity: 1;
     }
 }
-.Carrito{
-    color: #fff;
-    cursor: pointer;
-    font-size: 33px;
-}
+
+/* .tables-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+  } */
 
 
 .selec-product{
@@ -335,12 +336,14 @@ body {
 .btn-submit:hover {
     background-color: #218838;
 }
-.table-container {
+/* widht:100%
+display:inline-block */
+.table-container { 
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 900px;
+    width: 900px; 
 }
 .table-container h2 {
     text-align: center;
