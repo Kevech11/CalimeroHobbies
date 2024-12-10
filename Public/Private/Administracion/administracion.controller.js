@@ -161,10 +161,71 @@ function mostrarSeccion(seccionId) {
   })
 }
 
-//GRAFICO
-const ctx = document.getElementById("miGrafico").getContext("2d")
 
-const miGrafico = new Chart(ctx, {
+// REPORTES
+const formularioReportes = document.getElementById("formulario-reportes")
+const ctx = document.getElementById("miGrafico").getContext("2d")
+let chart = null
+
+formularioReportes.addEventListener("submit", async (e) => {
+  e.preventDefault()
+
+  // chart.js:19 Uncaught (in promise) Error: Canvas is already in use. Chart with ID '0' must be destroyed before the canvas with ID 'miGrafico' can be reused.
+
+  chart?.destroy()
+
+  const tipoReporte = document.getElementById("tipo-reporte").value
+  const fechaInicio = document.getElementById("fecha-inicio").value
+  const fechaFin = document.getElementById("fecha-fin").value
+
+  const response = await fetch("/api/ventas", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    },
+  })
+
+  if (response.status === 403) {
+    window.location.href = "/home"
+  }
+
+  const ventas = await response.json()
+
+  // Filtrar por fecha
+  const ventasFiltradas = ventas.filter(venta => {
+    const fechaVenta = new Date(venta.fecha)
+    const inicio = fechaInicio ? new Date(fechaInicio) : new Date(0)
+    const fin = fechaFin ? new Date(fechaFin) : new Date()
+    return fechaVenta >= inicio && fechaVenta <= fin
+  })
+
+  const ventasMayoristas = ventasFiltradas.filter(venta => venta.esMayorista)
+  const ventasDiarias = ventasFiltradas.filter(venta => !venta.esMayorista)
+
+  let ventasPorMes = []
+  
+  if (tipoReporte === "ventas-mayoristas") {
+    ventasPorMes = ventasMayoristas.map(venta => new Date(venta.fecha).getMonth())
+  } else if (tipoReporte === "ventas-diarias") {
+    ventasPorMes = ventasDiarias.map(venta => new Date(venta.fecha).getMonth())
+  }
+  
+  const mesesChart = Array.from({ length: 12 }, (_, i) => 0)
+
+
+  mesesChart.forEach((mes, index) => {
+
+    ventasPorMes.forEach(venta => {
+      if (venta === index) {
+        mesesChart[index]++
+      }
+    })
+  })
+
+
+
+chart = new Chart(ctx, {
   type: "bar", // Tipo de gráfico: barra (bar) lineas (line)
   data: {
     labels: [
@@ -184,7 +245,7 @@ const miGrafico = new Chart(ctx, {
     datasets: [
       {
         label: "Ventas por mes", // Nombre del dataset
-        data: [12, 19, 3, 5, 2, 6, 25, 18, 10, 14, 12, 34], // Datos para cada etiqueta
+        data: mesesChart, // Datos para cada etiqueta
         backgroundColor: "rgb(31, 31, 78)", // Color de las barras
         borderColor: "rgba(75, 192, 192, 1)", // Color del borde de las barras
         borderWidth: 3, // Grosor del borde
@@ -198,4 +259,6 @@ const miGrafico = new Chart(ctx, {
       },
     },
   },
+})
+
 })

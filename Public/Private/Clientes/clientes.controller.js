@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const clients = await getClients()
   console.log(clients)
   clients.sort((a, b) =>
-    a.nombre.localeCompare(b.nombre, "es", { sensitivity: "base" })
+    a.name.localeCompare(b.name, "es", { sensitivity: "base" })
   )
   clients.forEach((client) => {
     const newRow = clientesTable.insertRow()

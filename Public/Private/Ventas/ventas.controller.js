@@ -4,6 +4,7 @@ const categoriesInput = document.getElementById("categoria")
 const selectedProductsElement = document.getElementById("selected-products")
 let selectedProducts = []
 const loginBtn = document.getElementById("loginBtn")
+const ventasDiariasTable = document.getElementById("ventasDiariasTable")
 
 function sumarUnProducto(id) {
   selectedProducts.find((product) => {
@@ -145,7 +146,7 @@ async function cargarVentas() {
     const ventas = await response.json()
     console.log(ventas)
 
-    ventas.forEach((venta) => {
+    ventas.filter(venta => venta.esMayorista).forEach((venta) => {
       let productosVenta = [] // Para almacenar los productos
 
       const newRow = ventasTable.insertRow()
@@ -282,6 +283,19 @@ async function cargarVentas() {
       console.log(ventas)
       printButton.addEventListener("click", () => imprimitVenta(venta))
     })
+
+    console.log(ventas.filter(venta => !venta.esMayorista))
+    ventas.filter(venta => !venta.esMayorista).forEach((venta) => {
+      const newRow = ventasDiariasTable.insertRow()
+      newRow.insertCell(0).textContent = new Date(venta.fecha).toLocaleDateString()
+      newRow.insertCell(1).textContent = venta.cliente.name
+      newRow.insertCell(2).textContent = venta.cliente.email
+      newRow.insertCell(3).textContent = venta.cliente.address
+      newRow.insertCell(4).textContent = venta.productos.map(producto => producto.producto.titulo).join(", ")
+      newRow.insertCell(5).textContent = venta.paymentMethod
+    })
+
+    return ventas
   } catch (error) {
     console.error("Error fetching ventas:", error)
   }
@@ -463,6 +477,8 @@ ventaForm.addEventListener("submit", async function (event) {
   const dataToSend = {
     fecha,
     cliente,
+    esMayorista: true,
+    paymentMethod: "efectivo",
     productos: selectedProducts.map((product) => ({
       producto: product.id,
       cantidad: product.cantidad,

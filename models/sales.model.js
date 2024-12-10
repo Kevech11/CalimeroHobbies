@@ -5,9 +5,18 @@ const salesSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  esMayorista: {
+    type: Boolean,
+    default: false,
+  },
   cliente: {
     type: String,
     ref: "ClientMayorista",
+  },
+  paymentMethod: {
+    type: String,
+    enum: ["efectivo", "tarjeta", "transferencia"],
+    required: true,
   },
   productos: [
     {

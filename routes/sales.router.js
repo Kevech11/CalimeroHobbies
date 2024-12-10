@@ -19,8 +19,10 @@ salesRouter.get("/", async (req, res) => {
 
 salesRouter.post("/", async (req, res) => {
   try {
-    const { fecha, cliente, productos, total } = req.body
+    const { fecha, cliente, productos, total, esMayorista, paymentMethod } = req.body
     const nuevaVenta = await SalesModel.create({
+      paymentMethod,
+      esMayorista,
       fecha,
       cliente,
       productos,
