@@ -490,6 +490,11 @@ ventaForm.addEventListener("submit", async function (event) {
   }
 })
 
+function cerrarSesion() {  
+  window.localStorage.removeItem("user");
+  window.location.href = "/home";
+}
+
 if (loginBtn) {
   if (window.localStorage.getItem("user")) {
     loginBtn.innerHTML = `<a class="btn btn-primary" onclick='window.localStorage.removeItem("user");window.localStorage.removeItem("token"); window.location.reload();'>Cerrar sesion</a>`
