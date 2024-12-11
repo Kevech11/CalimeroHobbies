@@ -262,7 +262,8 @@ formularioReportes.addEventListener("submit", async (e) => {
   })
 })
 
-// GESTION DE PRODUCTOS
+
+//Gestion de productos
 const productosLista = document.getElementById("productos-lista")
 
 async function obtenerProductos() {
