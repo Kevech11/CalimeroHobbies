@@ -24,24 +24,29 @@ const obtenerPedidos = async () => {
 
 // Función para agregar pedidos a la tabla
 async function agregarPedidoATabla() {
-  const pedidos = await obtenerPedidos()
-  const tabla = document.getElementById("pedidosBody")
-  const fila = document.createElement("tr")
+  const pedidos = await obtenerPedidos();
+  const tabla = document.getElementById("pedidosBody");
 
-  console.log(pedidos)
   pedidos.forEach((pedido) => {
-    const fecha = new Date(pedido.createdAt)
-    const fila = document.createElement("tr")
+    const fecha = new Date(pedido.createdAt);
+    const fila = document.createElement("tr");
+
+    // Convertir los detalles del pedido en una lista ordenada
+    const detallesPedido = pedido.message.split('\n'); // Asegúrate de que los detalles estén separados por saltos de línea
+    const listaDetalles = detallesPedido.map(detalle => `<li>${detalle}</li>`).join('');
+
     fila.innerHTML = `
       <td>${pedido._id.slice(-5)}</td>
       <td>${pedido.name}</td>
       <td>${pedido.email}</td>
       <td>${pedido.subject}</td>
       <td>${fecha.toLocaleDateString()}</td>
-      <td>${pedido.message}</td>
-    `
-    tabla.appendChild(fila)
-  })
+      <td>
+        <ul>${listaDetalles}</ul>
+      </td>
+    `;
+    tabla.appendChild(fila);
+  });
 }
 
 agregarPedidoATabla()

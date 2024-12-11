@@ -193,11 +193,7 @@ input[type="checkbox"]{
         opacity: 1;
     }
 }
-.Carrito{
-    color: #fff;
-    cursor: pointer;
-    font-size: 33px;
-}
+
 
 .section-form{
     padding: 120px;
@@ -251,3 +247,13 @@ tbody tr:hover {
 }
 
 
+td ul {
+    list-style-type: disc; /* Cambia el estilo de las viñetas si es necesario */
+    padding-left: 20px; /* Espaciado desde el borde izquierdo */
+    margin: 0; /* Elimina el margen superior e inferior */
+    text-align: left; /* Alineación a la izquierda */
+}
+
+td ul li {
+    margin-bottom: 5px; /* Espaciado entre elementos de la lista */
+}

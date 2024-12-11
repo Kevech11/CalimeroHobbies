@@ -300,3 +300,19 @@ figure {
 .pie-pagina .box .ubic img{
     margin-bottom: -5px;
 }
+
+/* .boton-carrito {
+    margin-top: 2rem;
+    
+}
+.numerito {
+    background-color: var(--clr-white);
+    color: var(--clr-main);
+    padding: .15rem .25rem;
+    border-radius: .25rem;
+}
+
+.boton-carrito.active .numerito {
+    background-color: var(--clr-main);
+    color: var(--clr-white);
+} */
