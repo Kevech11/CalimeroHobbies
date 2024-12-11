@@ -139,6 +139,26 @@
                     <button id="btnEnviar">Enviar</button>
                   </div>
                 </form>
+
+                  <!-- Tabla para mostrar los productos cargados -->
+                  <div id="tabla-productos" style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                      <thead>
+                        <tr style="background-color: #007bff; color: white;">
+                          <th style="padding: 10px; border: 1px solid #ddd;">Titulo</th>
+                          <th style="padding: 10px; border: 1px solid #ddd;">Marca</th>
+                          <th style="padding: 10px; border: 1px solid #ddd;">Precio</th>                         
+                          <th style="padding: 10px; border: 1px solid #ddd;">Categoría</th>
+                          <th style="padding: 10px; border: 1px solid #ddd;">Stock</th>
+                          <th style="padding: 10px; border: 1px solid #ddd;">Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody id="productos-lista">
+                        <!-- Aquí se agregarán las filas dinámicamente -->
+                      </tbody>
+                    </table>
+                  </div>
+                  
               </div>
 
                 <div id="contenedor-reportes" class="contenedor-reportes contenedor">
