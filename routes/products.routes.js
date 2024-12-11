@@ -98,4 +98,16 @@ productsRouter.post("/", upload.single("imagen"), async (req, res) => {
   }
 })
 
+productsRouter.delete("/:id", async (req, res) => {
+  const { id } = req.params
+
+  try {
+    await ProductModel.findByIdAndDelete(id)
+    return res.status(204).send()
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({ error: "Internal Server Error" })
+  }
+})
+
 export { productsRouter }

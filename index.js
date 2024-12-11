@@ -9,6 +9,7 @@ import { salesRouter } from "./routes/sales.router.js"
 import { mpRouter } from "./routes/mercadopago.router.js"
 import { contactRouter } from "./routes/contact.router.js"
 import { adminRouter } from "./routes/admin.router.js"
+import { crearProductos } from "./helpers/crearProductos.js"
 import clientsMayoristaRouter from "./routes/clientsMayorista.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -119,6 +120,7 @@ connectDB()
     //levanto el servidors
     app.listen(port, () => {
       console.log(`Servidor levantado en el puerto ${port}`)
+      crearProductos()
     })
   })
   .catch((error) => {

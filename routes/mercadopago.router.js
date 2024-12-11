@@ -1,6 +1,7 @@
 import { MercadoPagoConfig, Preference } from "mercadopago"
 import { Router } from "express"
 import { checkRole, getUserData } from "../middlewares/getUserData.js"
+import SalesModel from "../models/sales.model.js"
 const client = new MercadoPagoConfig({
   accessToken: `APP_USR-6508105676111590-102213-8ab833730cadd581130cb361c29e4d4f-2052945142`,
 })
@@ -90,6 +91,56 @@ mpRouter.post("/create_preference", async (req, res) => {
   }
   try {
     const preference = await new Preference(client).create({ body })
+    // fecha: {
+    //   type: Date,
+    //   default: Date.now,
+    // },
+    // esMayorista: {
+    //   type: Boolean,
+    //   default: false,
+    // },
+    // cliente: {
+    //   type: String,
+    //   ref: "ClientMayorista",
+    // },
+    // paymentMethod: {
+    //   type: String,
+    //   enum: ["efectivo", "tarjeta", "transferencia"],
+    //   required: true,
+    // },
+    // productos: [
+    //   {
+    //     producto: {
+    //       type: String,
+    //       ref: "Product",
+    //     },
+    //     cantidad: {
+    //       type: Number,
+    //       required: true,
+    //     },
+    //   },
+    // ],
+    // total: {
+    //   type: Number,
+    //   required: true,
+    // },
+    // Registrar la venta
+    const sale = new SalesModel({
+      fecha: new Date(),
+      esMayorista: false,
+      cliente: req.user._id,
+      paymentMethod: "tarjeta",
+      productos: req.body.map((item) => ({
+        producto: item._id,
+        cantidad: item.quantity,
+      })),
+      total: req.body.reduce(
+        (acc, item) => acc + item.price * item.quantity,
+        0
+      ),
+    })
+
+    await sale.save()
     res.json({ redirectUrl: preference.init_point })
   } catch (error) {
     console.error(error)

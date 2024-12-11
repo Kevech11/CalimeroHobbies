@@ -137,6 +137,7 @@ botonesCategorias.forEach((boton) => {
         break
       case "productos":
         contenedorProductos.style.display = "block"
+        obtenerProductos().then((productos) => renderProductos(productos))
         break
       case "ventas":
         window.location.href = "/ventas"
@@ -160,7 +161,6 @@ function mostrarSeccion(seccionId) {
     }
   })
 }
-
 
 // REPORTES
 const formularioReportes = document.getElementById("formulario-reportes")
@@ -193,72 +193,142 @@ formularioReportes.addEventListener("submit", async (e) => {
   const ventas = await response.json()
 
   // Filtrar por fecha
-  const ventasFiltradas = ventas.filter(venta => {
+  const ventasFiltradas = ventas.filter((venta) => {
     const fechaVenta = new Date(venta.fecha)
     const inicio = fechaInicio ? new Date(fechaInicio) : new Date(0)
     const fin = fechaFin ? new Date(fechaFin) : new Date()
     return fechaVenta >= inicio && fechaVenta <= fin
   })
 
-  const ventasMayoristas = ventasFiltradas.filter(venta => venta.esMayorista)
-  const ventasDiarias = ventasFiltradas.filter(venta => !venta.esMayorista)
+  const ventasMayoristas = ventasFiltradas.filter((venta) => venta.esMayorista)
+  const ventasDiarias = ventasFiltradas.filter((venta) => !venta.esMayorista)
 
   let ventasPorMes = []
-  
+
   if (tipoReporte === "ventas-mayoristas") {
-    ventasPorMes = ventasMayoristas.map(venta => new Date(venta.fecha).getMonth())
+    ventasPorMes = ventasMayoristas.map((venta) =>
+      new Date(venta.fecha).getMonth()
+    )
   } else if (tipoReporte === "ventas-diarias") {
-    ventasPorMes = ventasDiarias.map(venta => new Date(venta.fecha).getMonth())
+    ventasPorMes = ventasDiarias.map((venta) =>
+      new Date(venta.fecha).getMonth()
+    )
   }
-  
+
   const mesesChart = Array.from({ length: 12 }, (_, i) => 0)
 
-
   mesesChart.forEach((mes, index) => {
-
-    ventasPorMes.forEach(venta => {
+    ventasPorMes.forEach((venta) => {
       if (venta === index) {
         mesesChart[index]++
       }
     })
   })
 
-
-
-chart = new Chart(ctx, {
-  type: "bar", // Tipo de gráfico: barra (bar) lineas (line)
-  data: {
-    labels: [
-      "Enero",
-      "Febrero",
-      "Marzo",
-      "Abril",
-      "Mayo",
-      "Junio",
-      "Julio",
-      "Agosto",
-      "Septiembre",
-      "Octubre",
-      "Noviembre",
-      "Diciembre",
-    ], // Etiquetas en el eje X
-    datasets: [
-      {
-        label: "Ventas por mes", // Nombre del dataset
-        data: mesesChart, // Datos para cada etiqueta
-        backgroundColor: "rgb(31, 31, 78)", // Color de las barras
-        borderColor: "rgba(75, 192, 192, 1)", // Color del borde de las barras
-        borderWidth: 3, // Grosor del borde
-      },
-    ],
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true, // Comenzar el eje Y desde cero
+  chart = new Chart(ctx, {
+    type: "bar", // Tipo de gráfico: barra (bar) lineas (line)
+    data: {
+      labels: [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
+      ], // Etiquetas en el eje X
+      datasets: [
+        {
+          label: "Ventas por mes", // Nombre del dataset
+          data: mesesChart, // Datos para cada etiqueta
+          backgroundColor: "rgb(31, 31, 78)", // Color de las barras
+          borderColor: "rgba(75, 192, 192, 1)", // Color del borde de las barras
+          borderWidth: 3, // Grosor del borde
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true, // Comenzar el eje Y desde cero
+        },
       },
     },
-  },
+  })
 })
 
-})
+// GESTION DE PRODUCTOS
+const productosLista = document.getElementById("productos-lista")
+
+async function obtenerProductos() {
+  try {
+    const response = await fetch("/api/productos", {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
+    })
+
+    if (response.status === 403) {
+      window.location.href = "/home"
+    }
+
+    const productos = await response.json()
+    return productos
+  } catch (error) {
+    console.error("Error al obtener productos:", error)
+    alert("Error al obtener productos")
+  }
+}
+
+async function eliminarProducto(id) {
+  try {
+    const response = await fetch(`/api/productos/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
+    })
+
+    if (response.status === 204) {
+      alert("Producto eliminado exitosamente")
+      obtenerProductos().then((productos) => renderProductos(productos))
+    } else {
+      alert("Error al eliminar producto")
+    }
+  } catch (error) {
+    console.error("Error al eliminar producto:", error)
+    alert("Error al eliminar producto")
+  }
+}
+
+function renderProductos(productos) {
+  productosLista.innerHTML = productos
+    .map(
+      (producto) => `
+      <tr>
+        <th>${producto.titulo}</th>
+        <th>${producto.marca}</th>
+        <th>$${producto.precio}</th>
+        <th>${producto.categoria}</th>
+        <th>${producto.stock || 10}</th>
+        <th><button class="btn btn-eliminar" id="${
+          producto._id
+        }">Eliminar</button></th>
+      </tr>
+    `
+    )
+    .join("")
+
+  const deleteButtons = document.querySelectorAll(".btn-eliminar")
+
+  deleteButtons.forEach((button) =>
+    button.addEventListener("click", async () => {
+      await eliminarProducto(button.id)
+    })
+  )
+}
