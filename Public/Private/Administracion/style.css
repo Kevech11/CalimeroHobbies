@@ -326,6 +326,23 @@ main {
     
 }
 
+/* Agrega este CSS a tu archivo de estilos */
+.users-table th, .users-table td {
+    color: #000; /* Negro */
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd; /* Opcional: para bordes visibles */
+  }
+  
+  /* Opcional: Cambiar el color de fondo para alternar filas */
+  .users-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Gris claro */
+  }
+  
+  .users-table tr:hover {
+    background-color: #f1f1f1; /* Gris más claro al pasar el cursor */
+  }
+
 .producto-imagen {
     align-items: center;
     border-radius: 1rem;
@@ -522,3 +539,36 @@ main {
   #generar-reporte:hover {
     background-color: #45a049;
 }
+
+/* Estilo para la tabla */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  /* Encabezados con margen interno adicional */
+  th {
+    background-color: #007bff;
+    color: white;
+    border: 2px solid #555;
+    padding: 15px 20px; /* Aumenta el espacio interno (simula márgenes) */
+    text-align: center;
+  }
+  
+  /* Estilo para las celdas */
+  td {
+    border: 2px solid #555;
+    padding: 10px;
+    text-align: center; /* Excepto donde se indique lo contrario */
+  }
+  
+  /* Precio alineado a la derecha */
+  td:nth-child(3) {
+    text-align: right;
+  }
+  
+  /* Hover para las filas */
+  tr:hover {
+    background-color: #f1f1f1;
+  }

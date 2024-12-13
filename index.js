@@ -120,7 +120,7 @@ connectDB()
     //levanto el servidors
     app.listen(port, () => {
       console.log(`Servidor levantado en el puerto ${port}`)
-      crearProductos()
+      
     })
   })
   .catch((error) => {

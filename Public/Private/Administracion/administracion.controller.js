@@ -308,28 +308,38 @@ async function eliminarProducto(id) {
 }
 
 function renderProductos(productos) {
+  const productosLista = document.getElementById("productos-lista");
+  const productosOrdenados = productos.sort((a, b) =>
+    a.titulo.localeCompare(b.titulo, "es", { sensitivity: "base" })
+  );
+  const formatearPesos = new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    minimumFractionDigits: 2, 
+  });
+
   productosLista.innerHTML = productos
     .map(
       (producto) => `
       <tr>
-        <th>${producto.titulo}</th>
-        <th>${producto.marca}</th>
-        <th>$${producto.precio}</th>
-        <th>${producto.categoria}</th>
-        <th>${producto.stock || 10}</th>
-        <th><button class="btn btn-eliminar" id="${
-          producto._id
-        }">Eliminar</button></th>
+        <td style="padding: 10px; border: 2px solid #555; text-align: center;">${producto.titulo}</td>
+        <td style="padding: 10px; border: 2px solid #555; text-align: center;">${producto.marca}</td>
+        <td style="padding: 10px; border: 2px solid #555; text-align: right;">$${producto.precio}</td>
+        <td style="padding: 10px; border: 2px solid #555; text-align: center;">${producto.categoria}</td>
+        <td style="padding: 10px; border: 2px solid #555; text-align: center;">${producto.stock || 10}</td>
+        <td style="padding: 10px; border: 2px solid #555; text-align: center;">
+          <button class="btn btn-eliminar" id="${producto._id}">Eliminar</button>
+        </td>
       </tr>
     `
     )
-    .join("")
+    .join("");
 
-  const deleteButtons = document.querySelectorAll(".btn-eliminar")
+  const deleteButtons = document.querySelectorAll(".btn-eliminar");
 
   deleteButtons.forEach((button) =>
     button.addEventListener("click", async () => {
-      await eliminarProducto(button.id)
+      await eliminarProducto(button.id);
     })
-  )
+  );
 }
