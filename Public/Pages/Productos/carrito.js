@@ -268,6 +268,8 @@ function cerrarSesion() {
   window.location.href = "/home";
 }
 
+
+
 // function cerrarSesion() {
 //   window.localStorage.removeItem("user")
 //   window.location.reload() // Recargar para actualizar el estado del navbar

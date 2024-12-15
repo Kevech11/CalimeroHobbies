@@ -552,7 +552,7 @@ table {
     background-color: #007bff;
     color: white;
     border: 2px solid #555;
-    padding: 15px 20px; /* Aumenta el espacio interno (simula márgenes) */
+    padding: 15px 20px; 
     text-align: center;
   }
   
@@ -560,15 +560,84 @@ table {
   td {
     border: 2px solid #555;
     padding: 10px;
-    text-align: center; /* Excepto donde se indique lo contrario */
+    text-align: center; 
   }
   
-  /* Precio alineado a la derecha */
   td:nth-child(3) {
     text-align: right;
   }
   
-  /* Hover para las filas */
   tr:hover {
     background-color: #f1f1f1;
+  }
+
+  
+.btn-editar {
+    background-color: #ffc107; 
+    color: #333;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-editar:hover {
+    background-color: #e0a800; 
+    color: white;
+  }
+  
+ 
+  .btn-guardar {
+    background-color: #28a745; 
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-guardar:hover {
+    background-color: #218838; 
+  }
+  
+  
+  td button {
+    margin: 0 5px; 
+  }
+
+/* Contenedor para centrar el título */
+.contenedor-titulo {
+    display: flex;           /* Flexbox para centrar contenido */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center;     /* Centrar verticalmente */
+    width: 100%;             /* Ocupa todo el ancho disponible */
+    margin: 20px 0;          /* Espacio superior e inferior */
+    text-align: center;      /* Centra el texto en caso de ser necesario */
+  }
+  
+  /* Estilo exclusivo para el título Productos en venta */
+  .titulo-productos {
+    font-size: 2rem;        
+    color: rgb(31, 31, 78);         
+    font-weight: bold;      
+    text-transform: uppercase; 
+    letter-spacing: 2px;    
+    border-bottom: 3px solid rgb(31, 31, 78); 
+    display: inline-block; 
+    padding-bottom: 10px;   
+  }
+  
+  .titulo-productos::before {
+    content: "🛒 ";         
+    color: #28a745;         
+  }
+  
+  .titulo-productos::after {
+    content: " 🛍️";        
+    color: #ffc107;         
   }

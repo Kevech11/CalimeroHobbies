@@ -302,3 +302,18 @@ th {
 .btn-edit:hover {
     background-color: #e0a800;
 }
+
+table input[type="text"] {
+    width: 100%; /* Ocupa todo el ancho de la celda */
+    box-sizing: border-box; /* Incluye padding y bordes dentro del ancho */
+    border: 1px solid #ccc; /* Borde sutil */
+    padding: 5px; /* Espaciado interno */
+    font-size: 14px; /* Tamaño de fuente */
+    border-radius: 4px; /* Bordes redondeados */
+    outline: none; /* Elimina contorno predeterminado */
+}
+
+table input[type="text"]:focus {
+    border-color: #66afe9; /* Color al enfocar */
+    box-shadow: 0 0 5px rgba(102, 175, 233, 0.5); /* Sombra ligera */
+}

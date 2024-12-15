@@ -111,3 +111,4 @@ productsRouter.delete("/:id", async (req, res) => {
 })
 
 export { productsRouter }
+

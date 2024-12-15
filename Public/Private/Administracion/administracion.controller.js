@@ -307,39 +307,158 @@ async function eliminarProducto(id) {
   }
 }
 
-function renderProductos(productos) {
+async function renderProductos() {
   const productosLista = document.getElementById("productos-lista");
-  const productosOrdenados = productos.sort((a, b) =>
-    a.titulo.localeCompare(b.titulo, "es", { sensitivity: "base" })
-  );
-  const formatearPesos = new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
-    minimumFractionDigits: 2, 
-  });
+  const productos = await obtenerProductos();
 
   productosLista.innerHTML = productos
     .map(
       (producto) => `
-      <tr>
-        <td style="padding: 10px; border: 2px solid #555; text-align: center;">${producto.titulo}</td>
-        <td style="padding: 10px; border: 2px solid #555; text-align: center;">${producto.marca}</td>
-        <td style="padding: 10px; border: 2px solid #555; text-align: right;">$${producto.precio}</td>
-        <td style="padding: 10px; border: 2px solid #555; text-align: center;">${producto.categoria}</td>
-        <td style="padding: 10px; border: 2px solid #555; text-align: center;">${producto.stock || 10}</td>
-        <td style="padding: 10px; border: 2px solid #555; text-align: center;">
-          <button class="btn btn-eliminar" id="${producto._id}">Eliminar</button>
+      <tr data-id="${producto._id}">
+        <td contenteditable="false">${producto.titulo}</td>
+        <td contenteditable="false">${producto.marca}</td>
+        <td contenteditable="false">${producto.precio}</td>
+        <td contenteditable="false">${producto.categoria}</td>
+        <td contenteditable="false">${producto.stock || 10}</td>
+        <td>
+          <button class="btn-editar">Editar</button>
+          <button class="btn-guardar" style="display:none;">Guardar</button>
+          <button class="btn-eliminar">Eliminar</button>
         </td>
-      </tr>
-    `
+      </tr>`
     )
     .join("");
 
-  const deleteButtons = document.querySelectorAll(".btn-eliminar");
+  document.querySelectorAll(".btn-editar").forEach((btn) =>
+    btn.addEventListener("click", (e) => {
+      const row = e.target.closest("tr");
+      row.querySelectorAll("td[contenteditable]").forEach((cell) => {
+        cell.contentEditable = true;
+        cell.style.backgroundColor = "#f9f9f9";
+      });
+      row.querySelector(".btn-guardar").style.display = "inline-block";
+      e.target.style.display = "none";
+    })
+  );
 
-  deleteButtons.forEach((button) =>
-    button.addEventListener("click", async () => {
-      await eliminarProducto(button.id);
+  document.querySelectorAll(".btn-guardar").forEach((btn) =>
+    btn.addEventListener("click", async (e) => {
+      const row = e.target.closest("tr");
+      const id = row.dataset.id;
+      const data = {
+        titulo: row.children[0].innerText,
+        marca: row.children[1].innerText,
+        precio: row.children[2].innerText,
+        categoria: row.children[3].innerText,
+        stock: row.children[4].innerText,
+      };
+      if (await actualizarProducto(id, data)) {
+        alert("Producto actualizado exitosamente");
+        renderProductos();
+      } else {
+        alert("Error al actualizar producto");
+      }
+    })
+  );
+
+  document.querySelectorAll(".btn-eliminar").forEach((btn) =>
+    btn.addEventListener("click", (e) => {
+      const id = e.target.closest("tr").dataset.id;
+      eliminarProducto(id);
     })
   );
 }
+
+async function actualizarProducto(id, data) {
+  try {
+    const response = await fetch(`/api/productos/${id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return response.ok;
+  } catch (error) {
+    console.error("Error al actualizar producto:", error);
+    return false;
+  }
+}
+
+renderProductos();
+
+
+
+
+
+
+//OPCION 2
+// function renderProductos(productos) {
+//   const productosLista = document.getElementById("productos-lista");
+//   productosLista.innerHTML = productos
+//     .map(
+//       (producto) => `
+//       <tr>
+//         <td>${producto.titulo}</td>
+//         <td>${producto.marca}</td>
+//         <td>$${producto.precio}</td>
+//         <td>${producto.categoria}</td>
+//         <td>${producto.stock || 10}</td>
+//         <td>
+//           <button class="btn-editar" data-id="${producto._id}">Editar</button>
+//           <button class="btn-eliminar" data-id="${producto._id}">Eliminar</button>
+//         </td>
+//       </tr>`
+//     )
+//     .join("");
+
+//   document.querySelectorAll(".btn-editar").forEach((button) =>
+//     button.addEventListener("click", () => cargarProductoEnFormulario(button.dataset.id))
+//   );
+//   document.querySelectorAll(".btn-eliminar").forEach((button) =>
+//     button.addEventListener("click", async () => await eliminarProducto(button.dataset.id))
+//   );
+// }
+
+
+
+//OPCION 1
+// function renderProductos(productos) {
+//   const productosLista = document.getElementById("productos-lista");
+//   const productosOrdenados = productos.sort((a, b) =>
+//     a.titulo.localeCompare(b.titulo, "es", { sensitivity: "base" })
+//   );
+//   const formatearPesos = new Intl.NumberFormat("es-AR", {
+//     style: "currency",
+//     currency: "ARS",
+//     minimumFractionDigits: 2, 
+//   });
+
+//   productosLista.innerHTML = productos
+//     .map(
+//       (producto) => `
+//       <tr>
+//         <td style="padding: 10px; border: 2px solid #555; text-align: center;">${producto.titulo}</td>
+//         <td style="padding: 10px; border: 2px solid #555; text-align: center;">${producto.marca}</td>
+//         <td style="padding: 10px; border: 2px solid #555; text-align: right;">$${producto.precio}</td>
+//         <td style="padding: 10px; border: 2px solid #555; text-align: center;">${producto.categoria}</td>
+//         <td style="padding: 10px; border: 2px solid #555; text-align: center;">${producto.stock || 10}</td>
+//         <td style="padding: 10px; border: 2px solid #555; text-align: center;">
+//           <button class="btn btn-eliminar" id="${producto._id}">Eliminar</button>
+//         </td>
+//       </tr>
+//     `
+//     )
+//     .join("");
+
+//   const deleteButtons = document.querySelectorAll(".btn-eliminar");
+
+//   deleteButtons.forEach((button) =>
+//     button.addEventListener("click", async () => {
+//       await eliminarProducto(button.id);
+//     })
+//   );
+// }
+
+

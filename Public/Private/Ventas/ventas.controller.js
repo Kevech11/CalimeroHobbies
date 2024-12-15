@@ -24,7 +24,8 @@ function restarUnProducto(id) {
   })
 }
 
-function imprimitVenta(venta) {
+//Imprimir reporte de venta
+function imprimiVenta(venta) {
   const productosOrdenados = venta.productos.sort((a, b) =>
     a.producto.titulo.localeCompare(b.producto.titulo)
   )
@@ -50,19 +51,13 @@ function imprimitVenta(venta) {
             <td style="padding: 8px;">${new Date(
               venta.fecha
             ).toLocaleDateString()}</td>
-          </tr>
+          </tr>        
           <tr>
             <th style="text-align: left; padding: 8px; font-weight: bold;">Cliente:</th>
-            <td style="padding: 8px;">${venta.cliente.name} ${
-    venta.cliente.lastName
-  }</td>
+            <td style="padding: 8px;">${venta.cliente.name} ${venta.cliente.lastName}</td>
           </tr>
           <tr>
-            <th style="text-align: left; padding: 8px; font-weight: bold;">Total:</th>
-            <td style="padding: 8px;">${new Intl.NumberFormat("es-AR", {
-              style: "currency",
-              currency: "ARS",
-            }).format(venta.total)}</td>
+           <th style="text-align: left; padding: 8px; font-weight: bold;">Cantidad de bultos:</th>
           </tr>
         </thead>
       </table>
@@ -101,6 +96,14 @@ function imprimitVenta(venta) {
           .join("")}
       </tbody>
     </table>
+
+    <!-- Total de la venta -->
+    <div style="text-align: right; margin-top: 16px; font-size: 1.2em; font-weight: bold;">
+      Total: ${new Intl.NumberFormat("es-AR", {
+        style: "currency",
+        currency: "ARS",
+      }).format(venta.total)}
+    </div>
 
     <!-- Pie de página -->
     <footer style="text-align: center; border-top: 2px solid black; margin-top: 16px; padding-top: 10px;">
@@ -281,7 +284,7 @@ async function cargarVentas() {
       actionsCell.appendChild(printButton)
 
       console.log(ventas)
-      printButton.addEventListener("click", () => imprimitVenta(venta))
+      printButton.addEventListener("click", () => imprimiVenta(venta))
     })
 
     console.log(ventas.filter(venta => !venta.esMayorista))
@@ -510,6 +513,9 @@ function cerrarSesion() {
   window.localStorage.removeItem("user");
   window.location.href = "/home";
 }
+
+
+
 
 if (loginBtn) {
   if (window.localStorage.getItem("user")) {

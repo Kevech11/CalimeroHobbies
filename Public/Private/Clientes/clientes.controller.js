@@ -108,6 +108,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           const input = document.createElement("input")
           input.type = "text"
           input.value = cell.textContent
+          input.classList.add("table-input"); 
           cell.textContent = ""
           cell.appendChild(input)
         }
