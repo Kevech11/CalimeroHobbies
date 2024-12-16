@@ -202,6 +202,7 @@ async function comprarCarrito() {
     title: producto.titulo,
     price: producto.precio,
     quantity: producto.cantidad,
+    product_id: producto.id,
   }))
 
   try {
@@ -269,7 +270,12 @@ function cerrarSesion() {
   window.location.href = "/home";
 }
 
+const numerito = document.querySelector("#numerito")
 
+numerito.innerText = productosEnCarrito.reduce(
+  (acc, producto) => acc + producto.cantidad,
+  0
+)
 
 
 // function cerrarSesion() {

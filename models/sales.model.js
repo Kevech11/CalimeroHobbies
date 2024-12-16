@@ -11,7 +11,15 @@ const salesSchema = new mongoose.Schema({
   },
   cliente: {
     type: String,
-    ref: "ClientMayorista",
+    refPath: 'clienteModel'
+  },
+  clienteModel: {
+    type: String,
+    required: true,
+    enum: ['Client', 'ClientMayorista'],
+    default: function() {
+      return this.esMayorista ? 'ClientMayorista' : 'Client'
+    }
   },
   paymentMethod: {
     type: String,

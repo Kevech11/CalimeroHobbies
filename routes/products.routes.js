@@ -56,7 +56,7 @@ productsRouter.get("/categoria/:categoria", async (req, res) => {
 productsRouter.use(getUserData)
 productsRouter.use(checkRole("admin"))
 productsRouter.post("/", upload.single("imagen"), async (req, res) => {
-  const { titulo, marca, precio, categoria } = req.body
+  const { titulo, marca, precio, categoria, stock } = req.body
   const { filename, destination } = req.file
 
   // Mover imagen a carpeta
@@ -85,6 +85,7 @@ productsRouter.post("/", upload.single("imagen"), async (req, res) => {
   try {
     const newProduct = new ProductModel({
       titulo,
+      stock,
       marca,
       precio,
       categoria,
@@ -92,6 +93,19 @@ productsRouter.post("/", upload.single("imagen"), async (req, res) => {
     })
     await newProduct.save()
     return res.status(201).json(newProduct)
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({ error: "Internal Server Error" })
+  }
+})
+
+productsRouter.put("/:id", async (req, res) => {
+  const { id } = req.params
+  const { titulo, marca, precio, categoria, stock } = req.body
+
+  try {
+    await ProductModel.findByIdAndUpdate(id, { titulo, marca, precio, categoria, stock })
+    return res.status(204).send()
   } catch (error) {
     console.log(error)
     return res.status(500).json({ error: "Internal Server Error" })

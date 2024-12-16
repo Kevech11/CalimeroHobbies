@@ -10,6 +10,12 @@ const searchBtn = document.getElementById("searchBtn")
 //   }
 // }
 
+const numerito = document.querySelector("#numerito")
+
+numerito.innerText = window.localStorage.getItem("productos-en-carrito") ? JSON.parse(window.localStorage.getItem("productos-en-carrito")).length : 0
+
+
+
 if (loginBtn) {
   if (window.localStorage.getItem("user")) {
     loginBtn.innerHTML = `

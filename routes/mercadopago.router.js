@@ -74,6 +74,7 @@ mpRouter.use(
 )
 
 mpRouter.post("/create_preference", async (req, res) => {
+  console.log(req.body)
   const items = req.body.map((item) => ({
     title: item.title,
     quantity: item.quantity,
@@ -125,13 +126,16 @@ mpRouter.post("/create_preference", async (req, res) => {
     //   required: true,
     // },
     // Registrar la venta
+    // LA ESTA REGISTRANDO AUNQUE NO SE COMPLETA LA COMPRA
+    // NO SE ESTA ACTUALIZANDO EL STOCK
+    console.log(preference)
     const sale = new SalesModel({
       fecha: new Date(),
       esMayorista: false,
       cliente: req.user._id,
       paymentMethod: "tarjeta",
       productos: req.body.map((item) => ({
-        producto: item._id,
+        producto: item.product_id,
         cantidad: item.quantity,
       })),
       total: req.body.reduce(

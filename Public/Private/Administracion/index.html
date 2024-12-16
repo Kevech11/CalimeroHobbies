@@ -121,6 +121,11 @@
                   </div>
 
                   <div class="form-group form-group-productos">
+                    <label for="stock">Stock:</label>
+                    <input type="number" id="stock" name="stock" required>
+                  </div>
+
+                  <div class="form-group form-group-productos">
                     <label for="imagen">Imagen:</label>
                     <input type="file" id="imagen" name="imagen">
                   </div>
@@ -194,6 +199,17 @@
                     <h2>Reportes</h2>
                     <!-- Contenedor del gráfico -->
                     <canvas id="miGrafico"></canvas>
+                    <h2>Productos mas vendidos</h2>
+                    <form id="formulario-productos-mas-vendidos">
+                      <div class="form-group">
+                        <label for="fecha-inicio-productos">Fecha de inicio:</label>
+                        <input type="date" id="fecha-inicio-productos" name="fecha-inicio-productos">
+                        <label for="fecha-fin-productos">Fecha de fin:</label>
+                        <input type="date" id="fecha-fin-productos" name="fecha-fin-productos">
+                        <button type="submit" id="generar-reporte-productos">Generar Reporte</button>
+                      </div>
+                    </form>
+                    <canvas id="miGraficoProductos"></canvas>
                   </div>
                 </div>               
         </main>
