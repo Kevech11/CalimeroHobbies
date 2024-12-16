@@ -11,6 +11,7 @@ import { contactRouter } from "./routes/contact.router.js"
 import { adminRouter } from "./routes/admin.router.js"
 import { crearProductos } from "./helpers/crearProductos.js"
 import clientsMayoristaRouter from "./routes/clientsMayorista.js"
+import categoriesRouter from "./routes/categories.router.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -110,6 +111,7 @@ app.use("/api/ventas", salesRouter)
 app.use("/api/mercadopago", mpRouter)
 app.use("/api/contact", contactRouter)
 app.use("/api/admin", adminRouter)
+app.use("/api/categories", categoriesRouter)
 
 const port = 5001 //Configurar Puerto
 

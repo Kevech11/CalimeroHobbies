@@ -95,11 +95,13 @@ async function renderUsers() {
 
 renderUsers()
 
+
 // Crear productos
 formularioProductos.addEventListener("submit", async (e) => {
   e.preventDefault()
 
   const formData = new FormData(formularioProductos)
+
   const response = await cargarProducto(formData)
 
   if (response.status === 201) {
@@ -138,6 +140,7 @@ botonesCategorias.forEach((boton) => {
       case "productos":
         contenedorProductos.style.display = "block"
         obtenerProductos().then((productos) => renderProductos(productos))
+        renderCategorias()
         break
       case "ventas":
         window.location.href = "/ventas"
@@ -340,6 +343,7 @@ formularioProductosMasVendidos.addEventListener("submit", async (e) => {
 
 //Gestion de productos
 const productosLista = document.getElementById("productos-lista")
+const select = document.getElementById("categoria")
 
 async function obtenerProductos() {
   try {
@@ -446,6 +450,24 @@ async function renderProductos() {
   );
 }
 
+async function obtenerCategorias() {
+  const response = await fetch("/api/categories", {
+    headers: {
+      Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    },
+  })
+
+  const categorias = await response.json()
+  return categorias
+}
+
+
+async function renderCategorias() {
+  const categorias = await obtenerCategorias()
+
+  select.innerHTML += categorias.map((categoria) => `<option value="${categoria._id}">${categoria.name.charAt(0).toUpperCase() + categoria.name.slice(1)}</option>`).join("")
+}
+
 async function actualizarProducto(id, data) {
   try {
     const response = await fetch(`/api/productos/${id}`, {
@@ -464,3 +486,4 @@ async function actualizarProducto(id, data) {
 }
 
 renderProductos();
+

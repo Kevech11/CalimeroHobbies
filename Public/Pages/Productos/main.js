@@ -2,7 +2,6 @@ let productos = []
 const searchInput = document.getElementById("searchInput")
 const searchBtn = document.getElementById("searchBtn")
 const contenedorProductos = document.querySelector("#contenedor-productos")
-const botonesCategorias = document.querySelectorAll(".boton-categoria")
 let botonesAgregar = document.querySelectorAll(".producto-agregar")
 const numerito = document.querySelector("#numerito")
 
@@ -54,11 +53,11 @@ if (new URLSearchParams(window.location.search).has("search")) {
     })
 }
 
-botonesCategorias.forEach((boton) =>
+/* botonesCategorias.forEach((boton) =>
   boton.addEventListener("click", () => {
     aside.classList.remove("aside-visible")
   })
-)
+) */
 
 function cargarProductos(productosElegidos) {
   contenedorProductos.innerHTML = ""
@@ -97,6 +96,7 @@ function cargarProductos(productosElegidos) {
   actualizarBotonesAgregar()
 }
 
+/*
 botonesCategorias.forEach((boton) => {
   boton.addEventListener("click", (e) => {
     botonesCategorias.forEach((boton) => boton.classList.remove("active"))
@@ -116,6 +116,7 @@ botonesCategorias.forEach((boton) => {
     }
   })
 })
+*/
 
 function actualizarBotonesAgregar() {
   botonesAgregar = document.querySelectorAll(".producto-agregar")
@@ -184,3 +185,19 @@ function actualizarNumerito() {
   numerito.innerText = nuevoNumerito
 }
 
+function renderizarCategorias() {
+  fetch("/api/categories")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data)
+      const menu = document.querySelector(".menu")
+      menu.innerHTML = data.map((categoria) => `<li><button id="${categoria.id}" class="boton-menu boton-categoria"><h2><i class="bi bi-chevron-right"></i></h2></i><h2>${categoria.name.charAt(0).toUpperCase() + categoria.name.slice(1)}</h2></button></li>`).join("")
+      menu.innerHTML += `<li>
+                        <a class="boton-menu boton-carrito" href="/Carrito">
+                            <h1><i class="bi bi-cart"> </i>Carrito</h1>
+                        </a>
+                    </li>`
+    })
+}
+
+renderizarCategorias()

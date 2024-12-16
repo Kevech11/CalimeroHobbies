@@ -1,5 +1,6 @@
 import { Router } from "express"
 import ProductModel from "../models/products.model.js"
+import Category from "../models/categories.model.js"
 import { getUserData, checkRole } from "../middlewares/getUserData.js"
 import { upload } from "../config/multer.js"
 import path from "path"
@@ -57,19 +58,14 @@ productsRouter.use(getUserData)
 productsRouter.use(checkRole("admin"))
 productsRouter.post("/", upload.single("imagen"), async (req, res) => {
   const { titulo, marca, precio, categoria, stock } = req.body
+  
+  console.log({categoria})
+  const category = await Category.findOne({_id: categoria})
   const { filename, destination } = req.file
 
-  // Mover imagen a carpeta
-  const folders = {
-    aeromodelismo: "aviones",
-    insumos: "insumos",
-    militaria: "militaria",
-    rompecabezas: "rompecabezas",
-    pinturas: "insumos",
-  }
 
   const oldPath = path.join(destination, filename)
-  const newPath = path.join(destination, folders[categoria], filename)
+  const newPath = path.join(destination, category.name, filename)
 
   fs.rename(oldPath, newPath, (err) => {
     if (err) {
@@ -86,6 +82,7 @@ productsRouter.post("/", upload.single("imagen"), async (req, res) => {
     const newProduct = new ProductModel({
       titulo,
       stock,
+      categoria: categoria,
       marca,
       precio,
       categoria,

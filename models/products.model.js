@@ -16,6 +16,7 @@ const productSchema = new mongoose.Schema({
   categoria: {
     type: String,
     required: true,
+    ref: "Category",
   },
   precio: {
     type: Number,
