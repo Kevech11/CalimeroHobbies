@@ -137,7 +137,8 @@ function vaciarCarrito() {
         "productos-en-carrito",
         JSON.stringify(productosEnCarrito)
       )
-      cargarProductosCarrito()
+      cargarProductosCarrito();
+      
     }
   })
 }
@@ -267,6 +268,7 @@ function cerrarSesion() {
   window.localStorage.removeItem("productos-en-carrito");
   window.location.href = "/home";
 }
+
 
 
 

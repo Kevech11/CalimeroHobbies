@@ -182,6 +182,26 @@ input[type="checkbox"]{
     cursor: pointer;
     font-size: 33px;
 }
+
+/* Ajuste para numerito del carrito */
+.numerito {
+    font-size: 14px; /* Ajusta el tamaño de la fuente */
+    font-weight: bold; /* Texto en negrita */
+    background-color: red; /* Color de fondo llamativo */
+    color: white; /* Color del texto */
+    padding: 2px 6px; /* Espaciado interno */
+    border-radius: 50%; /* Forma circular */
+    position: absolute; /* Posicionamiento absoluto */
+    top: 10px; /* Ajusta la posición vertical */
+    right: 10px; /* Ajusta la posición horizontal */
+    transform: translate(50%, -50%); /* Centra con respecto al carrito */
+    z-index: 10; /* Asegura que esté por encima */
+}
+
+.Carrito {
+    position: relative; /* Hace que el numerito se posicione en base a este contenedor */
+    font-size: 33px; /* Tamaño acorde al ícono */
+}
 /* NAVBAR */
 body{
 	background: #E0E4E5;

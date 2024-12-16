@@ -307,6 +307,8 @@ async function eliminarProducto(id) {
   }
 }
 
+
+
 async function renderProductos() {
   const productosLista = document.getElementById("productos-lista");
   const productos = await obtenerProductos();
