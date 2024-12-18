@@ -5,8 +5,10 @@ const botonesCategorias = document.querySelectorAll(".boton-categoria")
 const contenedores = document.querySelectorAll(".contenedor")
 const contenedorUsuarios = document.getElementById("contenedor-usuarios")
 const contenedorProductos = document.getElementById("contenedor-productos")
+const contenedorCategorias = document.getElementById("contenedor-categorias")
 const formularioProductos = document.querySelector("#formulario-productos")
 const btnReportes = document.getElementById("btn-reportes")
+const formularioCategorias = document.getElementById("formulario-categorias")
 
 if (loginBtn) {
   if (window.localStorage.getItem("user")) {
@@ -140,6 +142,10 @@ botonesCategorias.forEach((boton) => {
       case "productos":
         contenedorProductos.style.display = "block"
         obtenerProductos().then((productos) => renderProductos(productos))
+        renderCategoriasEnProductos()
+        break
+      case "categorias":
+        contenedorCategorias.style.display = "block"
         renderCategorias()
         break
       case "ventas":
@@ -301,6 +307,10 @@ formularioProductosMasVendidos.addEventListener("submit", async (e) => {
   // Crear un objeto para acumular las cantidades por título
   const productosAcumulados = {}
 
+  if (ventasFiltradas.length === 0) {
+    alert("No hay ventas en el rango de fechas seleccionado")
+    return
+  }
   // Recorrer todas las ventas y productos
   ventasFiltradas.forEach(venta => {
     venta.productos.forEach(producto => {
@@ -399,7 +409,7 @@ async function renderProductos() {
         <td contenteditable="false">${producto.titulo}</td>
         <td contenteditable="false">${producto.marca}</td>
         <td contenteditable="false">${producto.precio}</td>
-        <td contenteditable="false">${producto.categoria}</td>
+        <td contenteditable="false">${producto.categoria.name}</td>
         <td contenteditable="false">${producto.stock || 10}</td>
         <td>
           <button class="btn-editar">Editar</button>
@@ -462,7 +472,7 @@ async function obtenerCategorias() {
 }
 
 
-async function renderCategorias() {
+async function renderCategoriasEnProductos() {
   const categorias = await obtenerCategorias()
 
   select.innerHTML += categorias.map((categoria) => `<option value="${categoria._id}">${categoria.name.charAt(0).toUpperCase() + categoria.name.slice(1)}</option>`).join("")
@@ -486,4 +496,53 @@ async function actualizarProducto(id, data) {
 }
 
 renderProductos();
+
+// Categorias
+async function crearCategoria(name) {
+  const response = await fetch("/api/categories", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name }),
+  })
+
+  if (response.status === 201) {
+    alert("Categoria creada exitosamente")
+  } else {
+    alert("Error al crear categoria")
+  }
+}
+
+async function eliminarCategoria(id) {
+  const response = await fetch(`/api/categories/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    },
+  })
+} 
+
+async function renderCategorias() {
+  const categorias = await obtenerCategorias()
+  const categoriasTableBody = document.getElementById("categorias-table-body")
+  categoriasTableBody.innerHTML = categorias.map((categoria) => `<tr><td>${categoria.name}</td><td><button class="btn-eliminar" id="categoria-${categoria._id}">Eliminar</button></td></tr>`).join("")
+  const botonesCategorias = document.querySelectorAll("[id*='categoria-']")
+  botonesCategorias.forEach((boton) => {
+    boton.addEventListener("click", async () => {
+      const id = boton.id.split("-")[1]
+      await eliminarCategoria(id)
+      renderCategorias()
+    })
+  })
+}
+
+formularioCategorias.addEventListener("submit", async (e) => {
+  e.preventDefault()
+  const name = document.getElementById("nombre-categoria").value
+  await crearCategoria(name)
+  renderCategorias()
+  document.getElementById("nombre-categoria").value = ""
+})
 

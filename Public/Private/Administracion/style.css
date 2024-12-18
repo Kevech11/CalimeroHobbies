@@ -641,3 +641,26 @@ table {
     content: " 🛍️";        
     color: #ffc107;         
   }
+
+.contenedor-categorias {
+    display: none;
+}
+
+.categorias-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.categorias-table th, .categorias-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.categorias-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.categorias-table tr:hover {
+    background-color: #f1f1f1;
+}

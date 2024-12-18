@@ -10,7 +10,7 @@ const productsRouter = Router()
 
 productsRouter.get("/", async (req, res) => {
   try {
-    const products = await ProductModel.find()
+    const products = await ProductModel.find().populate("categoria")
     return res.json(products)
   } catch (error) {
     console.log(error)
@@ -28,7 +28,7 @@ productsRouter.get("/search", async (req, res) => {
         { marca: { $regex: term, $options: "i" } },
         { categoria: { $regex: term, $options: "i" } },
       ],
-    })
+    }).populate("categoria")
     return res.json(products)
   } catch (error) {
     console.log(error)
@@ -46,7 +46,7 @@ productsRouter.get("/categoria/:categoria", async (req, res) => {
         : [categoria]
     const products = await ProductModel.find({
       categoria: { $in: searchCategorias.map((cat) => new RegExp(cat, "i")) },
-    })
+    }).populate("categoria")
     return res.json(products)
   } catch (error) {
     console.log(error)
@@ -59,7 +59,6 @@ productsRouter.use(checkRole("admin"))
 productsRouter.post("/", upload.single("imagen"), async (req, res) => {
   const { titulo, marca, precio, categoria, stock } = req.body
   
-  console.log({categoria})
   const category = await Category.findOne({_id: categoria})
   const { filename, destination } = req.file
 
@@ -67,16 +66,12 @@ productsRouter.post("/", upload.single("imagen"), async (req, res) => {
   const oldPath = path.join(destination, filename)
   const newPath = path.join(destination, category.name, filename)
 
-  fs.rename(oldPath, newPath, (err) => {
-    if (err) {
-      console.log(err)
-      return res.status(500).json({ error: "Internal Server Error" })
-    }
-  })
-
-  // filename: "1626804275052-iphone12.png"
-  // destination: "/home/alejandro/Documentos/Proyecto-Final-Panaderia/Public/Pages/Productos/img"
-  // mimetype: "image/png"
+  try {
+    await fs.promises.rename(oldPath, newPath)
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json({ error: "Internal Server Error" })
+  }
 
   try {
     const newProduct = new ProductModel({
@@ -98,10 +93,17 @@ productsRouter.post("/", upload.single("imagen"), async (req, res) => {
 
 productsRouter.put("/:id", async (req, res) => {
   const { id } = req.params
-  const { titulo, marca, precio, categoria, stock } = req.body
+  const { titulo, marca, precio, categoria: nuevoNombreCategoria, stock } = req.body
 
   try {
-    await ProductModel.findByIdAndUpdate(id, { titulo, marca, precio, categoria, stock })
+    const product = await ProductModel.findById(id)
+    const {_id: idCategoria, name: nombreCategoria} = await Category.findOne({_id: product.categoria})
+    await Category.findByIdAndUpdate(idCategoria, {name: nuevoNombreCategoria})
+    if (!fs.existsSync(path.join("./Public/Pages/Productos/img", nuevoNombreCategoria))) {
+      await fs.promises.mkdir(path.join("./Public/Pages/Productos/img", nuevoNombreCategoria))
+    }
+    await fs.promises.rename(path.join("./Public/Pages/Productos/img", nombreCategoria, product.imagen), path.join("./Public/Pages/Productos/img", nuevoNombreCategoria, product.imagen))
+    await ProductModel.findByIdAndUpdate(id, { titulo, marca, precio, stock })
     return res.status(204).send()
   } catch (error) {
     console.log(error)

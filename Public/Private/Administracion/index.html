@@ -40,6 +40,9 @@
                         <button id="productos" class="boton-menu boton-categoria"><h2><i class="bi bi-chevron-right"></i></h2></i><h2>Gestión de Productos</h2></button>
                     </li>
                     <li>
+                        <button id="categorias" class="boton-menu boton-categoria"><h2><i class="bi bi-chevron-right"></i></h2></i><h2>Gestión de Categorías</h2></button>
+                    </li>
+                    <li>
                         <button id="ventas" class="boton-menu boton-categoria"><h2><i class="bi bi-chevron-right"></i></h2></i><h2>Ventas</h2></button>
                     </li>                  
                     <li>
@@ -206,7 +209,33 @@
                     </form>
                     <canvas id="miGraficoProductos"></canvas>
                   </div>
-                </div>               
+                </div>             
+                
+                <div id="contenedor-categorias" class="contenedor-categorias contenedor">
+                  <h2>Categorías</h2>
+                  <form id="formulario-categorias">
+                    <div class="form-group">
+                      <label for="nombre-categoria">Nombre de la categoría:</label>
+                      <input type="text" id="nombre-categoria" name="nombre-categoria" required>
+                    </div>
+
+                    <div class="form-group">
+                      <button type="submit" id="btn-enviar-categoria">Enviar</button>
+                    </div>
+                  </form>
+
+                  <table class="categorias-table">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Acciones</th>
+                      </tr>
+                      <tbody id="categorias-table-body">
+                        <!-- Aquí se agregarán las filas dinámicamente -->
+                      </tbody>
+                    </thead>
+                  </table>
+                </div>
         </main>
     </div>
 
