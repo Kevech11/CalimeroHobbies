@@ -91,7 +91,7 @@ function cargarProductos(productosElegidos) {
   actualizarBotonesAgregar()
 }
 
-/*
+
 botonesCategorias.forEach((boton) => {
   boton.addEventListener("click", (e) => {
     botonesCategorias.forEach((boton) => boton.classList.remove("active"))
@@ -99,11 +99,7 @@ botonesCategorias.forEach((boton) => {
 
     if (e.currentTarget.id != "todos") {
       const productosBoton = productos.filter((producto) => {
-        if (producto.categoria === "aeromodelismo") {
-          return e.currentTarget.id === "aviones"
-        }
-
-        return producto.categoria.toLowerCase() === e.currentTarget.id
+        return producto.categoria.id == e.currentTarget.id
       })
       cargarProductos(productosBoton)
     } else {
@@ -111,7 +107,7 @@ botonesCategorias.forEach((boton) => {
     }
   })
 })
-*/
+
 
 function actualizarBotonesAgregar() {
   botonesAgregar = document.querySelectorAll(".producto-agregar")
@@ -186,7 +182,7 @@ function renderizarCategorias() {
     .then((data) => {
       console.log(data)
       const menu = document.querySelector(".menu")
-      menu.innerHTML = data.map((categoria) => `<li><button id="${categoria.id}" class="boton-menu boton-categoria"><h2><i class="bi bi-chevron-right"></i></h2></i><h2>${categoria.name.charAt(0).toUpperCase() + categoria.name.slice(1)}</h2></button></li>`).join("")
+      menu.innerHTML = data.map((categoria) => `<li><button id="${categoria._id}" class="boton-menu boton-categoria"><h2><i class="bi bi-chevron-right"></i></h2></i><h2>${categoria.name.charAt(0).toUpperCase() + categoria.name.slice(1)}</h2></button></li>`).join("")
       menu.innerHTML += `<li>
                         <a class="boton-menu boton-carrito" href="/Carrito">
                             <h1><i class="bi bi-cart"> </i>Carrito</h1>
@@ -194,5 +190,6 @@ function renderizarCategorias() {
                     </li>`
     })
 }
+
 
 renderizarCategorias()

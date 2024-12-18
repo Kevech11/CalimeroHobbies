@@ -332,6 +332,9 @@ productsInput.addEventListener("change", function () {
   }
   selectedProducts.push(product)
 
+  console.log({product})
+  console.log({selectedProducts})
+
   selectedProductsElement.innerHTML += `
     <li>
       <div class="titulo">
