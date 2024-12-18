@@ -4,7 +4,7 @@ const searchBtn = document.getElementById("searchBtn")
 const contenedorProductos = document.querySelector("#contenedor-productos")
 let botonesAgregar = document.querySelectorAll(".producto-agregar")
 const numerito = document.querySelector("#numerito")
-const botonesCategorias = document.querySelectorAll(".boton-categoria")
+
 
 function redireccionarAlBuscar() {
   const term = searchInput.value
@@ -54,11 +54,7 @@ if (new URLSearchParams(window.location.search).has("search")) {
     })
 }
 
-botonesCategorias.forEach((boton) =>
-  boton.addEventListener("click", () => {
-    aside.classList.remove("aside-visible")
-  })
-)
+
 
 function cargarProductos(productosElegidos) {
   contenedorProductos.innerHTML = ""
@@ -92,22 +88,6 @@ function cargarProductos(productosElegidos) {
   actualizarBotonesAgregar()
 }
 
-
-botonesCategorias.forEach((boton) => {
-  boton.addEventListener("click", (e) => {
-    botonesCategorias.forEach((boton) => boton.classList.remove("active"))
-    e.currentTarget.classList.add("active")
-
-    if (e.currentTarget.id != "todos") {
-      const productosBoton = productos.filter((producto) => {
-        return producto.categoria.id == e.currentTarget.id
-      })
-      cargarProductos(productosBoton)
-    } else {
-      cargarProductos(productos)
-    }
-  })
-})
 
 
 function actualizarBotonesAgregar() {
@@ -183,13 +163,32 @@ function renderizarCategorias() {
     .then((data) => {
       console.log(data)
       const menu = document.querySelector(".menu")
-      menu.innerHTML = data.map((categoria) => `<li><button id="${categoria._id}" class="boton-menu boton-categoria"><h2><i class="bi bi-chevron-right"></i></h2></i><h2>${categoria.name.charAt(0).toUpperCase() + categoria.name.slice(1)}</h2></button></li>`).join("")
+      menu.innerHTML = data.map((categoria) => `<li><button id="${categoria.name}" class="boton-menu boton-categoria"><h2><i class="bi bi-chevron-right"></i></h2></i><h2>${categoria.name.charAt(0).toUpperCase() + categoria.name.slice(1)}</h2></button></li>`).join("")
       menu.innerHTML += `<li>
                         <a class="boton-menu boton-carrito" href="/Carrito">
                             <h1><i class="bi bi-cart"> </i>Carrito</h1>
                         </a>
                     </li>`
+    
+    const botonesCategorias = document.querySelectorAll(".boton-categoria")
+    
+    botonesCategorias.forEach((boton) => {
+      boton.addEventListener("click", (e) => {
+        aside.classList.remove("aside-visible")
+        botonesCategorias.forEach((boton) => boton.classList.remove("active"))
+        e.currentTarget.classList.add("active")
+    
+        if (e.currentTarget.id != "todos") {
+          const productosBoton = productos.filter((producto) => {
+            return producto.categoria.name == e.currentTarget.id
+          })
+          cargarProductos(productosBoton)
+        } else {
+          cargarProductos(productos)
+        }
+      })
     })
+  })
 }
 
 
