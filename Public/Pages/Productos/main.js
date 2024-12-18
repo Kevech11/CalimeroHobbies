@@ -4,6 +4,7 @@ const searchBtn = document.getElementById("searchBtn")
 const contenedorProductos = document.querySelector("#contenedor-productos")
 let botonesAgregar = document.querySelectorAll(".producto-agregar")
 const numerito = document.querySelector("#numerito")
+const botonesCategorias = document.querySelectorAll(".boton-categoria")
 
 function redireccionarAlBuscar() {
   const term = searchInput.value
@@ -53,11 +54,11 @@ if (new URLSearchParams(window.location.search).has("search")) {
     })
 }
 
-/* botonesCategorias.forEach((boton) =>
+botonesCategorias.forEach((boton) =>
   boton.addEventListener("click", () => {
     aside.classList.remove("aside-visible")
   })
-) */
+)
 
 function cargarProductos(productosElegidos) {
   contenedorProductos.innerHTML = ""
