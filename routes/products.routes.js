@@ -115,6 +115,8 @@ productsRouter.delete("/:id", async (req, res) => {
   const { id } = req.params
 
   try {
+    const product = await ProductModel.findById(id).populate("categoria")
+    await fs.promises.unlink(path.join("./Public/Pages/Productos/img", product.categoria.name, product.imagen))
     await ProductModel.findByIdAndDelete(id)
     return res.status(204).send()
   } catch (error) {

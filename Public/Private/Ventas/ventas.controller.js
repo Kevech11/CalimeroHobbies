@@ -429,9 +429,32 @@ function actualizarTotal() {
   totalElement.textContent = formatter.format(total)
 }
 
+async function getCategories() {
+  const response = await fetch("/api/categories", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    },
+  })
+
+  const categories = await response.json()
+  categories.sort((a, b) => a.name.localeCompare(b.name))
+
+  console.log({categories})
+
+  categories.forEach((category) => {
+    const option = document.createElement("option")
+    option.value = category._id
+    option.textContent = category.name
+    categoriesInput.appendChild(option)
+  })
+}
+
 document.addEventListener("DOMContentLoaded", async function () {
   const clients = await getClients()
   const sales = await cargarVentas()
+  const categories = await getCategories()
 
   clients.forEach((client) => {
     const option = document.createElement("option")
