@@ -242,7 +242,7 @@ a {
 }
 
 aside {
-    margin-left: -38px;
+    margin-left: 10px;
     padding: 5rem;
     padding-right: 0;
     color: var(--clr-white);
@@ -267,7 +267,6 @@ aside {
 }
 
 .boton-menu {
-
     background-color: transparent;
     border: 0;
     color: var(--clr-white);
@@ -353,6 +352,7 @@ main {
     background-color: var(--clr-white);
     margin: 1rem;
     margin-left: 0;
+    margin-right: 40px;
     border-radius: 2rem;
     padding: 3rem;
     

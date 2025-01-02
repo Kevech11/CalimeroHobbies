@@ -326,7 +326,7 @@ main {
     
 }
 
-/* Agrega este CSS a tu archivo de estilos */
+
 .users-table th, .users-table td {
     color: #000; /* Negro */
     padding: 8px;
@@ -664,3 +664,79 @@ table {
 .categorias-table tr:hover {
     background-color: #f1f1f1;
 }
+
+#generar-reporte-productos{
+    width: 200px; 
+    height: 40px; 
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#generar-reporte-productos:hover{
+    background-color: #45a049;
+}
+
+#btn-enviar-categoria{
+    width: 200px; 
+    height: 40px; 
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#btn-enviar-categoria:hover {
+    background-color: #45a049;
+}
+
+#formulario-productos-mas-vendidos {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  #formulario-productos-mas-vendidos .form-group {
+    margin-bottom: 15px;
+  }
+  
+  #formulario-productos-mas-vendidos label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  #formulario-productos-mas-vendidos input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  #formulario-productos-mas-vendidos button {
+    width: 200px;
+    height: 40px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  #formulario-productos-mas-vendidos button:hover {
+    background-color: #45a049;
+  }
+
+  

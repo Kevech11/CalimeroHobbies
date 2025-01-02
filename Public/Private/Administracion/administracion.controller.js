@@ -401,6 +401,7 @@ async function eliminarProducto(id) {
 async function renderProductos() {
   const productosLista = document.getElementById("productos-lista");
   const productos = await obtenerProductos();
+  productos.sort((a, b) => a.titulo.localeCompare(b.titulo));
 
   productosLista.innerHTML = productos
     .map(
