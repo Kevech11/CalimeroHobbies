@@ -39,6 +39,10 @@ const clientSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const Client = mongoose.model("Client", clientSchema)

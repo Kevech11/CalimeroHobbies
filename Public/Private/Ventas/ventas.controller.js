@@ -54,7 +54,9 @@ function imprimiVenta(venta) {
           </tr>        
           <tr>
             <th style="text-align: left; padding: 8px; font-weight: bold;">Cliente:</th>
-            <td style="padding: 8px;">${venta.cliente.name} ${venta.cliente.lastName}</td>
+            <td style="padding: 8px;">${venta.cliente.name} ${
+    venta.cliente.lastName
+  }</td>
           </tr>
           <tr>
            <th style="text-align: left; padding: 8px; font-weight: bold;">Cantidad de bultos:</th>
@@ -149,48 +151,50 @@ async function cargarVentas() {
     const ventas = await response.json()
     console.log(ventas)
 
-    ventas.filter(venta => venta.esMayorista).forEach((venta) => {
-      let productosVenta = [] // Para almacenar los productos
+    ventas
+      .filter((venta) => venta.esMayorista)
+      .forEach((venta) => {
+        let productosVenta = [] // Para almacenar los productos
 
-      const newRow = ventasTable.insertRow()
-      newRow.insertCell(0).textContent = new Date(
-        venta.fecha
-      ).toLocaleDateString()
-      newRow.insertCell(
-        1
-      ).textContent = `${venta.cliente.name} ${venta.cliente.lastName}`
-      newRow.insertCell(
-        2
-      ).innerHTML = `<button type="button" class="btn btn-primary">Ver productos</button>`
+        const newRow = ventasTable.insertRow()
+        newRow.insertCell(0).textContent = new Date(
+          venta.fecha
+        ).toLocaleDateString()
+        newRow.insertCell(
+          1
+        ).textContent = `${venta.cliente.name} ${venta.cliente.lastName}`
+        newRow.insertCell(
+          2
+        ).innerHTML = `<button type="button" class="btn btn-primary">Ver productos</button>`
 
-      const totalCell = newRow.insertCell(3)
-      totalCell.textContent = new Intl.NumberFormat("es-AR", {
-        style: "currency",
-        currency: "ARS",
-        minimumFractionDigits: 2,
-      }).format(venta.total)
-      totalCell.style.textAlign = "right" // Aplica el estilo en línea
+        const totalCell = newRow.insertCell(3)
+        totalCell.textContent = new Intl.NumberFormat("es-AR", {
+          style: "currency",
+          currency: "ARS",
+          minimumFractionDigits: 2,
+        }).format(venta.total)
+        totalCell.style.textAlign = "right" // Aplica el estilo en línea
 
-      newRow.cells[2]
-        .querySelector("button")
-        .addEventListener("click", function () {
-          const width = 600
-          const height = 400
-          const left = window.screen.width / 2 - width / 2
-          const top = window.screen.height / 2 - height / 2
+        newRow.cells[2]
+          .querySelector("button")
+          .addEventListener("click", function () {
+            const width = 600
+            const height = 400
+            const left = window.screen.width / 2 - width / 2
+            const top = window.screen.height / 2 - height / 2
 
-          const productosVenta = venta.productos.sort((a, b) =>
-            a.producto.titulo.localeCompare(b.producto.titulo)
-          )
+            const productosVenta = venta.productos.sort((a, b) =>
+              a.producto.titulo.localeCompare(b.producto.titulo)
+            )
 
-          let win = window.open(
-            "",
-            "",
-            `height=${height},width=${width},top=${top},left=${left}`
-          )
+            let win = window.open(
+              "",
+              "",
+              `height=${height},width=${width},top=${top},left=${left}`
+            )
 
-          // Crear el contenido HTML con una tabla
-          win.document.write(`
+            // Crear el contenido HTML con una tabla
+            win.document.write(`
             <html>
               <head>
                 <title>Productos</title>
@@ -233,9 +237,9 @@ async function cargarVentas() {
                   </thead>
                   <tbody>`)
 
-          // Añadir los productos a la tabla
-          productosVenta.forEach(({ producto, cantidad }) => {
-            win.document.write(`
+            // Añadir los productos a la tabla
+            productosVenta.forEach(({ producto, cantidad }) => {
+              win.document.write(`
               <tr>
                 <td>${producto.titulo}</td>
                 <td class="right">$ ${producto.precio.toLocaleString("es-AR", {
@@ -250,53 +254,59 @@ async function cargarVentas() {
                   maximumFractionDigits: 2,
                 })}</td>
               </tr>`)
+            })
+
+            win.document.write(`</tbody></table></body></html>`)
+            win.document.close()
+
+            win.onunload = function () {
+              win = null
+            }
           })
 
-          win.document.write(`</tbody></table></body></html>`)
-          win.document.close()
+        const actionsCell = newRow.insertCell(4)
 
-          win.onunload = function () {
-            win = null
+        const deleteButton = document.createElement("button")
+        deleteButton.textContent = "Eliminar"
+        deleteButton.className = "btn-delete"
+        actionsCell.appendChild(deleteButton)
+
+        deleteButton.addEventListener("click", function () {
+          if (confirm("¿Estás seguro de que deseas eliminar esta venta?")) {
+            const deleted = eliminarVenta(venta._id)
+            if (deleted) {
+              ventasTable.deleteRow(newRow.rowIndex)
+            } else {
+              alert("No se pudo eliminar la venta")
+            }
           }
         })
 
-      const actionsCell = newRow.insertCell(4)
+        const printButton = document.createElement("button")
+        printButton.textContent = "Imprimir"
+        printButton.className = "btn-print"
+        actionsCell.appendChild(printButton)
 
-      const deleteButton = document.createElement("button")
-      deleteButton.textContent = "Eliminar"
-      deleteButton.className = "btn-delete"
-      actionsCell.appendChild(deleteButton)
-
-      deleteButton.addEventListener("click", function () {
-        if (confirm("¿Estás seguro de que deseas eliminar esta venta?")) {
-          const deleted = eliminarVenta(venta._id)
-          if (deleted) {
-            ventasTable.deleteRow(newRow.rowIndex)
-          } else {
-            alert("No se pudo eliminar la venta")
-          }
-        }
+        console.log(ventas)
+        printButton.addEventListener("click", () => imprimiVenta(venta))
       })
 
-      const printButton = document.createElement("button")
-      printButton.textContent = "Imprimir"
-      printButton.className = "btn-print"
-      actionsCell.appendChild(printButton)
-
-      console.log(ventas)
-      printButton.addEventListener("click", () => imprimiVenta(venta))
-    })
-
-    console.log(ventas.filter(venta => !venta.esMayorista))
-    ventas.filter(venta => !venta.esMayorista).forEach((venta) => {
-      const newRow = ventasDiariasTable.insertRow()
-      newRow.insertCell(0).textContent = new Date(venta.fecha).toLocaleDateString()
-      newRow.insertCell(1).textContent = venta.cliente.name
-      newRow.insertCell(2).textContent = venta.cliente.email
-      newRow.insertCell(3).textContent = venta.cliente.address
-      newRow.insertCell(4).textContent = venta.productos.map(producto => producto.producto.titulo).join(", ")
-      newRow.insertCell(5).textContent = venta.paymentMethod
-    })
+    console.log(ventas.filter((venta) => !venta.esMayorista))
+    ventas
+      .filter((venta) => !venta.esMayorista)
+      .forEach((venta) => {
+        const newRow = ventasDiariasTable.insertRow()
+        newRow.insertCell(0).textContent = new Date(
+          venta.fecha
+        ).toLocaleDateString()
+        newRow.insertCell(1).textContent = venta.cliente.name
+        newRow.insertCell(2).textContent = venta.cliente.email
+        newRow.insertCell(3).textContent = venta.cliente.address
+        newRow.insertCell(4).textContent = venta.productos
+          .map((producto) => producto.producto.titulo)
+          .join(", ")
+        newRow.insertCell(5).textContent = venta.paymentMethod
+      })
 
     return ventas
   } catch (error) {
@@ -332,8 +342,8 @@ productsInput.addEventListener("change", function () {
   }
   selectedProducts.push(product)
 
-  console.log({product})
-  console.log({selectedProducts})
+  console.log({ product })
+  console.log({ selectedProducts })
 
   selectedProductsElement.innerHTML += `
     <li>
@@ -444,7 +454,7 @@ async function getCategories() {
   const categories = await response.json()
   categories.sort((a, b) => a.name.localeCompare(b.name))
 
-  console.log({categories})
+  console.log({ categories })
 
   categories.forEach((category) => {
     const option = document.createElement("option")
@@ -503,6 +513,7 @@ ventaForm.addEventListener("submit", async function (event) {
     0
   )
 
+  // ACA ESTA EL PROBLEMA, SELECTED PRODUCTS ESTA VACIO Y NO SE GUARDAN LOS PRODUCTOS EN LAS VENTAS CREADAS
   const dataToSend = {
     fecha,
     cliente,
@@ -535,13 +546,10 @@ ventaForm.addEventListener("submit", async function (event) {
   }
 })
 
-function cerrarSesion() {  
-  window.localStorage.removeItem("user");
-  window.location.href = "/home";
+function cerrarSesion() {
+  window.localStorage.removeItem("user")
+  window.location.href = "/home"
 }
-
-
-
 
 if (loginBtn) {
   if (window.localStorage.getItem("user")) {

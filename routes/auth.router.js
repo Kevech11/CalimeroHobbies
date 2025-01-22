@@ -25,6 +25,15 @@ authRouter.post("/register", async (req, res) => {
     })
     // Devolver el usuario creado sin la password
     delete newUser.password
+
+    await sendMail({
+      to: email,
+      subject:
+        "Bienvenido a Calimero Hobbies, por favor verifica tu email para iniciar sesion",
+      html: `<h1>Gracias por registrarte en Calimero Hobbies</h1>
+      <p>Para poder iniciar sesion, por favor verifica tu email haciendo click en el siguiente enlace, luego te redireccionara al inicio de sesion</p>
+      <a href="http://localhost:5001/api/auth/verify/${newUser._id}">Verificar email</a>`,
+    })
     res.status(201).json(newUser)
   } catch (error) {
     console.log(error)
@@ -46,6 +55,10 @@ authRouter.post("/login", async (req, res) => {
       if (!user) {
         return res.status(404).send("Credenciales invalidas")
       }
+    }
+
+    if (user.role === "client" && !user.isVerified) {
+      return res.status(401).send("Usuario no verificado")
     }
     // Chequear si la contraseña es correcta
     const validPassword = await bcrypt.compare(password, user.password)
@@ -88,6 +101,26 @@ authRouter.get("/me", async (req, res) => {
   }
 })
 
+authRouter.get("/verify/:id", async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const user = await ClientModel.findById(id)
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" })
+    }
+
+    user.isVerified = true
+    await user.save()
+
+    res.status(200).redirect("http://localhost:5001/Pages/Login")
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: "Ocurrio un error" })
+  }
+})
+
 authRouter.post("/recoverypassword", async (req, res) => {
   try {
     const { email } = req.body
@@ -117,11 +150,34 @@ authRouter.post("/recoverypassword", async (req, res) => {
       subject: "Recuperar contraseña en Calimero Hobbies",
       html: `Solicitaste recuperar tu contraseña en Calimero Hobbies!
       Para recuperarla, hace click en el siguiente enlace y cambia tu contraseña.
-      <a href="http://localhost:5001/Pages/confirmar?token=${parsedToken}">Cambiar contraseña/a>
+      <a href="http://localhost:5001/Pages/confirmar?token=${parsedToken}">Cambiar contraseña</a>
       El enlace expira en 10 minutos!`,
     })
 
     res.status(200).json({ message: "Email enviado correctamente" })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: "Ocurrio un error" })
+  }
+})
+
+authRouter.post("/resetpassword", async (req, res) => {
+  try {
+    const { token, password } = req.body
+
+    const decodedToken = jwt.verify(token, "claveSecreta")
+
+    const user = await ClientModel.findById(decodedToken.id)
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" })
+    }
+
+    user.password = await bcrypt.hash(password, 10)
+
+    await user.save()
+
+    res.status(200).json({ message: "Contraseña cambiada correctamente" })
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: "Ocurrio un error" })

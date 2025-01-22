@@ -97,7 +97,6 @@ async function renderUsers() {
 
 renderUsers()
 
-
 // Crear productos
 formularioProductos.addEventListener("submit", async (e) => {
   e.preventDefault()
@@ -173,9 +172,13 @@ function mostrarSeccion(seccionId) {
 
 // REPORTES
 const formularioReportes = document.getElementById("formulario-reportes")
-const formularioProductosMasVendidos = document.getElementById("formulario-productos-mas-vendidos")
+const formularioProductosMasVendidos = document.getElementById(
+  "formulario-productos-mas-vendidos"
+)
 const ctx = document.getElementById("miGrafico").getContext("2d")
-const ctxProductos = document.getElementById("miGraficoProductos").getContext("2d")
+const ctxProductos = document
+  .getElementById("miGraficoProductos")
+  .getContext("2d")
 let chart = null
 let chartProductos = null
 
@@ -311,9 +314,10 @@ formularioProductosMasVendidos.addEventListener("submit", async (e) => {
     alert("No hay ventas en el rango de fechas seleccionado")
     return
   }
+
   // Recorrer todas las ventas y productos
-  ventasFiltradas.forEach(venta => {
-    venta.productos.forEach(producto => {
+  ventasFiltradas.forEach((venta) => {
+    venta.productos.forEach((producto) => {
       const titulo = producto.producto.titulo
       if (productosAcumulados[titulo]) {
         productosAcumulados[titulo] += producto.cantidad
@@ -324,19 +328,27 @@ formularioProductosMasVendidos.addEventListener("submit", async (e) => {
   })
 
   // Convertir el objeto a array con el formato requerido
-  const productosMasVendidos = Object.entries(productosAcumulados).map(([titulo, cantidad]) => ({
-    titulo,
-    cantidad
-  }))
+  const productosMasVendidos = Object.entries(productosAcumulados).map(
+    ([titulo, cantidad]) => ({
+      titulo,
+      cantidad,
+    })
+  )
 
-  
-
-    // Chart productos tipo torta
+  // Chart productos tipo torta
   chartProductos = new Chart(ctxProductos, {
     type: "pie",
     data: {
-      labels: productosMasVendidos.map((producto) => producto.titulo).slice(0, 5),
-      datasets: [{ data: productosMasVendidos.map((producto) => producto.cantidad).slice(0, 5) }],
+      labels: productosMasVendidos
+        .map((producto) => producto.titulo)
+        .slice(0, 5),
+      datasets: [
+        {
+          data: productosMasVendidos
+            .map((producto) => producto.cantidad)
+            .slice(0, 5),
+        },
+      ],
     },
     options: {
       responsive: true,
@@ -345,9 +357,9 @@ formularioProductosMasVendidos.addEventListener("submit", async (e) => {
       plugins: {
         legend: {
           display: true,
-        }
-      }
-    }
+        },
+      },
+    },
   })
 })
 
@@ -396,12 +408,10 @@ async function eliminarProducto(id) {
   }
 }
 
-
-
 async function renderProductos() {
-  const productosLista = document.getElementById("productos-lista");
-  const productos = await obtenerProductos();
-  productos.sort((a, b) => a.titulo.localeCompare(b.titulo));
+  const productosLista = document.getElementById("productos-lista")
+  const productos = await obtenerProductos()
+  productos.sort((a, b) => a.titulo.localeCompare(b.titulo))
 
   productosLista.innerHTML = productos
     .map(
@@ -419,46 +429,46 @@ async function renderProductos() {
         </td>
       </tr>`
     )
-    .join("");
+    .join("")
 
   document.querySelectorAll(".btn-editar").forEach((btn) =>
     btn.addEventListener("click", (e) => {
-      const row = e.target.closest("tr");
+      const row = e.target.closest("tr")
       row.querySelectorAll("td[contenteditable]").forEach((cell) => {
-        cell.contentEditable = true;
-        cell.style.backgroundColor = "#f9f9f9";
-      });
-      row.querySelector(".btn-guardar").style.display = "inline-block";
-      e.target.style.display = "none";
+        cell.contentEditable = true
+        cell.style.backgroundColor = "#f9f9f9"
+      })
+      row.querySelector(".btn-guardar").style.display = "inline-block"
+      e.target.style.display = "none"
     })
-  );
+  )
 
   document.querySelectorAll(".btn-guardar").forEach((btn) =>
     btn.addEventListener("click", async (e) => {
-      const row = e.target.closest("tr");
-      const id = row.dataset.id;
+      const row = e.target.closest("tr")
+      const id = row.dataset.id
       const data = {
         titulo: row.children[0].innerText,
         marca: row.children[1].innerText,
         precio: row.children[2].innerText,
         categoria: row.children[3].innerText,
         stock: row.children[4].innerText,
-      };
+      }
       if (await actualizarProducto(id, data)) {
-        alert("Producto actualizado exitosamente");
-        renderProductos();
+        alert("Producto actualizado exitosamente")
+        renderProductos()
       } else {
-        alert("Error al actualizar producto");
+        alert("Error al actualizar producto")
       }
     })
-  );
+  )
 
   document.querySelectorAll(".btn-eliminar").forEach((btn) =>
     btn.addEventListener("click", (e) => {
-      const id = e.target.closest("tr").dataset.id;
-      eliminarProducto(id);
+      const id = e.target.closest("tr").dataset.id
+      eliminarProducto(id)
     })
-  );
+  )
 }
 
 async function obtenerCategorias() {
@@ -472,11 +482,17 @@ async function obtenerCategorias() {
   return categorias
 }
 
-
 async function renderCategoriasEnProductos() {
   const categorias = await obtenerCategorias()
 
-  select.innerHTML += categorias.map((categoria) => `<option value="${categoria._id}">${categoria.name.charAt(0).toUpperCase() + categoria.name.slice(1)}</option>`).join("")
+  select.innerHTML += categorias
+    .map(
+      (categoria) =>
+        `<option value="${categoria._id}">${
+          categoria.name.charAt(0).toUpperCase() + categoria.name.slice(1)
+        }</option>`
+    )
+    .join("")
 }
 
 async function actualizarProducto(id, data) {
@@ -488,15 +504,15 @@ async function actualizarProducto(id, data) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    });
-    return response.ok;
+    })
+    return response.ok
   } catch (error) {
-    console.error("Error al actualizar producto:", error);
-    return false;
+    console.error("Error al actualizar producto:", error)
+    return false
   }
 }
 
-renderProductos();
+renderProductos()
 
 // Categorias
 async function crearCategoria(name) {
@@ -523,12 +539,17 @@ async function eliminarCategoria(id) {
       Authorization: `Bearer ${window.localStorage.getItem("token")}`,
     },
   })
-} 
+}
 
 async function renderCategorias() {
   const categorias = await obtenerCategorias()
   const categoriasTableBody = document.getElementById("categorias-table-body")
-  categoriasTableBody.innerHTML = categorias.map((categoria) => `<tr><td>${categoria.name}</td><td><button class="btn-eliminar" id="categoria-${categoria._id}">Eliminar</button></td></tr>`).join("")
+  categoriasTableBody.innerHTML = categorias
+    .map(
+      (categoria) =>
+        `<tr><td>${categoria.name}</td><td><button class="btn-eliminar" id="categoria-${categoria._id}">Eliminar</button></td></tr>`
+    )
+    .join("")
   const botonesCategorias = document.querySelectorAll("[id*='categoria-']")
   botonesCategorias.forEach((boton) => {
     boton.addEventListener("click", async () => {
@@ -546,4 +567,3 @@ formularioCategorias.addEventListener("submit", async (e) => {
   renderCategorias()
   document.getElementById("nombre-categoria").value = ""
 })
-
