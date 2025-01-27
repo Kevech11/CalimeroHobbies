@@ -85,6 +85,7 @@ async function renderUsers() {
         method: "DELETE",
       })
 
+      console.log(response.status)
       if (response.status === 200) {
         alert("Usuario eliminado exitosamente")
         window.location.reload()

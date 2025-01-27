@@ -340,6 +340,8 @@ productsInput.addEventListener("change", function () {
       selectedProduct.dataset.precio * selectedProduct.dataset.cantidad
     ),
   }
+
+  console.log({ product })
   selectedProducts.push(product)
 
   console.log({ product })
@@ -491,7 +493,7 @@ categoriesInput.addEventListener("change", async function () {
   let products = await response.json()
   products = products.sort((a, b) => a.titulo.localeCompare(b.titulo))
 
-  productsInput.innerHTML = ""
+  productsInput.innerHTML = `<option value="" disabled selected>Selecciona productos</option>`
   products.forEach((product) => {
     const option = document.createElement("option")
     option.value = product._id

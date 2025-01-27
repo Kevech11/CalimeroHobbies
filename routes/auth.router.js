@@ -57,7 +57,7 @@ authRouter.post("/login", async (req, res) => {
       }
     }
 
-    if (user.role === "client" && !user.isVerified) {
+    if (user.role === "cliente" && !user.isVerified) {
       return res.status(401).send("Usuario no verificado")
     }
     // Chequear si la contraseña es correcta

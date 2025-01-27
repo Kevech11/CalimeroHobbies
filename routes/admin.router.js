@@ -46,8 +46,16 @@ adminRouter.post("/new-user", async (req, res) => {
 adminRouter.delete("/delete-user/:id", async (req, res) => {
   const { id } = req.params
 
+  let user
   try {
-    await UserModel.findByIdAndDelete(id)
+    user = await UserModel.findByIdAndDelete(id)
+    if (!user) {
+      user = await ClientModel.findByIdAndDelete(id)
+    }
+
+    if (!user) {
+      return res.status(404).send("User not found")
+    }
     res.status(200).send("User deleted successfully")
   } catch (error) {
     res.status(500).send(error.message)

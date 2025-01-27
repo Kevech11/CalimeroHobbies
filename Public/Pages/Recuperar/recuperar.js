@@ -26,5 +26,8 @@ form.addEventListener("submit", async (e) => {
 
   const response = await res.json()
 
+  alert(
+    "Se ha enviado un email con las instrucciones para recuperar tu contraseña"
+  )
   console.log(response)
 })
