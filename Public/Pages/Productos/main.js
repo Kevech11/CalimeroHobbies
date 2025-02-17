@@ -5,7 +5,6 @@ const contenedorProductos = document.querySelector("#contenedor-productos")
 let botonesAgregar = document.querySelectorAll(".producto-agregar")
 const numerito = document.querySelector("#numerito")
 
-
 function redireccionarAlBuscar() {
   const term = searchInput.value
   window.location.href = `/Productos?search=${term}`
@@ -48,13 +47,14 @@ if (new URLSearchParams(window.location.search).has("search")) {
           precio: producto.precio,
           imagen: producto.imagen,
           categoria: producto.categoria,
+          stock: producto.stock,
         }
       })
+
+      console.log({ productos })
       cargarProductos(productos)
     })
 }
-
-
 
 function cargarProductos(productosElegidos) {
   contenedorProductos.innerHTML = ""
@@ -62,9 +62,11 @@ function cargarProductos(productosElegidos) {
   productosElegidos.forEach((producto) => {
     const div = document.createElement("div")
     div.classList.add("producto")
-    console.log(producto)
+    console.log({ AAAA: producto })
     div.innerHTML = `
-            <img class="producto-imagen" src="Pages/Productos/img/${producto.categoria.name}/${producto.imagen}" alt="${producto.titulo}">
+            <img class="producto-imagen" src="Pages/Productos/img/${
+              producto.categoria.name
+            }/${producto.imagen}" alt="${producto.titulo}">
             <div class="producto-detalles">
                 <h1 class="producto-titulo">${producto.titulo}</h1>
                 <h4 class="producto-marca">${producto.marca}</h4>
@@ -77,6 +79,7 @@ function cargarProductos(productosElegidos) {
                     maximumFractionDigits: 0,
                   }
                 )}</p>
+                ${producto.stock <= 0 ? "<p class='agotado'>AGOTADO</p>" : ""}
                 <button class="producto-agregar" id="${
                   producto.id
                 }">Agregar</button>
@@ -87,8 +90,6 @@ function cargarProductos(productosElegidos) {
   })
   actualizarBotonesAgregar()
 }
-
-
 
 function actualizarBotonesAgregar() {
   botonesAgregar = document.querySelectorAll(".producto-agregar")
@@ -108,6 +109,51 @@ if (productosEnCarritoLS) {
 }
 
 function agregarAlCarrito(e) {
+  e.preventDefault()
+
+  const idBoton = e.currentTarget.id
+  const productoAgregado = productos.find((producto) => producto.id === idBoton)
+
+  if (productoAgregado.stock <= 0) {
+    Toastify({
+      text: "Producto agotado",
+      duration: 3000,
+      close: true,
+      gravity: "top",
+      position: "right",
+      stopOnFocus: true,
+      style: {
+        background: "linear-gradient(to right, rgb(83, 4, 4), rgb(83, 4, 4)",
+        borderRadius: "2rem",
+        textTransform: "uppercase",
+        fontSize: ".75rem",
+      },
+      offset: {
+        x: "1.5rem",
+        y: "1.5rem",
+      },
+      onClick: function () {},
+    }).showToast()
+    return
+  }
+
+  if (productosEnCarrito.some((producto) => producto.id === idBoton)) {
+    const index = productosEnCarrito.findIndex(
+      (producto) => producto.id === idBoton
+    )
+    productosEnCarrito[index].cantidad++
+  } else {
+    productoAgregado.cantidad = 1
+    productosEnCarrito.push(productoAgregado)
+  }
+
+  actualizarNumerito()
+
+  localStorage.setItem(
+    "productos-en-carrito",
+    JSON.stringify(productosEnCarrito)
+  )
+
   Toastify({
     text: "Producto agregado",
     duration: 3000,
@@ -127,26 +173,6 @@ function agregarAlCarrito(e) {
     },
     onClick: function () {},
   }).showToast()
-
-  const idBoton = e.currentTarget.id
-  const productoAgregado = productos.find((producto) => producto.id === idBoton)
-
-  if (productosEnCarrito.some((producto) => producto.id === idBoton)) {
-    const index = productosEnCarrito.findIndex(
-      (producto) => producto.id === idBoton
-    )
-    productosEnCarrito[index].cantidad++
-  } else {
-    productoAgregado.cantidad = 1
-    productosEnCarrito.push(productoAgregado)
-  }
-
-  actualizarNumerito()
-
-  localStorage.setItem(
-    "productos-en-carrito",
-    JSON.stringify(productosEnCarrito)
-  )
 }
 
 function actualizarNumerito() {
@@ -163,33 +189,41 @@ function renderizarCategorias() {
     .then((data) => {
       console.log(data)
       const menu = document.querySelector(".menu")
-      menu.innerHTML = data.map((categoria) => `<li><button id="${categoria.name}" class="boton-menu boton-categoria"><h2><i class="bi bi-chevron-right"></i></h2></i><h2>${categoria.name.charAt(0).toUpperCase() + categoria.name.slice(1)}</h2></button></li>`).join("")
+      menu.innerHTML = data
+        .map(
+          (categoria) =>
+            `<li><button id="${
+              categoria.name
+            }" class="boton-menu boton-categoria"><h2><i class="bi bi-chevron-right"></i></h2></i><h2>${
+              categoria.name.charAt(0).toUpperCase() + categoria.name.slice(1)
+            }</h2></button></li>`
+        )
+        .join("")
       menu.innerHTML += `<li>
                         <a class="boton-menu boton-carrito" href="/Carrito">
                             <h1><i class="bi bi-cart"> </i>Carrito</h1>
                         </a>
                     </li>`
-    
-    const botonesCategorias = document.querySelectorAll(".boton-categoria")
-    
-    botonesCategorias.forEach((boton) => {
-      boton.addEventListener("click", (e) => {
-        aside.classList.remove("aside-visible")
-        botonesCategorias.forEach((boton) => boton.classList.remove("active"))
-        e.currentTarget.classList.add("active")
-    
-        if (e.currentTarget.id != "todos") {
-          const productosBoton = productos.filter((producto) => {
-            return producto.categoria.name == e.currentTarget.id
-          })
-          cargarProductos(productosBoton)
-        } else {
-          cargarProductos(productos)
-        }
+
+      const botonesCategorias = document.querySelectorAll(".boton-categoria")
+
+      botonesCategorias.forEach((boton) => {
+        boton.addEventListener("click", (e) => {
+          aside.classList.remove("aside-visible")
+          botonesCategorias.forEach((boton) => boton.classList.remove("active"))
+          e.currentTarget.classList.add("active")
+
+          if (e.currentTarget.id != "todos") {
+            const productosBoton = productos.filter((producto) => {
+              return producto.categoria.name == e.currentTarget.id
+            })
+            cargarProductos(productosBoton)
+          } else {
+            cargarProductos(productos)
+          }
+        })
       })
     })
-  })
 }
-
 
 renderizarCategorias()

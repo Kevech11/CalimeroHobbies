@@ -689,3 +689,14 @@ figure {
     margin-bottom: -5px;
 }
 
+.agotado {
+    background-color: red;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: rotate(-45deg);
+    z-index: 1;
+}

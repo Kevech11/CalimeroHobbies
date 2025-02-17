@@ -422,7 +422,7 @@ async function renderProductos() {
         <td contenteditable="false">${producto.marca}</td>
         <td contenteditable="false">${producto.precio}</td>
         <td contenteditable="false">${producto.categoria.name}</td>
-        <td contenteditable="false">${producto.stock || 10}</td>
+        <td contenteditable="false">${producto.stock || "Agotado"}</td>
         <td>
           <button class="btn-editar">Editar</button>
           <button class="btn-guardar" style="display:none;">Guardar</button>

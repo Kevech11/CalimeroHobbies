@@ -74,61 +74,14 @@ mpRouter.use(
 )
 
 mpRouter.post("/create_preference", async (req, res) => {
-  console.log(req.body)
   const items = req.body.map((item) => ({
     title: item.title,
     quantity: item.quantity,
     unit_price: item.price,
     currency_id: "ARS",
   }))
-  const body = {
-    items,
-    back_urls: {
-      success: "http://localhost:5001/api/mercadopago/success",
-      failure: "http://localhost:5001/api/mercadopago/failure",
-      pending: "http://localhost:5001/api/mercadopago/pending",
-    },
-    auto_return: "approved",
-  }
+
   try {
-    const preference = await new Preference(client).create({ body })
-    // fecha: {
-    //   type: Date,
-    //   default: Date.now,
-    // },
-    // esMayorista: {
-    //   type: Boolean,
-    //   default: false,
-    // },
-    // cliente: {
-    //   type: String,
-    //   ref: "ClientMayorista",
-    // },
-    // paymentMethod: {
-    //   type: String,
-    //   enum: ["efectivo", "tarjeta", "transferencia"],
-    //   required: true,
-    // },
-    // productos: [
-    //   {
-    //     producto: {
-    //       type: String,
-    //       ref: "Product",
-    //     },
-    //     cantidad: {
-    //       type: Number,
-    //       required: true,
-    //     },
-    //   },
-    // ],
-    // total: {
-    //   type: Number,
-    //   required: true,
-    // },
-    // Registrar la venta
-    // LA ESTA REGISTRANDO AUNQUE NO SE COMPLETA LA COMPRA
-    // NO SE ESTA ACTUALIZANDO EL STOCK
-    console.log(preference)
     const sale = new SalesModel({
       fecha: new Date(),
       esMayorista: false,
@@ -145,6 +98,19 @@ mpRouter.post("/create_preference", async (req, res) => {
     })
 
     await sale.save()
+
+    const body = {
+      items,
+      back_urls: {
+        success: "http://localhost:5001/api/mercadopago/success",
+        failure: "http://localhost:5001/api/mercadopago/failure",
+        pending: "http://localhost:5001/api/mercadopago/pending",
+      },
+      auto_return: "approved",
+    }
+
+    const preference = await new Preference(client).create({ body })
+
     res.json({ redirectUrl: preference.init_point })
   } catch (error) {
     console.error(error)
