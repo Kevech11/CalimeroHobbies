@@ -35,7 +35,7 @@ registerForm.addEventListener("submit", async (e) => {
     }
     const result = await response.json()
     alert(
-      "Usuario registrado correctamente. Por favor verifica el email en tu correo."
+      "Usuario registrado correctamente. Por favor verifica el email registrado en tu correo para validar la cuenta."
     )
     registerForm.querySelector("input[name='name']").value = ""
     registerForm.querySelector("input[name='email']").value = ""
