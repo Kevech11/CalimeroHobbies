@@ -3,7 +3,7 @@ import { Router } from "express"
 import { checkRole, getUserData } from "../middlewares/getUserData.js"
 import SalesModel from "../models/sales.model.js"
 import ClientModel from "../models/client.model.js"
-import ProductModel from "../models/product.model.js"
+import ProductModel from "../models/products.model.js"
 import { sendMail } from "../config/mailer.js"
 const client = new MercadoPagoConfig({
   accessToken: `APP_USR-6508105676111590-102213-8ab833730cadd581130cb361c29e4d4f-2052945142`,
@@ -56,7 +56,7 @@ mpRouter.get("/success", async (req, res) => {
                   (p) => p._id.toString() === producto.producto.toString()
                 )
                 return `<li style="padding: 8px 0; border-bottom: 1px solid #dee2e6;">
-                ${product ? product.name : "Producto no encontrado"} x ${
+                ${product ? product.titulo : "Producto no encontrado"} x ${
                   producto.cantidad
                 }
               </li>`
