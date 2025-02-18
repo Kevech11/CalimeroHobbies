@@ -3,6 +3,7 @@ import { Router } from "express"
 import { checkRole, getUserData } from "../middlewares/getUserData.js"
 import SalesModel from "../models/sales.model.js"
 import ClientModel from "../models/client.model.js"
+import ProductModel from "../models/product.model.js"
 import { sendMail } from "../config/mailer.js"
 const client = new MercadoPagoConfig({
   accessToken: `APP_USR-6508105676111590-102213-8ab833730cadd581130cb361c29e4d4f-2052945142`,
@@ -13,6 +14,28 @@ const mpRouter = Router()
 mpRouter.get("/success", async (req, res) => {
   const sale = await SalesModel.findById(req.query.saleId)
   const client = await ClientModel.findById(sale.cliente)
+  const products = await ProductModel.find({
+    _id: { $in: sale.productos.map((item) => item.producto) },
+  })
+
+  const generateTrackingCode = () => {
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    const prefix = Array(2)
+      .fill()
+      .map(() => letters[Math.floor(Math.random() * letters.length)])
+      .join("")
+    const suffix = Array(2)
+      .fill()
+      .map(() => letters[Math.floor(Math.random() * letters.length)])
+      .join("")
+    const numbers = Array(8)
+      .fill()
+      .map(() => Math.floor(Math.random() * 10))
+      .join("")
+    return `${prefix}-${numbers}-${suffix}`
+  }
+
+  const trackingCode = generateTrackingCode()
 
   const info = await sendMail({
     to: client.email,
@@ -22,20 +45,28 @@ mpRouter.get("/success", async (req, res) => {
         <h1 style="color: #2c3e50; text-align: center; padding: 20px 0;">¡Gracias por su compra!</h1>
         <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px;">
           <p style="font-size: 16px;">Le enviamos el comprobante de su compra.</p>
-          <p style="font-size: 14px;"><strong>Fecha:</strong> ${sale.fecha}</p>
+          <p style="font-size: 14px;"><strong>Fecha:</strong> ${new Date(
+            sale.fecha
+          ).toLocaleDateString()}</p>
           <p style="font-size: 16px; margin-top: 20px;"><strong>Productos:</strong></p>
           <ul style="list-style-type: none; padding: 0;">
-            ${sale.productos.map(
-              (
-                producto
-              ) => `<li style="padding: 8px 0; border-bottom: 1px solid #dee2e6;">
-                ${producto.producto} x ${producto.cantidad}
+            ${sale.productos
+              .map((producto, index) => {
+                const product = products.find(
+                  (p) => p._id.toString() === producto.producto.toString()
+                )
+                return `<li style="padding: 8px 0; border-bottom: 1px solid #dee2e6;">
+                ${product ? product.name : "Producto no encontrado"} x ${
+                  producto.cantidad
+                }
               </li>`
-            )}
+              })
+              .join("")}
           </ul>
           <p style="font-size: 18px; text-align: right; margin-top: 20px;">
             <strong>Total:</strong> $${sale.total}
           </p>
+          <p style="font-size: 16px; margin-top: 20px;"><strong>Código de seguimiento:</strong> ${trackingCode}</p>
         </div>
         <div style="text-align: center; margin-top: 30px;">
           <p style="color: #2c3e50; font-size: 16px;">¡Gracias por elegirnos!</p>
