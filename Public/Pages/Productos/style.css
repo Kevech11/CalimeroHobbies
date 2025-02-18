@@ -700,3 +700,14 @@ figure {
     transform: rotate(-45deg);
     z-index: 1;
 }
+.agotado {
+    position: absolute;
+    top: -25px; /* Ajusta este valor según sea necesario */
+    right: 10px;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    font-weight: bold;
+    transform: rotate(20deg);
+    z-index: 10;
+  }
