@@ -18,4 +18,6 @@ export async function sendMail({ to, subject, html }) {
     subject,
     html,
   })
+
+  return info
 }
