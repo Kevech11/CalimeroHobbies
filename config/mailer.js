@@ -9,11 +9,11 @@ const transporter = nodemailer.createTransport({
   },
 })
 
-// async..await is not allowed in global scope, must use a wrapper
+
+
 export async function sendMail({ to, subject, html }) {
-  // send mail with defined transport object
   const info = await transporter.sendMail({
-    from: '"Calimero Hobbies" <calimerohobbies@ethereal.email>', // sender address
+    from: '"Calimero Hobbies" <calimerohobbies@ethereal.email>',
     to,
     subject,
     html,

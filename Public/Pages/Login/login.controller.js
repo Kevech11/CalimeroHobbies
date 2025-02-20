@@ -83,6 +83,6 @@ loginForm.addEventListener("submit", async (e) => {
     }
   } catch (error) {
     console.error(error)
-    alert("Ocurrió un error al iniciar sesión")
+    alert("Usuario y/o contraseña incorrectas")
   }
 })

@@ -28,12 +28,28 @@ authRouter.post("/register", async (req, res) => {
 
     await sendMail({
       to: email,
-      subject:
-        "Bienvenido a Calimero Hobbies, por favor verifica tu email para iniciar sesion",
-      html: `<h1>Gracias por registrarte en Calimero Hobbies</h1>
-      <p>Para poder iniciar sesion, por favor verifica tu email haciendo click en el siguiente enlace, luego te redireccionara al inicio de sesion</p>
-      <a href="http://localhost:5001/api/auth/verify/${newUser._id}">Verificar email</a>`,
-    })
+      subject: "Bienvenido a Calimero Hobby, verifica tu email para iniciar sesión",
+      html: `
+        <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; border-radius: 10px;">
+          <div style="background-color: #ffffff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); text-align: center;">
+            <h1 style="color:rgb(31, 31, 78); margin-bottom: 10px;">¡Bienvenido a Calimero Hobby!</h1>
+            <p style="font-size: 16px; color: #555;">Gracias por registrarte en <strong>Calimero Hobby</strong>. Para completar tu registro y comenzar a comprar, verifica tu email.</p>
+            
+            <a href="http://localhost:5001/api/auth/verify/${newUser._id}" 
+               style="display: inline-block; background-color:rgb(31, 31, 78); color: #ffffff; text-decoration: none; padding: 12px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; margin-top: 15px;">
+              Verificar email
+            </a>
+    
+            <p style="margin-top: 20px; font-size: 14px; color: #777;">Al hacer clic en el enlace, serás redirigido a la página de inicio de sesión.</p>
+          </div>
+    
+          <div style="text-align: center; margin-top: 20px;">
+            <h3 style="color:rgb(31, 31, 78); margin-bottom: 5px;">Calimero Hobby</h3>
+            <p style="color: #777; font-size: 12px;">Este es un mensaje automático, por favor no respondas.</p>
+          </div>
+        </div>
+      `,
+    });
     res.status(201).json(newUser)
   } catch (error) {
     console.log(error)
@@ -147,12 +163,29 @@ authRouter.post("/recoverypassword", async (req, res) => {
 
     await sendMail({
       to: user.email,
-      subject: "Recuperar contraseña en Calimero Hobbies",
-      html: `Solicitaste recuperar tu contraseña en Calimero Hobbies!
-      Para recuperarla, hace click en el siguiente enlace y cambia tu contraseña.
-      <a href="http://localhost:5001/Pages/confirmar?token=${parsedToken}">Cambiar contraseña</a>
-      El enlace expira en 10 minutos!`,
-    })
+      subject: "Recuperar contraseña en Calimero Hobby",
+      html: `
+        <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; border-radius: 10px;">
+          <div style="background-color: #ffffff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); text-align: center;">
+            <h2 style="color:rgb(31, 31, 78); margin-bottom: 10px;">Recuperación de contraseña</h2>
+            <p style="font-size: 16px; color: #555;">Solicitaste recuperar tu contraseña en <strong>Calimero Hobby</strong>.</p>
+            <p style="font-size: 14px; color: #777;">Para establecer una nueva contraseña, haz clic en el siguiente botón:</p>
+    
+            <a href="http://localhost:5001/Pages/confirmar?token=${parsedToken}" 
+               style="display: inline-block; background-color:rgb(31, 31, 78); color: #ffffff; text-decoration: none; padding: 12px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; margin-top: 15px;">
+              Cambiar contraseña
+            </a>
+    
+            <p style="margin-top: 20px; font-size: 14px; color: #777;">Este enlace expira en <strong>10 minutos</strong>. Si no solicitaste este cambio, ignora este mensaje.</p>
+          </div>
+    
+          <div style="text-align: center; margin-top: 20px;">
+            <h3 style="color:rgb(31, 31, 78); margin-bottom: 5px;">Calimero Hobby</h3>
+            <p style="color: #777; font-size: 12px;">Este es un mensaje automático, por favor no respondas.</p>
+          </div>
+        </div>
+      `,
+    });
 
     res.status(200).json({ message: "Email enviado correctamente" })
   } catch (error) {

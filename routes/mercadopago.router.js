@@ -41,43 +41,52 @@ mpRouter.get("/success", async (req, res) => {
     to: client.email,
     subject: "¡Gracias por su compra!",
     html: `
-      <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #333;">
-        <h1 style="color: #2c3e50; text-align: center; padding: 20px 0;">¡Gracias por su compra!</h1>
-        <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px;">
-          <p style="font-size: 16px;">Le enviamos el comprobante de su compra.</p>
-          <p style="font-size: 14px;"><strong>Fecha:</strong> ${new Date(
-            sale.fecha
-          ).toLocaleDateString()}</p>
-          <p style="font-size: 16px; margin-top: 20px;"><strong>Productos:</strong></p>
+      <div style="max-width: 600px; margin: 0 auto; font-family: 'Arial', sans-serif; color: #333; background-color: #f4f4f4; padding: 20px; border-radius: 10px;">
+        <div style="background-color: #ffffff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+          <h1 style="color:rgb(31, 31, 78); text-align: center; font-size: 24px; margin-bottom: 10px;">¡Gracias por tu compra!</h1>
+          <p style="text-align: center; font-size: 16px; color: #555;">Aquí tienes los detalles de tu pedido.</p>
+          
+          <div style="border-top: 2px solidrgb(31, 31, 78); margin: 20px 0; padding-top: 15px;">
+            <p style="font-size: 14px;"><strong>Fecha:</strong> ${new Date(sale.fecha).toLocaleDateString()}</p>
+          </div>
+  
+          <h3 style="color:rgb(31, 31, 78); margin-bottom: 10px;">Productos adquiridos:</h3>
           <ul style="list-style-type: none; padding: 0;">
             ${sale.productos
-              .map((producto, index) => {
-                const product = products.find(
-                  (p) => p._id.toString() === producto.producto.toString()
-                )
-                return `<li style="padding: 8px 0; border-bottom: 1px solid #dee2e6;">
-                ${product ? product.titulo : "Producto no encontrado"} x ${
-                  producto.cantidad
-                }
-              </li>`
+              .map((producto) => {
+                const product = products.find((p) => p._id.toString() === producto.producto.toString());
+                return `
+                  <li style="display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee;">
+                    <div style="flex-grow: 1;">
+                      <p style="margin: 0; font-size: 16px; font-weight: bold;">${product ? product.titulo : "Producto no encontrado"}</p>
+                      <p style="margin: 0; font-size: 14px; color: #777;">Cantidad: ${producto.cantidad}</p>
+                    </div>
+                    <p style="margin: 0; font-size: 16px; font-weight: bold; color:rgb(31, 31, 78);">$${producto.cantidad * (product ? product.precio : 0)}</p>
+                  </li>
+                `;
               })
               .join("")}
           </ul>
-          <p style="font-size: 18px; text-align: right; margin-top: 20px;">
-            <strong>Total:</strong> $${sale.total}
+  
+          <p style="font-size: 20px; text-align: right; margin-top: 20px; font-weight: bold; color: #333;">
+            Total: <span style="color:rgb(31, 31, 78);">$${sale.total}</span>
           </p>
-          <p style="font-size: 16px; margin-top: 20px;"><strong>Código de seguimiento:</strong> ${trackingCode}</p>
+  
+          <div style="border-top: 2px solid rgb(31, 31, 78); margin: 20px 0; padding-top: 15px;">
+            <p style="font-size: 16px;"><strong>Código de seguimiento del envio:</strong> <span style="color:rgb(31, 31, 78);">${trackingCode}</span></p>
+          </div>
         </div>
-        <div style="text-align: center; margin-top: 30px;">
-          <p style="color: #2c3e50; font-size: 16px;">¡Gracias por elegirnos!</p>
-          <h2 style="color: #2c3e50;">Calimero Hobbies</h2>
-          <p style="color: #6c757d; font-size: 12px; margin-top: 20px;">
-            Este es un mensaje automático, por favor no responda.
+  
+        <div style="text-align: center; margin-top: 20px;">
+          <p style="color: #333; font-size: 16px;">¡Gracias por elegirnos!</p>
+          <h2 style="color:rgb(31, 31, 78);">Calimero Hobby</h2>
+          <p style="color: #777; font-size: 12px; margin-top: 10px;">
+            Este es un mensaje automático, por favor no respondas.
           </p>
         </div>
       </div>
     `,
-  })
+  });
 
   if (!info.messageId) {
     res.status(500).send(`
