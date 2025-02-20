@@ -491,7 +491,9 @@ categoriesInput.addEventListener("change", async function () {
   })
 
   let products = await response.json()
-  products = products.sort((a, b) => a.titulo.localeCompare(b.titulo))
+  products = products
+    .sort((a, b) => a.titulo.localeCompare(b.titulo))
+    .filter((product) => product.stock > 0)
 
   productsInput.innerHTML = `<option value="" disabled selected>Selecciona productos</option>`
   products.forEach((product) => {
